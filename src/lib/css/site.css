@@ -1,0 +1,161 @@
+.pesquisar input {
+    border: none;
+}
+
+.pesquisar .input,
+.enviar {
+    border: 1px solid #b3b3b3;
+    height: 38px;
+}
+
+.pesquisar .input {
+    width: 50%;
+}
+
+.pesquisar .enviar {
+    width: 60px;
+}
+
+.pesquisar .enviar button {
+    background: none;
+    border: none;
+}
+
+/* menu dropdowm */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-container i {
+    cursor: pointer;
+}
+
+/* Dropdown inicialmente escondido */
+.dropdown {
+    max-height: 0;
+    /* Altura inicial */
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: max-height 0.18s ease, opacity 0.18s ease;
+    opacity: 0;
+    /* Invisível inicialmente */
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 100;
+    width: 348px;
+    /* Largura do dropdown */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* Sombra opcional */
+    margin-left: -58px;
+    margin-top: 12px;
+    padding-left: 10px;
+}
+
+/* Estilo dos itens do dropdown */
+.dropdown li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.15s ease, margin-bottom 0.15s ease;
+}
+
+.dropdown li:last-child {
+    border-bottom: none;
+}
+
+.dropdown li:hover {
+    background-color: #f9f9f9;
+}
+
+/* Exibir o dropdown quando o pai está ativo */
+.dropdown-container:focus-within .dropdown,
+.dropdown-container:hover .dropdown {
+    max-height: 300px;
+    /* Altura suficiente para exibir todos os itens */
+    opacity: 1;
+    /* Visível */
+}
+
+/* Margem inferior suave para itens */
+.dropdown li {
+    margin-bottom: 5px;
+}
+
+/* FIM DO MENU DROPDOWN */
+.img {
+    position: relative;
+    height: 400px;
+}
+
+.img img {
+    height: 400px;
+    transition: .45s ease-in-out;
+}
+
+.destaque .box-2 {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(61, 70, 77);
+}
+
+.oculta {
+    position: absolute;
+    top: 0;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    transition: .45s ease-in-out;
+}
+
+.img:hover .oculta {
+    opacity: 1;
+    transform: scale(1.03)
+}
+
+.img:hover img {
+    transform: scale(1.03)
+}
+
+.ofertas .box-5 {
+    height: 300px;
+}
+
+.ofertas img {
+    height: 300px;
+}
+
+.ofertas .oculta {
+    opacity: 1;
+    width: 100%;
+    height: 300px;
+    background-color: rgba(0, 0, 0, 0.6);    
+}
+
+.ofertas .img:hover img {    
+    transform:scale(1.08) rotate(1deg);
+}
+.bg-light{
+    background-color: #51595f;
+    transition: .15s ease-in-out;
+}
+.divider-vertical {
+    width: 1px;
+    height: 250px;
+    background-color:#51595f;
+}
+.contador{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border:1px solid rgb(255, 211, 51);
+    background-color: none;
+    margin-left: 5px;
+}

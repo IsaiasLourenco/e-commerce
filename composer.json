@@ -1,0 +1,17 @@
+{
+    "name": "ecompras/e-compras",
+    "description": "projeto desenvolvido no curso de desenvolvimento web para fins didaticos.",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ronaldo leite rodrigues"
+        }
+    ],
+    "require": {}
+}
