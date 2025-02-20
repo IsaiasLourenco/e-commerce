@@ -1,7 +1,6 @@
 <?php
 # Classe Contexto: Refatorada para melhor clareza e reutilização
 namespace App\Models;
-
 use PDO;
 use PDOException;
 
@@ -12,7 +11,7 @@ class Contexto
     protected static function getConexao()
     {
         if (self::$conexao === null) {
-            $inf = "mysql:host=localhost;dbname=ar3-pdv";
+            $inf = "mysql:host=localhost;dbname=ecompras";
             try {
                 self::$conexao = new PDO($inf, "root", "", [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
                 self::$conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -69,7 +68,7 @@ class Contexto
         return $stmt->rowCount();
     }
 
-    protected function excluir($tabela, $id)
+    protected function deletar($tabela, $id)
     {
         $sql = "DELETE FROM {$tabela} WHERE id = ? LIMIT 1";
         $stmt = $this->executarConsulta($sql, [$id]);

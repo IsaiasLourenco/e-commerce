@@ -3,17 +3,16 @@
 namespace App\Services;
 
 use App\Models\Usuario;
-use App\Models\UsuarioDao;
+use App\Models\Dao\UsuarioDao;
 
 class UserService
 {
     private $usuarioDao;
     private $fileUploadService;
 
-    public function __construct(UsuarioDao $usuarioDao, FileUploadService $fileUploadService)
+    public function __construct(UsuarioDao $usuarioDao)
     {
         $this->usuarioDao = $usuarioDao;
-        $this->fileUploadService = $fileUploadService;
     }
 
     public function adicionarUsuario($dados, $imagem)

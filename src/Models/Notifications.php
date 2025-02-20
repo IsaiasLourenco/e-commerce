@@ -39,12 +39,12 @@ abstract class Notifications
         $mensagem = sprintf(
             "%s<div class='aviso'>
                 <div class='msg bg-branco'>
-                    <h2 class='fonte12 poppins-black fnc-sucesso'>
+                    <h2 class='fonte12 poppins-medium fnc-preto-azulado'>
                         Deseja realmente %s %s %s definitivamente?
                     </h2>
                     <div class='botoes mg-t-1 flex justify-between'>
-                        <a href='index.php?controller=%sController&metodo=Delete&id=%s' class='btn-mini fnc-branco bg-azul mg-auto'> Sim </a>
-                        <a href='index.php?controller=%sController&metodo=Listar' class='btn-mini fnc-branco bg-vermelho mg-auto'> Não </a>
+                        <a href='index.php?controller=%sController&metodo=excluir&id=%s' class='btn-mini fnc-branco bg-azul mg-auto'> Sim </a>
+                        <a href='index.php?controller=%sController&metodo=listar' class='btn-mini fnc-branco bg-vermelho mg-auto'> Não </a>
                     </div>
                 </div>
             </div>",
@@ -66,10 +66,10 @@ abstract class Notifications
         $mensagem = sprintf(
             "%s<div class='aviso'>
                 <div class='msg bg-branco'>
-                    <h2 class='fonte12 poppins-black fnc-error'>
+                    <h2 class='fonte12 poppins-black fnc-secundario'>
                       %s!
                     </h2>
-                        <a href='index.php' class='btn-msg fnc-preto-azulado-claro'> Fechar Sair </a>                    
+                        <a href='index.php' class='btn-msg fnc-secundario'> Fechar Sair </a>                    
                 </div>
             </div>",
             $css,
@@ -99,33 +99,24 @@ abstract class Notifications
     }
 
     // Retorna uma mensagem padrão
-    protected function defaultMessage($mensagem, $controller, $metodo)
+    protected function defaultMessage($mensagem,$submensagem, $controller, $metodo)
     {
         $css = $this->getCssLink();
         $mensagem = sprintf(
-            "%s<div class='mensagem'>
-                <div class='span animated bounceInDown mg-t-2 bg-p1-verde'>
-                    <h2 class='fw-300 espaco-letra txt-c fnc-branco fonte14 mg-t-2'>
-                        %s
+            "%s<div class='aviso'>
+                <div class='msg bg-branco'>
+                    <h2 class=' fonte10 poppins-medium fnc-preto-azulado'>
+                       <i class='fa-solid fa-check fonte18 fnc-sucesso'></i>  %s <br> %s <i class='fa-regular fa-face-smile-beam fonte18 fnc-sucesso'></i>
                     </h2>
-                    <a href='index.php?controller=%sController&metodo=%s' class='fnc-branco block mg-t-1 mg-auto fonte12 txt-c'> Ok </a>
+                    <a href='index.php' class='btn-msg bg-vermelho-claro fnc-preto-azulado'> Fechar e Sair </a>
                 </div>
             </div>",
             $css,
             htmlspecialchars($mensagem),
+            htmlspecialchars($submensagem),
             htmlspecialchars($controller),
             htmlspecialchars($metodo)
         );
         return $mensagem;
-    }
-
-    // Registra um log de mensagem
-    protected function log($mensagem)
-    {
-        echo "<link rel='stylesheet' type='text/css' href='lib/css/aurora.css' />";
-        echo "<p class='fonte14 espaco-letra fonte-montserrat fnc-sucesso'>";
-        echo htmlspecialchars($mensagem);
-        echo "</p>";
-        echo "<hr> <hr>";
     }
 }

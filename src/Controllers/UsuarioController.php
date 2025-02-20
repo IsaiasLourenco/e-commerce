@@ -5,8 +5,8 @@ namespace App\Controllers;
 session_start();
 
 use App\Models\Usuario;
-use App\Models\PerfilDao;
-use App\Models\UsuarioDao;
+use App\Models\Dao\PerfilDao;
+use App\Models\Dao\UsuarioDao;
 use App\Models\Notifications;
 use App\Services\FileUploadService;
 use App\Services\UserService;
@@ -24,7 +24,7 @@ class UsuarioController extends Notifications
         $this->usuarioDao = new UsuarioDao();
         $this->perfilDao = new PerfilDao();
         $this->fileUploadService = new FileUploadService("lib/img/users-images");
-        $this->userService = new UserService($this->usuarioDao, $this->fileUploadService);
+        $this->userService = new UserService($this->usuarioDao);
     }
 
     // Função responsável por listar todos os usuários
@@ -105,57 +105,45 @@ class UsuarioController extends Notifications
         $id = $_GET['id'] ?? null;
 
         if ($id) {
-            $this->usuarioDao->deletar($id);
+            $this->usuarioDao->excluir($id);
             echo $this->Success("Usuario", "Excluido", "Listar");
         }
 
         require_once "views/shared/header.php";
     }
+    public function autenticar()
+  {
 
-    // FUNÇÃO RESPONSAVEL POR VALIDAR OS DADOS DO USUÁRIO
-    public function login()
-    {
-        require_once "views/usuario/login.php";
-        // Incluindo a view inicial da página de login
+    require_once "Views/usuario/autenticar.php";
 
-        // Verificando se o formulário foi enviado com o operador de coalescencia
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $usuario = $_POST['usuario'] ?? '';
-            $senha = $_POST['senha'] ?? '';
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'):
 
-            // Validando entrada de dados básica
-            if (empty($usuario) || empty($senha)) :
-                echo $this->loginError("Usuário ou senha não podem estar vazios.");
-                return;
-            endif;
-            // Instanciando o DAO para autenticação
-            $usuario = $this->usuarioDao->autenticarUsuario($usuario);
+      $usuario = $_POST['usuario'] ?? '';
+      $senha = $_POST['senha'] ?? '';
 
-            // Validando resultado da autenticação
-            if (!empty($usuario) && password_verify($senha, $usuario[0]->SENHA)) :
-                $this->iniciarSessao($usuario[0]);
-                header("Location: index.php?controller=PainelController&metodo=index");
-                exit;
-            else :
-                echo $this->loginError("Usuário ou senha incorretos.");
-            endif;
-            
-        }
-    }
-    // FUNÇÃO RESPONSAVEL POR CRIAR A SESSÃO DE USUARIO
-    private function iniciarSessao($usuario)
-    {
-        $_SESSION['permissao'] = -1;
-        $_SESSION['id'] = $usuario->ID;
-        $_SESSION['nome'] = $usuario->NOME;
-        $_SESSION['imagem'] = $usuario->IMAGEM;
-    }
+      $dadosUsuario = $this->usuarioDao->autenticar($usuario);
 
-    // Função responsável por encerrar a sessão de login
-    public function sair()
-    {
-        $_SESSION = [];
-        session_destroy();
-        header("location:index.php");
-    }
+      if (!empty($dadosUsuario) && password_verify($senha, $dadosUsuario[0]->SENHA)):
+        $this->gerraSessao($dadosUsuario);
+        header("location:index.php?controller=PainelController&metodo=index");
+        exit;
+      else :
+        echo $this->loginError('Usuario ou senha incorreto!');
+      endif;
+
+    endif;
+  }
+
+  public function gerraSessao($usuario)
+  {   
+    $_SESSION['id'] = $usuario[0]->ID;
+    $_SESSION['nome'] = $usuario[0]->NOME;
+    $_SESSION['imagem'] = $usuario[0]->IMAGEM;
+  }
+
+  public function logout()
+  {
+    session_destroy();
+    header("location:index.php");
+  }
 }

@@ -1,3 +1,18 @@
+<?php
+ob_start();
+
+if(!isset($_SESSION)):
+  session_start();
+endif;
+
+use App\Configurations\Formater;
+$formater = new Formater();
+
+if ($_GET) {
+    $controller = strtolower(str_replace("Controller", "", $_GET['controller']));
+    $metodo = strtolower($_GET['metodo']);
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -29,10 +44,8 @@
             <div class="box-12">
                 <nav class="wd-100">
                     <ul class="flex justify-start">
-                        <li class="mg-r-4"><a href="" class="fonte14 fnc-secundario border-bottom-hover">Inicio</a></li>
-                        <li class="mg-r-4"><a href="" class="fonte14 fnc-secundario border-bottom-hover">Contato</a></li>
-                        <li class="mg-r-4"><a href="" class="fonte14 fnc-secundario border-bottom-hover">Ajuda</a></li>
-                        <li class="mg-r-4"><a href="" class="fonte14 fnc-secundario border-bottom-hover">Sobre nós</a></li>
+                        <li class="mg-r-4"><a href="index.php" class="fonte14 fnc-secundario border-bottom-hover">Inicio</a></li>
+                        <li class="mg-r-4"><a href="index.php?controller=UsuarioController&metodo=autenticar" class="fonte14 fnc-secundario border-bottom-hover">Login</a></li>       
                     </ul>
                 </nav>
             </div>

@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Dao;
+use App\Models\Contexto;
 
 class PerfilDao extends Contexto
 {

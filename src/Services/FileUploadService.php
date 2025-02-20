@@ -14,7 +14,7 @@ class FileUploadService
     public function upload($file)
     {
         if (!empty($file['name'])) {
-            $filename = uniqid() . $file['name'];
+            $filename = uniqid() .'_'. $file['name'];
             $filepath = $this->uploadDir . '/' . $filename;
             move_uploaded_file($file['tmp_name'], $filepath);
             return $filename;

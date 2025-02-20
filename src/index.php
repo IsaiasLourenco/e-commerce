@@ -1,5 +1,5 @@
 <?php
-use App\Controller\BaseController;
+use App\Controllers\BaseController;
 
 require_once '../vendor/autoload.php';
 
@@ -7,7 +7,7 @@ if($_GET):
      $controller = $_GET['controller'];
      $metodo = $_GET['metodo'];
 
-     $objClass = 'App\\Controller\\'.$controller;
+     $objClass = 'App\\Controllers\\'.$controller;
 
      $obj = new $objClass();
      $obj->$metodo();
