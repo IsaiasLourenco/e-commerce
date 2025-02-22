@@ -34,9 +34,7 @@
                     <div class="box-12 flex justify-center item-centro oculta">
                         <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
                         <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-heart fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                    </div>
+                      </div>
                 </div>
 
                 <div class="box-12 footer pd-20">
@@ -53,9 +51,7 @@
                     <div class="box-12 flex justify-center item-centro oculta">
                         <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
                         <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-heart fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                    </div>
+                     </div>
                 </div>
 
                 <div class="box-12 footer pd-20">
@@ -73,9 +69,7 @@
                     <div class="box-12 flex justify-center item-centro oculta">
                         <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
                         <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-heart fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                    </div>
+                      </div>
                 </div>
 
                 <div class="box-12 footer pd-20">
@@ -92,8 +86,6 @@
                     <div class="box-12 flex justify-center item-centro oculta">
                         <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
                         <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-heart fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
                     </div>
                 </div>
 
