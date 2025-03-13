@@ -22,8 +22,9 @@ if ($_GET) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casa Web - imobiliaria online</title>
     <!-- carregando arquivos java scripts -->
-    <script type="text/javascript" src="lib/js/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="lib/js/jquery-3.7.1.min.js"></script>   
     <script type="text/javascript" src="lib/js/animacoes.js"></script>
+    <script type="text/javascript" src="lib/js/ajax.js"></script>
 
     <!-- carregando fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />

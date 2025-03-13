@@ -17,10 +17,10 @@ abstract class Notifications
         $mensagem = sprintf(
             "%s<div class='aviso'>
                 <div class='msg bg-branco'>
-                    <h2 class='fonte12 poppins-black fnc-sucesso'>
+                    <h2 class='fonte12 poppins-black fnc-secundario'>
                         %s %s com sucesso!
                     </h2>
-                        <a href='index.php?controller=%sController&metodo=%s' class='btn-msg fnc-cinza-claro'> Fechar Sair </a>                    
+                        <a href='index.php?controller=%sController&metodo=%s' class='btn-msg fnc-secundario'> Fechar Sair </a>                    
                 </div>
             </div>",
             $css,
@@ -39,12 +39,12 @@ abstract class Notifications
         $mensagem = sprintf(
             "%s<div class='aviso'>
                 <div class='msg bg-branco'>
-                    <h2 class='fonte12 poppins-medium fnc-preto-azulado'>
+                    <h2 class='fonte12 poppins-medium fnc-secundario'>
                         Deseja realmente %s %s %s definitivamente?
                     </h2>
                     <div class='botoes mg-t-1 flex justify-between'>
-                        <a href='index.php?controller=%sController&metodo=excluir&id=%s' class='btn-mini fnc-branco bg-azul mg-auto'> Sim </a>
-                        <a href='index.php?controller=%sController&metodo=listar' class='btn-mini fnc-branco bg-vermelho mg-auto'> Não </a>
+                        <a href='index.php?controller=%sController&metodo=excluir&id=%s' class='btn-mini fnc-error bg-azul mg-auto'> Sim </a>
+                        <a href='index.php?controller=%sController&metodo=listar' class='btn-mini fnc-sucesso bg-vermelho mg-auto'> Não </a>
                     </div>
                 </div>
             </div>",
@@ -105,7 +105,7 @@ abstract class Notifications
         $mensagem = sprintf(
             "%s<div class='aviso'>
                 <div class='msg bg-branco'>
-                    <h2 class=' fonte10 poppins-medium fnc-preto-azulado'>
+                    <h2 class=' fonte10 poppins-medium fnc-secundario'>
                        <i class='fa-solid fa-check fonte18 fnc-sucesso'></i>  %s <br> %s <i class='fa-regular fa-face-smile-beam fonte18 fnc-sucesso'></i>
                     </h2>
                     <a href='index.php' class='btn-msg bg-vermelho-claro fnc-preto-azulado'> Fechar e Sair </a>

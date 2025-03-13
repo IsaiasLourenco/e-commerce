@@ -6,12 +6,12 @@ class Categoria
 {
     private string $id;
     private string $descricao;
-    private string $status;
+    private string $estatus;
 
-    public function __construct($id = '', $descricao = ''){
+    public function __construct($id = '', $descricao = '', $estatus = ''){
       $this->id = $id;
       $this->descricao = $descricao;
-      $this->status = 'A';
+      $this->estatus = $estatus ?: 'A';
     }
      public function getId(){
         return $this->id;
@@ -19,13 +19,19 @@ class Categoria
      public function setId($id){
         return $this->id = $id;
      }
-
+     
+     public function __set($chave, $valor)
+     {
+        if (property_exists($this, $chave)):
+           $this->$chave = $valor;
+        endif;
+     }
 
      public function toArray(){
         return  [
              "id" => $this->id,
              "descricao" => $this->descricao,
-             "status" => $this->status
+             "estatus" => $this->estatus
         ];
      }
      public function atributosPreenchidos()

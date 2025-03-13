@@ -1,11 +1,12 @@
 <?php
 ob_start();
 
-if(!isset($_SESSION)):
-  session_start();
+if (!isset($_SESSION)):
+    session_start();
 endif;
 
 use App\Configurations\Formater;
+
 $formater = new Formater();
 
 if ($_GET) {
@@ -23,6 +24,9 @@ if ($_GET) {
     <!-- carregando arquivos java scripts -->
     <script type="text/javascript" src="lib/js/jquery-3.7.1.min.js"></script>
     <script type="text/javascript" src="lib/js/animacoes.js"></script>
+    <script type="text/javascript" src="lib/js/ajax.js"></script>
+    <script type="text/javascript" src="lib/js/validacao.js"></script>
+    
 
     <!-- carregando fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -34,6 +38,7 @@ if ($_GET) {
     <!-- CARREGANDO CSS -->
     <link rel="stylesheet" href="lib/css/aurora.css">
     <link rel="stylesheet" href="lib/css/site.css">
+    <link rel="stylesheet" href="lib/css/menu.css">
 
 </head>
 
@@ -42,12 +47,23 @@ if ($_GET) {
         <!-- primeiro menu -->
         <div class="container">
             <div class="box-12">
-                <nav class="wd-100">
+                <nav class="box-6">
                     <ul class="flex justify-start">
                         <li class="mg-r-4"><a href="index.php" class="fonte14 fnc-secundario border-bottom-hover">Inicio</a></li>
-                        <li class="mg-r-4"><a href="index.php?controller=UsuarioController&metodo=autenticar" class="fonte14 fnc-secundario border-bottom-hover">Login</a></li>       
+                        <li class="mg-r-4"><a href="index.php?controller=ClienteController&metodo=autenticar" class="fonte14 fnc-secundario border-bottom-hover">Login</a></li>
                     </ul>
                 </nav>
+
+                <div class="box-6 flex justify-end item-centro">
+                    <?php if(isset($_SESSION['cliente'])):?>
+                    <div class="img-cli mg-r-1 bg-primario flex justify-center item-centro pd-5">
+                        <i class="fa-regular fa-circle-user fonte20 fnc-branco"></i>
+                    </div>
+                    <p>Olá, <?= $_SESSION['nome']?></p>
+                    <a href="index.php?controller=ClienteController&metodo=logout">Sair</a>
+
+                    <?php endif;?>
+                </div>
             </div>
         </div>
         <!-- BARRA DE PESQUUISA  -->

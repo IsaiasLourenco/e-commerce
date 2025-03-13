@@ -23,7 +23,7 @@ class UsuarioController extends Notifications
     {
         $this->usuarioDao = new UsuarioDao();
         $this->perfilDao = new PerfilDao();
-        $this->fileUploadService = new FileUploadService("lib/img/users-images");
+        $this->fileUploadService = new FileUploadService("lib/img/users");
         $this->userService = new UserService($this->usuarioDao);
     }
 

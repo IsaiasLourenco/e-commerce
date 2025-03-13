@@ -1,6 +1,7 @@
 <?php
 # Classe Contexto: Refatorada para melhor clareza e reutilização
 namespace App\Models;
+
 use PDO;
 use PDOException;
 
@@ -26,14 +27,15 @@ class Contexto
     {
         self::$conexao = null;
     }
-
     protected function executarConsulta($sql, $params = [])
     {
         try {
             $stmt = self::getConexao()->prepare($sql);
+
             foreach ($params as $key => $value) {
                 $stmt->bindValue($key + 1, $value);
             }
+
             $stmt->execute();
             return $stmt;
         } catch (PDOException $e) {
@@ -48,6 +50,14 @@ class Contexto
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    // metodo responsavel por listar o ultimo registro no banco
+    protected function listarUltimoRegistro($tabela, $campo,  $condicao = "", $parametro = [])
+    {
+        $sql = "SELECT MAX($campo) AS ULTIMOVALOR FROM {$tabela} {$condicao} ORDER BY ID DESC ";
+        $stmt = $this->executarConsulta($sql, $parametro);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     protected function inserir($tabela, $atributos, $valores)
     {
         $sql = "INSERT INTO {$tabela} (" . implode(",", $atributos) . ") VALUES (" . implode(",", array_fill(0, count($valores), "?")) . ")";
@@ -56,12 +66,7 @@ class Contexto
     }
 
     protected function atualizar($tabela, $atributos, $valores, $id)
-    {/*
-        Essa função recebe um parâmetro chamado $attr, que representa cada um dos elementos do array $atributos. Para cada elemento do array $atributos, a função retorna uma string no formato "$attr = ?", onde $attr é o valor de cada item do array.
-        Por exemplo, se $attr = "nome", a função retorna a string "nome = ?".
-        Se $attr = "idade", a função retorna a string "idade = ?".
-        E assim por diante para cada item do array $atributos.
-    */
+    {
         $set = implode(",", array_map(fn($attr) => "$attr = ?", $atributos));
         $sql = "UPDATE {$tabela} SET {$set} WHERE id = ?";
         $stmt = $this->executarConsulta($sql, array_merge($valores, [$id]));

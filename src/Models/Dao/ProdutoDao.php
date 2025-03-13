@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Models\Dao;
-use APP\Models\Contexto;
+
+use App\Models\Contexto;
 use App\Models\Produto;
 
 class ProdutoDao extends Contexto
@@ -13,6 +14,10 @@ class ProdutoDao extends Contexto
     public function obterPorId($id)
     {
         return $this->listar('PRODUTO', "WHERE ID = ?", [$id]);
+    }
+    public function ObterUltimoRegistro($campo)
+    {
+        return $this->listarUltimoRegistro('PRODUTO', $campo);
     }
 
     public function adicionar(Produto $produto)
@@ -28,9 +33,8 @@ class ProdutoDao extends Contexto
         $valores = array_values($produto->atributosPreenchidos());
         return $this->atualizar('PRODUTO', $atributos, $valores, $produto->getId());
     }
-    public function excluir($id)    
+    public function excluir($id)
     {
-       return $this->deletar('PRODUTO', $id);
+        return $this->deletar('PRODUTO', $id);
     }
-
 }

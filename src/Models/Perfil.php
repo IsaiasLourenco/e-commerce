@@ -4,26 +4,44 @@ namespace App\Models;
 
 class Perfil
 {
-    private $idperfil;
+    private $id;
     private $descricao;
     
-    function __construct($idperfil = null, $descricao=null) {
-        $this->idperfil = $idperfil;
+    function __construct($id = null, $descricao=null) {
+        $this->id = $id;
         $this->descricao = $descricao;
     }
-    function getIdperfil() {
-        return $this->idperfil;
+    function getId() {
+        return $this->id;
     }
 
     function getDescricao() {
         return $this->descricao;
     }
 
-    function setIdperfil($idperfil) {
-        $this->idperfil = $idperfil;
+    function setIdperfil($id) {
+        $this->id = $id;
     }
 
     function setDescricao($descricao) {
         $this->descricao = $descricao;
+    }
+    
+    public function __set($chave, $valor)
+    {
+       if (property_exists($this, $chave)):
+          $this->$chave = $valor;
+       endif;
+    }
+
+    public function toArray(){
+       return  [
+            "id" => $this->id,
+            "descricao" => $this->descricao
+       ];
+    }
+    public function atributosPreenchidos()
+    {
+        return array_filter($this->toArray(), fn($value) => $value !== null && $value !== '');
     }
 }

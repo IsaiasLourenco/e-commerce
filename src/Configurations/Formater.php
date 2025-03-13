@@ -143,4 +143,8 @@ class Formater
          return str_pad($num, $qtde, $char, STR_PAD_LEFT);
      }
 
+     public function formataCpf($valor){
+        return str_replace(str_replace($valor,'.',''),'-','');
+     }
+
 }

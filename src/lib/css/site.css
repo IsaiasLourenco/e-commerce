@@ -172,3 +172,26 @@ ul {
     height: 100vh;
     background-color: rgba(67, 60, 17, 0.8);
 }
+input[type='file']
+{
+    display: none;
+}
+.file-label{
+    background-color: #2e0b74;
+}
+.zebra td{
+    border-bottom: 1px solid #dcdcdc;
+}
+.zebra th{
+    border-bottom: 2px solid #211f1a ;
+    font-weight: 800;
+}
+.cad form input[type='file']
+{
+    display: block;
+}
+.img-cli{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
