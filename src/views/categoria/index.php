@@ -1,4 +1,4 @@
-<div class="box-12 mg-t-1">
+<div class="box-12 mg-t-12">
     <h2 class=" poppins-medium fw-300 fonte22">
         <i class="fa-solid fa-tags mg-r-1 fonte22 fnc-secundario"></i>
         <?php

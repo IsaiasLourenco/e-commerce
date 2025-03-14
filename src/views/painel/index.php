@@ -1,19 +1,17 @@
 <?php require_once 'views/shared/header-painel.php'; ?>
-<header class=" bg-preto-azulado-escuro hg-90">
-
-</header>
+<header class="fixed bg-preto-azulado-escuro hg-90"></header>
 <section class="painel">
 
     <div class="container-100">
 
-        <div class="box-2 bg-preto-azulado-escuro">
-   
+        <div class="box-2">
+
             <nav class="side-bar active">
-                
+
                 <button class="menu-toggle"> <i class="fa-solid fa-bars"></i> </button>
 
                 <ul class="menu pd-20">
-                <li class="item">
+                    <li class="item">
                         <a href="index.php?controller=PainelController&metodo=index" class="fonte12 fnc-terciario">
                             <i class="fa-solid fa-tags mg-r-1 fonte12 fnc-terciario"></i>
                             Painel</a>
@@ -45,15 +43,26 @@
         <!-- carregamento altomatico das páginas -->
         <div class="box-10">
 
-            <?php if ($controller == "painel" && $metodo == "index") : ?>
+            <?php
+            if ($controller == "painel" && $metodo == "index") :
+                require_once "Views/painel/dashboard.php";
 
+            else:
+                require_once "Views/" . strtolower($controller) . "/" . strtolower($metodo) . ".php";
 
-            <?php else:  require_once "Views/" . strtolower($controller) . "/" . strtolower($metodo) . ".php";
-
-            endif; ?>
+            endif;
+            ?>
 
         </div>
 
     </div>
 </section>
 <div class="limpar mg-b-10"></div>
+
+<script>
+    let table = new DataTable('#tabela');
+
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('.side-bar').classList.toggle('active');
+    });
+</script>

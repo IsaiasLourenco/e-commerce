@@ -1,4 +1,4 @@
-<div class="box-12 mg-t-1">
+<div class="box-12 mg-t-12">
     <div class="box-8">
         <h2 class=" poppins-medium fw-300 fonte22">
             <i class="fa-solid fa-tags mg-r-1 fonte22 fnc-secundario"></i> Lista de Perfil de acesso
@@ -12,7 +12,7 @@
 <div class="box-12 divider mg-t-1 mg-b-2"></div>
 
 <div class="box-12">
-    <table class="zebra wd-100 collapse">
+    <table class="zebra wd-100 collapse" id="tabela">
         <thead>
             <tr>
                 <th class="pd-10">Código</th>
