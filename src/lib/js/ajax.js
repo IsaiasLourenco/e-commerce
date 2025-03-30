@@ -16,3 +16,19 @@ $(function () {
     });
 });
 // });
+
+$(function () {
+    $('.qtde').change(function () {
+        var quantidade = $(this).val();
+        var linha = $(this).data('linha'); 
+
+        $.ajax({
+            type: "POST",
+            url: "index.php?controller=CarrinhoController&metodo=atualizarCarrinho",
+            data: { linha: linha, quantidade: quantidade }, 
+            success: function () {
+                location.reload();
+            }
+        });
+    });
+});

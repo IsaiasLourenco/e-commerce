@@ -13,5 +13,7 @@
             "name": "ronaldo leite rodrigues"
         }
     ],
-    "require": {}
+    "require": {
+        "mercadopago/dx-php": "^2.6"
+    }
 }

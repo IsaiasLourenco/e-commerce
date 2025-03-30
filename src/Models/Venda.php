@@ -2,49 +2,110 @@
 
 namespace App\Models;
 
+use DateTime;
+use App\Models\ItensVenda;
+
 class Venda
 {
-    private string $id;
+    private ?string $id;
     private string $datavenda;
-    private string $valor;
-    private string $usuario;
-    private string $precounitario;
+    private float $valor;
+    private string $cliente;
+    private string $status;
+    private array $itensVenda = [];
 
-    public function __construct($id = '', $datavenda = '', $valor = '', $usuario = '')
-    {
+    public function __construct(
+        ?string $id = '',
+        float $valor = 0.00,
+        string $cliente = '',
+        string $status = 'Pendente'
+    ) {
+        date_default_timezone_set('America/Sao_Paulo');
         $this->id = $id;
-        $this->datavenda = $datavenda;
+        $this->datavenda =  date('Y-m-d H:i:s');
         $this->valor = $valor;
-        $this->usuario = $usuario;
+        $this->cliente = $cliente;
+        $this->status = $status;
     }
+
+    // Getters
     public function getId()
     {
         return $this->id;
     }
-    public function setId($id)
+
+    public function getDatavenda()
     {
-        return $this->id = $id;
+        return $this->datavenda;
     }
 
-    public function __set($chave, $valor)
+    public function getValor()
     {
-        if (property_exists($this, $chave)):
-            $this->$chave = $valor;
-        endif;
+        return $this->valor;
     }
 
-
-    public function toArray()
+    public function getCliente()
     {
-        return  [
+        return $this->cliente;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function getItens(): array
+    {
+        return $this->itensVenda;
+    }
+    // Setters
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    public function setDatavenda($datavenda): void
+    {
+        $this->datavenda = $datavenda;
+    }
+
+    public function setValor(float $valor): void
+    {
+        $this->valor = $valor;
+    }
+
+    public function setCliente($cliente): void
+    {
+        $this->cliente = $cliente;
+    }
+
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
+    }
+
+    // Adicionar itens à venda
+    public function adicionarItem($itemVenda): void
+    {
+        $this->itensVenda[] = $itemVenda;
+    }
+
+    // Converter para array
+    public function toArray(): array
+    {
+        return [
             "id" => $this->id,
             "datavenda" => $this->datavenda,
             "valor" => $this->valor,
-            "usuario" => $this->usuario
+            "cliente" => $this->cliente,
+            "status" => $this->status,
+            "itensVenda" => array_map(fn($item) => $item->toArray(), $this->itensVenda)
         ];
     }
-    public function atributosPreenchidos()
+
+    // Verifica atributos preenchidos
+    public function atributosPreenchidos(): array
     {
-        return array_filter($this->toArray(), fn($value) => $value !== null && $value !== '');
+        return array_filter($this->toArray(), fn($value) => !empty($value));
     }
 }

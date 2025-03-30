@@ -22,11 +22,26 @@ class Contexto
         }
         return self::$conexao;
     }
+    public function iniciarTransacao()
+    {
+        self::getConexao()->beginTransaction();
+    }
+
+    public function confirmarTransacao()
+    {
+        self::getConexao()->commit();
+    }
+
+    public function reverterTransacao()
+    {
+        self::getConexao()->rollBack();
+    }
 
     protected static function closeConexao()
     {
         self::$conexao = null;
     }
+
     protected function executarConsulta($sql, $params = [])
     {
         try {

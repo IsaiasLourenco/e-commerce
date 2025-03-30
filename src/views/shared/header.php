@@ -26,7 +26,7 @@ if ($_GET) {
     <script type="text/javascript" src="lib/js/animacoes.js"></script>
     <script type="text/javascript" src="lib/js/ajax.js"></script>
     <script type="text/javascript" src="lib/js/validacao.js"></script>
-    
+
 
     <!-- carregando fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -55,14 +55,14 @@ if ($_GET) {
                 </nav>
 
                 <div class="box-6 flex justify-end item-centro">
-                    <?php if(isset($_SESSION['cliente'])):?>
-                    <div class="img-cli mg-r-1 bg-primario flex justify-center item-centro pd-5">
-                        <i class="fa-regular fa-circle-user fonte20 fnc-branco"></i>
-                    </div>
-                    <p>Olá, <?= $_SESSION['nome']?></p>
-                    <a href="index.php?controller=ClienteController&metodo=logout">Sair</a>
+                    <?php if (isset($_SESSION['cliente'])): ?>
+                        <div class="img-cli mg-r-1 bg-primario flex justify-center item-centro pd-5">
+                            <i class="fa-regular fa-circle-user fonte20 fnc-branco"></i>
+                        </div>
+                        <p>Olá, <?= $_SESSION['nome'] ?></p>
+                        <a href="index.php?controller=ClienteController&metodo=logout">Sair</a>
 
-                    <?php endif;?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -108,10 +108,27 @@ if ($_GET) {
                     </ul>
                 </div>
                 <div class="box-9 flex justify-end item-centro pd-t-2">
-                    <i class="fa-solid fa-heart fonte18 fnc-primario"></i>
-                    <div class="contador fnc-branco mg-r-1 flex justify-center item-centro">0</div>
-                    <i class="fa-solid fa-cart-shopping fonte18 fnc-primario"></i>
-                    <div class="contador fnc-branco flex justify-center item-centro">0</div>
+                    <a href="index.php?controller=CarrinhoController&metodo=inserirProdutoCarrinho=id=0">
+                        <i class="fa-solid fa-heart fonte18 fnc-primario"></i>
+                    </a>
+
+                    <div class="contador fnc-branco mg-r-1 flex justify-center item-centro">
+
+                    </div>
+                    <a href="index.php?controller=CarrinhoController&metodo=inserirProdutoCarrinho&id=0">
+                        <i class="fa-solid fa-cart-shopping fonte18 fnc-primario"></i>
+                    </a>
+
+                    <div class="contador fnc-branco flex justify-center item-centro">
+                        <?php
+                        if (isset($_SESSION['carrinho'])):
+                            echo $_SESSION['quantidade_carrinho'];
+                        else:
+                            echo '0';
+                        endif;
+
+                        ?>
+                    </div>
 
                 </div>
             </div>

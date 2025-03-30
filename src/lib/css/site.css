@@ -202,3 +202,7 @@ input[type='file']
     position: fixed;
     top:0;
 } 
+.qtde{
+    width: 43px;
+    height: 40px;
+}

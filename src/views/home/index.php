@@ -23,79 +23,47 @@
 <!-- sessão de carregamento de produtos -->
 <section class="destaque mg-t-6">
     <div class="container">
+
         <div class="box-12 flex justify-start item-centro mg-b-4 mg-t-6">
             <h1 class=" fnc-secundario fonte24">PRODUTOS EM DESTAQUE </h1>
             <div class="divider-pontilhado mg-l-2 wd-50"></div>
         </div>
-        <div class="box-12 flex justify-center item-centro">
-            <div class="box-3 bg-branco shadow-down pd-10">
-                <div class="box-12 img">
-                    <img src="lib/img/upload/produtos/camisa-social-3.jpg" alt="">
-                    <div class="box-12 flex justify-center item-centro oculta">
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-heart fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                      </div>
-                </div>
-
-                <div class="box-12 footer pd-20">
-
-                    <p class="fonte20 fnc-secundario fnc-primario-hover txt-c poppins-black">Camisa Social</p>
-                    <div class="divider bg-cinza mg-b-1 mg-t-1"></div>
-                    <p class="fonte22 fnc-secundario fw-300 roboto-condensed fnc-primario-hover txt-c">R$ 359,90</p>
-                </div>
-            </div>
-
-            <div class="box-3 bg-branco shadow-down pd-10">
-                <div class="box-12 img">
-                    <img src="lib/img/upload/produtos/calca-masculina.jpg" alt="">
-                    <div class="box-12 flex justify-center item-centro oculta">
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-heart fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                     </div>
-                </div>
-
-                <div class="box-12 footer pd-20">
-
-                    <p class="fonte20 fnc-secundario fnc-primario-hover txt-c poppins-black">Camisa Social</p>
-                    <div class="divider bg-cinza mg-b-1 mg-t-1"></div>
-                    <p class="fonte22 fnc-secundario fw-300 roboto-condensed fnc-primario-hover txt-c">R$ 359,90</p>
-                </div>
-            </div>
+        <!-- LISTAGEM DE PRODUTOS -->
 
 
-            <div class="box-3 bg-branco shadow-down pd-10">
-                <div class="box-12 img">
-                    <img src="lib/img/upload/produtos/blusa-frio.jpg" alt="">
-                    <div class="box-12 flex justify-center item-centro oculta">
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-heart fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                      </div>
-                </div>
 
-                <div class="box-12 footer pd-20">
+        <div class="box-12 flex justify-center item-centro flex-wrap">
+            <?php
+            if (isset($produtos) && count($produtos) > 0):
+                foreach ($produtos as $produto): ?>
 
-                    <p class="fonte20 fnc-secundario fnc-primario-hover txt-c poppins-black">Camisa Social</p>
-                    <div class="divider bg-cinza mg-b-1 mg-t-1"></div>
-                    <p class="fonte22 fnc-secundario fw-300 roboto-condensed fnc-primario-hover txt-c">R$ 359,90</p>
-                </div>
-            </div>
+                    <div class="box-3 bg-branco shadow-down pd-10 mg-b-4">
+                        <div class="box-12 img">
+                            <img src="lib/img/upload/produtos/<?= $produto->IMAGEM; ?>" alt="">
+                            <div class="box-12 flex justify-center item-centro oculta">
+                                <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover">
+                                    <a href="index.php?controller=CarrinhoController&metodo=inserirProdutoCarrinho&id=<?= $produto->ID; ?>">
+                                        <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i>
+                                    </a>
+                                </div>
+                                <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover">
+                                    <i class="fa-solid fa-heart fnc-primario-hover fonte18 fnc-secundario"></i>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="box-3 bg-branco shadow-down pd-10">
-                <div class="box-12 img">
-                    <img src="lib/img/upload/produtos/blusa-frio.jpg" alt="">
-                    <div class="box-12 flex justify-center item-centro oculta">
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i> </div>
-                        <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover"> <i class="fa-solid fa-heart fnc-primario-hover fonte18 fnc-secundario"></i> </div>
+                        <div class="box-12 footer pd-20">
+
+                            <p class="fonte20 fnc-secundario fnc-primario-hover txt-c poppins-black"><?= $formater->formataTextoCap($produto->NOME); ?></p>
+                            <div class="divider bg-cinza mg-b-1 mg-t-1"></div>
+                            <p class="fonte22 fnc-secundario fw-300 roboto-condensed fnc-primario-hover txt-c">R$ <?= $formater->converterMoeda($produto->PRECO); ?></p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="box-12 footer pd-20">
+            <?php endforeach;
+            endif;
 
-                    <p class="fonte20 fnc-secundario fnc-primario-hover txt-c poppins-black">Camisa Social</p>
-                    <div class="divider bg-cinza mg-b-1 mg-t-1"></div>
-                    <p class="fonte22 fnc-secundario fw-300 roboto-condensed fnc-primario-hover txt-c">R$ 359,90</p>
-                </div>
-            </div>
+            ?>
 
         </div>
     </div>
@@ -104,7 +72,7 @@
 <!-- sessão de ofertas -->
 <section class="ofertas mg-t-4">
     <div class="container">
-    <div class="box-12 flex justify-start item-centro mg-b-4 mg-t-6">
+        <div class="box-12 flex justify-start item-centro mg-b-4 mg-t-6">
             <h1 class=" fnc-secundario fonte24">OFERTAS ESPECIAIS </h1>
             <div class="divider-pontilhado mg-l-2 wd-50"></div>
         </div>
