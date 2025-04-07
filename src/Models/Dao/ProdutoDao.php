@@ -15,6 +15,11 @@ class ProdutoDao extends Contexto
     {
         return $this->listar('PRODUTO', "WHERE ID = ?", [$id]);
     }
+
+    public function obterPorCategoria($id)
+    {
+        return $this->listar('PRODUTO', "WHERE CATEGORIA = ?", [$id]);
+    }
     public function ObterUltimoRegistro($campo)
     {
         return $this->listarUltimoRegistro('PRODUTO', $campo);

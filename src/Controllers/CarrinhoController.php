@@ -105,12 +105,14 @@ class CarrinhoController
 
         if (empty($_SESSION['carrinho'])):
             header("location:index.php?controller=CarrinhoController&metodo=inserirProdutoCarrinho&id=0");
+            exit;
         endif;
         
         $email = $_SESSION['email'] ?? null;
         $cliente = $_SESSION['idcliente'] ?? null;
         if(!$cliente):
             header("location:index.php?controller=ClienteController&metodo=autenticar");
+            exit;
         endif;
 
         $total = 0.00;

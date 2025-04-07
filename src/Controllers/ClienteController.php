@@ -117,7 +117,11 @@ class ClienteController extends Notifications
 
       if (!empty($dadosCliente) && password_verify($senha, $dadosCliente[0]->SENHA)):
         $this->gerarSessao($dadosCliente);
-        header("location:index.php");
+        if ($dadosCliente[0]->PERFIL === '1'):
+          header("location:index.php?controller=PainelController&metodo=index");
+        else:
+          header("location:index.php");
+        endif;
         exit;
       else :
         echo $this->loginError('Usuario ou senha incorreto!');
@@ -129,7 +133,7 @@ class ClienteController extends Notifications
   private function gerarSessao($cliente)
   {
     $_SESSION['cliente'] = true;
-    $_SESSION['id'] = $cliente[0]->ID;
+    $_SESSION['idcliente'] = $cliente[0]->ID;
     $_SESSION['nome'] = $cliente[0]->NOME;
     $_SESSION['email'] = $cliente[0]->EMAIL;
     $_SESSION['imagem'] = $cliente[0]->IMAGEM;
@@ -154,19 +158,19 @@ class ClienteController extends Notifications
 
   public function logout()
   {
-    session_unset();
     session_destroy();
     header("location:index.php");
     exit;
   }
 
-  public function validarDadosCliente(){
+  public function validarDadosCliente()
+  {
 
     header("Content-Type: application/json; charset=UTF-8");
     $dados = json_decode(file_get_contents("php://input"), true);
 
-    if(!isset($dados['campo']) || !isset($dados["valor"])):
-      echo(json_encode(["erro"=>"Dados Invalidos"]));
+    if (!isset($dados['campo']) || !isset($dados["valor"])):
+      echo (json_encode(["erro" => "Dados Invalidos"]));
       exit;
     endif;
 
@@ -177,7 +181,5 @@ class ClienteController extends Notifications
 
     echo json_encode(["existe" => $existe ? true : false]);
     exit;
-
   }
-  
 }

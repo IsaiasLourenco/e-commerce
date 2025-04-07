@@ -98,10 +98,13 @@ if ($_GET) {
                     <ul class="mg-l-2">
                         <li class="fonte20 dropdown-container">Categoria <i class="fa-solid fa-chevron-right fonte16 fnc-primario mg-l-2"></i>
                             <ul class="dropdown">
-                                <li class="fonte14"><a href="" class="fnc-secundario block wd-10 pd-10">Camisetas </a> </li>
-                                <li class="fonte14"><a href="" class="fnc-secundario block wd-10 pd-10">Calças </a> </li>
-                                <li class="fonte14"><a href="" class="fnc-secundario block wd-10 pd-10">Sapatos </a> </li>
-                                <li class="fonte14"><a href="" class="fnc-secundario block wd-10 pd-10">Acessórios </a> </li>
+                               <?php if(isset($categorias) && count($categorias) > 0 ):
+                               foreach($categorias as $categoria):
+                                ?>
+
+                                <li class="fonte14"><a href="index.php?controller=BaseController&metodo=listarProdutoPorCategoria&id=<?= $categoria->ID; ?>" class="fnc-secundario block wd-10 pd-10"> <?= $formater->formataTextoCap($categoria->DESCRICAO); ?></a> </li>
+
+                                <?php endforeach; endif;?>
                             </ul>
 
                         </li>

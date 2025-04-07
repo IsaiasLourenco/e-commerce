@@ -4,34 +4,34 @@ namespace App\Controllers;
 
 session_start();
 
-use App\Models\Usuario;
+use App\Models\Cliente;
 use App\Models\Dao\PerfilDao;
-use App\Models\Dao\UsuarioDao;
+use App\Models\Dao\ClienteDao;
 use App\Models\Notifications;
 use App\Services\FileUploadService;
-use App\Services\UserService;
+use App\Services\ClienteService;
 
 class UsuarioController extends Notifications
 {
-    private $usuarioDao;
+    private $clienteDao;
     private $perfilDao;
     private $fileUploadService;
-    private $userService;
+    private $clienteService;
 
     // Injeção de dependências para melhor testabilidade e organização
     public function __construct()
     {
-        $this->usuarioDao = new UsuarioDao();
+        $this->clienteDao = new clienteDao();
         $this->perfilDao = new PerfilDao();
         $this->fileUploadService = new FileUploadService("lib/img/users");
-        $this->userService = new UserService($this->usuarioDao);
+        $this->clienteService = new ClienteService($this->clienteDao);
     }
 
     // Função responsável por listar todos os usuários
     public function listar()
     {
         // Separação da responsabilidade de buscar os dados e exibir a view
-        $usuarios = $this->usuarioDao->ListarTodos();
+        $clientes = (new ClienteDao())->ListarTodos();
         require_once "views/painel/index.php";
     }
 
@@ -46,7 +46,7 @@ class UsuarioController extends Notifications
 
         if ($id) {
             // Recupera dados para edição de usuário
-            $usuario = $this->usuarioDao->obterPorId($id);
+            $cliente = $this->clienteDao->obterPorId($id);
         }
 
         if ($_POST) {
@@ -58,7 +58,7 @@ class UsuarioController extends Notifications
             }
         }
 
-        $usuarios = $this->usuarioDao->ListarTodos();
+        $clientes = $this->clienteDao->ListarTodos();
         $perfis = $this->perfilDao->listarTodos();
         require_once "views/painel/index.php";
     }
@@ -70,7 +70,7 @@ class UsuarioController extends Notifications
         $imagem = $this->fileUploadService->upload($files['imagem']);
 
         // Valida e cria o usuário via serviço dedicado
-        $retorno = $this->userService->adicionarUsuario($dados, $imagem);
+        $retorno = $this->clienteService->adicionarCliente($dados, $imagem);
 
         // Exibe mensagem de sucesso
         echo $this->Success("Usuario", "Cadastrado", "Listar");
@@ -83,7 +83,7 @@ class UsuarioController extends Notifications
         $imagem = $this->fileUploadService->upload($files['imagem']);
 
         // Atualiza o usuário via serviço dedicado
-        $retorno = $this->userService->alterarUsuario($dados, $imagem);
+        $retorno = $this->clienteService->alterarCliente($dados, $imagem);
 
         // Exibe mensagem de sucesso
         echo $this->Success("Usuario", "Alterado", "Listar");
@@ -100,50 +100,27 @@ class UsuarioController extends Notifications
     }
 
     // Função responsável por excluir um usuário
-    public function delete()
+    public function excluir()
     {
         $id = $_GET['id'] ?? null;
 
         if ($id) {
-            $this->usuarioDao->excluir($id);
+            $this->clienteDao->excluir($id);
             echo $this->Success("Usuario", "Excluido", "Listar");
         }
 
         require_once "views/shared/header.php";
     }
-    public function autenticar()
-  {
+    public function alterarStatus()
+    {
+        $id = $_GET['id'] ?? null;
+        $ativo = $_GET['ativo'] ?? null;
 
-    require_once "Views/usuario/autenticar.php";
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST'):
-
-      $usuario = $_POST['usuario'] ?? '';
-      $senha = $_POST['senha'] ?? '';
-
-      $dadosUsuario = $this->usuarioDao->autenticar($usuario);
-
-      if (!empty($dadosUsuario) && password_verify($senha, $dadosUsuario[0]->SENHA)):
-        $this->gerraSessao($dadosUsuario);
-        header("location:index.php?controller=PainelController&metodo=index");
-        exit;
-      else :
-        echo $this->loginError('Usuario ou senha incorreto!');
-      endif;
-
-    endif;
-  }
-
-  public function gerraSessao($usuario)
-  {   
-    $_SESSION['id'] = $usuario[0]->ID;
-    $_SESSION['nome'] = $usuario[0]->NOME;
-    $_SESSION['imagem'] = $usuario[0]->IMAGEM;
-  }
-
-  public function logout()
-  {
-    session_destroy();
-    header("location:index.php");
-  }
+        if ($id):
+            $cliente = new  Cliente($id, "","","","","","","","","","","","","",$ativo,"");
+            $this->clienteDao->alterar($cliente);
+        #$this->success("Imovel", "Atualizado", "listar");
+        endif;
+    }
+   
 }

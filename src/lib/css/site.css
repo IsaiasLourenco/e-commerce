@@ -30,6 +30,8 @@ ul {
 
 .dropdown-container {
     position: relative;
+    height: auto;
+    padding-bottom: 20px;
 }
 
 .dropdown-container i {
@@ -78,7 +80,7 @@ ul {
 /* Exibir o dropdown quando o pai está ativo */
 .dropdown-container:focus-within .dropdown,
 .dropdown-container:hover .dropdown {
-    max-height: 300px;
+    max-height: 100vh;
     /* Altura suficiente para exibir todos os itens */
     opacity: 1;
     /* Visível */

@@ -27,11 +27,10 @@ if ($_GET) {
     <script type="text/javascript" src="lib/js/ajax.js"></script>
     <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
 
-    <!-- <?php
+     <?php
     if ($controller == "painel" && $metodo == "index"): ?>
         <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
-    <?php endif;
-    ?> -->
+    <?php endif;  ?>
 
     <!-- carregando fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />

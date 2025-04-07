@@ -38,23 +38,23 @@ class VendaService
          $idvenda = $this->vendaDao->adicionar($venda);
          $venda->setId($idvenda);
          $id = $venda->getId();
-
-         if (!empty($dados['itensVenda'])):
-            foreach ($dados['itensVenda'] as $item):
+   #var_dump($dados);
+         if (!empty($dados['itensvenda'])):
+            foreach ($dados['itensvenda'] as $item):
 
                $itensVenda = new ItensVenda();
                $itensVenda->setVenda($id);
                $itensVenda->setProduto($item['produto']);
                $itensVenda->setQtde($item['quantidade']);
-               $itensVenda->setPrecoUni($item['precounitario']);
-               $itensVenda->setSubTotal($item['quantidade'] * $item['precounitario']);
+               $itensVenda->setPrecoUni($item['valorunitario']);
+               $itensVenda->setSubTotal($item['valorunitario'] * $item['valorunitario']);
 
                $this->vendaDao->adicionarItens($itensVenda);
             endforeach;
-
          endif;
+         
          $this->vendaDao->confirmarTransacao();
-         return $dados['itensVenda'];
+         return $dados['itensvenda'];
       } catch (PDOException $e) {
          $this->vendaDao->reverterTransacao();
          throw new Exception("Erro ao inserir venda: " . $e->getMessage());

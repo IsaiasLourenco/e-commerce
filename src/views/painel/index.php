@@ -32,7 +32,13 @@
                             Perfil</a>
                     </li>
                     <li class="item">
-                        <a href="" class="fonte12 fnc-terciario">
+                        <a href="index.php?controller=UsuarioController&metodo=listar" class="fonte12 fnc-terciario">
+                            <i class="fa-solid fa-user mg-r-1 fonte12 fnc-terciario"></i>
+                            Usuario</a>
+                    </li>
+
+                    <li class="item">
+                        <a href="index.php?controller=ClienteController&metodo=logout" class="fonte12 fnc-terciario">
                             <i class="fa-solid fa-right-from-bracket mg-r-1 fonte12 fnc-terciario"></i>
                             Logout</a>
                     </li>
@@ -44,7 +50,7 @@
         <div class="box-10">
 
             <?php
-            if ($controller == "painel" && $metodo == "index") :
+            if ($controller == "painel" && $metodo == "index") :                                
                 require_once "Views/painel/dashboard.php";
 
             else:

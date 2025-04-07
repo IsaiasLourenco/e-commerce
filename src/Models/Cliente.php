@@ -19,8 +19,9 @@ class Cliente
     private ?string  $imagem;
     private ?string  $datacadastro;
     private ?string  $ativo;
+    private ?string  $perfil;
 
-    public function __construct($id = '', $nome = '', $cpf = '', $datanascimento = '', $email = '',  $senha = '',   $cep = '',   $logradouro = '',    $numero = '', $bairro = '', $uf = '', $cidade = '', $imagem = '', $datacadastro = '', $ativo = '')
+    public function __construct($id = '', $nome = '', $cpf = '', $datanascimento = '', $email = '',  $senha = '',   $cep = '',   $logradouro = '',    $numero = '', $bairro = '', $uf = '', $cidade = '', $imagem = '', $datacadastro = '', $ativo = '', $perfil = '')
     {
         date_default_timezone_set('America/Sao_Paulo');
         $this->id = $id;
@@ -37,7 +38,8 @@ class Cliente
         $this->cidade = $cidade;
         $this->imagem = $imagem;
         $this->datacadastro = $datacadastro ?: date("Y-m-d H:i:s");
-        $this->ativo = $ativo;
+        $this->ativo = $ativo ?: '0';
+        $this->perfil = $perfil;
     }
 
     public function getId()
@@ -74,6 +76,7 @@ class Cliente
             'imagem' => $this->imagem,
             'datacadastro' => $this->datacadastro,
             'ativo' => $this->ativo,
+            'perfil' => $this->perfil,
         ];
     }
 

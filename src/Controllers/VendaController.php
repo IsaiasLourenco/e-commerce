@@ -11,23 +11,22 @@ class VendaController extends Notifications
 
     public function sucesso()
     {
-
         // $tipo_pagamento = $_GET['payment_type'];
 
         if ($_GET['status'] === 'approved'):
 
             if (!isset($_SESSION)):
-                session_start();
-            endif;
+                 session_start();
+             endif;
 
-            if (empty($_SESSION['carrinho'])):
-                header("location:index.php?controller=CarrinhoController&metodo=inserirProdutoCarrinho&id=0");
-            endif;
+             if (empty($_SESSION['carrinho'])):
+                 header("location:index.php?controller=CarrinhoController&metodo=inserirProdutoCarrinho&id=0");
+             endif;
 
-            $cliente = $_SESSION['idcliente'] ?? null;
-            if (!$cliente):
-                header("location:index.php?controller=ClienteController&metodo=autenticar");
-            endif;
+             $cliente = $_SESSION['idcliente'];
+             if (!$cliente):
+                 header("location:index.php?controller=ClienteController&metodo=autenticar");
+             endif;
 
             $itensVenda = [];
             $total = 0.00;
@@ -61,7 +60,6 @@ class VendaController extends Notifications
             } catch (Exception $e) {
                 throw new Exception("Erro ao inserir Venda: ". $e->getMessage());
             }
-
             echo $this->defaultMessage("Pagamento realizado com sucesso!", "", "Base", "index");
         endif;
     }
