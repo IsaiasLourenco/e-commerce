@@ -1,7 +1,7 @@
 <?php
 use App\Controllers\BaseController;
 
-require_once '../vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
 if($_GET):
      $controller = $_GET['controller'];

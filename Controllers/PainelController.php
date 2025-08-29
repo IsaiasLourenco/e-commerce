@@ -7,7 +7,7 @@ class PainelController
     public function index()
     {
         $indicadores = (new DashBoardDao())->indicadores();
-        $produtosMaisVendidos = (new DashBoardDao())->produtoMaisVendidos();
+        $produtosMaisVendidos = (new DashBoardDao())->produtosMaisVendidos();
         $vendaPorMes = (new DashBoardDao())->vendasPorMes();
         $categoriaMaisVendida = (new DashBoardDao())->categoriasMaisVendidas();
         

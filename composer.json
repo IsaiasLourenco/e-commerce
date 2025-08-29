@@ -1,16 +1,16 @@
 {
-    "name": "ecompras/e-compras",
-    "description": "projeto desenvolvido no curso de desenvolvimento web para fins didaticos.",
+    "name": "isaias/e-commerce",
+    "description": "E-commerce da Vetor256.",
     "type": "project",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "./"
         }
     },
     "authors": [
         {
-            "name": "ronaldo leite rodrigues"
+            "name": "Isaias"
         }
     ],
     "require": {

@@ -10,23 +10,17 @@ class DashBoardDao extends Contexto
 {
     public function indicadores()
     {
-        $sql = "SELECT SUM(VALOR) AS FATURAMENTO,  
-                      (SELECT COUNT(*) FROM VENDA) AS TOTALVENDAS, 
-                      (SUM(VALOR) / NULLIF((SELECT COUNT(*) FROM VENDA), 0)) AS TICKETMEDIO
-                 FROM VENDA ";
+        $sql = "SELECT sum(valor) AS faturamento,  
+                      (SELECT count(*) FROM venda) AS totalvendas, 
+                      (sum(valor) / nullif((SELECT count(*) FROM venda), 0)) AS ticketmedio FROM venda";
         $stmt = $this->executarConsulta($sql);
         $retorno = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $retorno;
     }
 
-    public function produtoMaisVendidos()
+    public function produtosMaisVendidos()
     {
-        $sql = "SELECT P.ID, P.NOME, SUM(I.QUANTIDADE) AS QUANTIDADE
-                  FROM ITENSVENDA I  
-            INNER JOIN PRODUTO P ON P.ID = I.PRODUTO
-              GROUP BY 1,2 
-              ORDER BY 3 DESC
-                 LIMIT 10";
+        $sql = "SELECT p.id, p.nome, sum(i.quantidade) AS quantidade FROM itens_venda INNER JOIN produto p ON p.id = i.produto GROUP BY 1,2 ORDER BY 3 DESC LIMIT 10";
         $stmt = $this->executarConsulta($sql);
         $retorno = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $retorno;
@@ -34,10 +28,7 @@ class DashBoardDao extends Contexto
 
     public function vendasPorMes()
     {
-        $sql = "SELECT SUM(VALOR) AS TOTAL,  DATE(DATAVENDA) AS DATA
-                  FROM VENDA
-              GROUP BY DATA
-              ORDER BY TOTAL DESC ";
+        $sql = "SELECT sum(valor) AS total, DATE(data_venda) AS data FROM venda GROUP BY data_venda ORDER BY total DESC ";
         $stmt = $this->executarConsulta($sql);
         $retorno = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $retorno;
@@ -45,13 +36,7 @@ class DashBoardDao extends Contexto
 
     public function categoriasMaisVendidas()
     {
-        $sql = "SELECT  P.CATEGORIA,  C.DESCRICAO,  SUM(I.QUANTIDADE) AS TOTAL
-                   FROM ITENSVENDA I  
-             INNER JOIN PRODUTO P ON P.ID = I.PRODUTO  
-             INNER JOIN CATEGORIA C ON C.ID = P.CATEGORIA
-               GROUP BY 1,2
-               ORDER BY 3 DESC 
-               LIMIT 10 ";
+        $sql = "SELECT  p.categoria,  c.descricao,  sum(i.quantidade) AS total FROM itensvenda i INNER JOIN produto p ON p.id = i.produto INNER JOIN categoria c ON c.id = p.categoria GROUP BY 1,2 ORDER BY 3 DESC LIMIT 10 ";
         $stmt = $this->executarConsulta($sql);
         $retorno = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $retorno;
