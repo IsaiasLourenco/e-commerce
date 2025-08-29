@@ -52,12 +52,12 @@ interface ManagerRegistry extends ConnectionRegistry
     public function resetManager(?string $name = null);
 
     /**
-     * Gets all object manager names and associated service IDs. A service ID
+     * Gets all object manager names and associated service ids. A service id
      * is a string that allows to obtain an object manager, typically from a
      * PSR-11 container.
      *
      * @return array<string,string> An array with object manager names as keys,
-     *                              and service IDs as values.
+     *                              and service ids as values.
      */
     public function getManagerNames();
 

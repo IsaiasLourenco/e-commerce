@@ -22,7 +22,7 @@ class ConfigTest extends TestCase
             $dotenv->load();
         }
 
-        MercadoPago\SDK::setClientId(getenv('CLIENT_ID'));
+        MercadoPago\SDK::setClientid(getenv('CLIENT_id'));
         MercadoPago\SDK::setClientSecret(getenv('CLIENT_SECRET')); 
     }
 
@@ -31,7 +31,7 @@ class ConfigTest extends TestCase
      */
     public function testSettings()
     {
-        $this->assertEquals(getenv('CLIENT_ID'), MercadoPago\SDK::getClientId());
+        $this->assertEquals(getenv('CLIENT_id'), MercadoPago\SDK::getClientid());
         $this->assertEquals(getenv('CLIENT_SECRET'), MercadoPago\SDK::getClientSecret());
 
     }

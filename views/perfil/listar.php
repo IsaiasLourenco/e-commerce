@@ -26,12 +26,12 @@
             if (isset($perfis) && count($perfis)):
                 foreach ($perfis as $perfil): ?>
                     <tr>
-                        <td class="pd-10 txt-c"><?= $formater->zeroEsquerda($perfil->ID, 6); ?></td>
-                        <td class="pd-10 txt-c"><?= $formater->formataTextoCap($perfil->DESCRICAO); ?></td>
+                        <td class="pd-10 txt-c"><?= $formater->zeroEsquerda($perfil->id, 6); ?></td>
+                        <td class="pd-10 txt-c"><?= $formater->formataTextoCap($perfil->descricao); ?></td>
 
                         <td class="pd-10 txt-c flex justify-center item-centro">
-                            <a href="index.php?controller=PerfilController&metodo=deleteConfirm&id=<?= $perfil->ID; ?>"><i class="fa-solid fa-trash-can mg-r-2 fnc-secundario fonte14"></i> </a>
-                            <a href="index.php?controller=PerfilController&metodo=index&id=<?= $perfil->ID; ?>"><i class="fa-solid fa-pen fnc-primario fonte14"></i> </a>
+                            <a href="index.php?controller=PerfilController&metodo=deleteConfirm&id=<?= $perfil->id; ?>"><i class="fa-solid fa-trash-can mg-r-2 fnc-secundario fonte14" title="Apagar Registro"></i> </a>
+                            <a href="index.php?controller=PerfilController&metodo=index&id=<?= $perfil->id; ?>"><i class="fa-solid fa-pen fnc-primario fonte14" title="Editar Registro"></i> </a>
 
                         </td>
                     </tr>

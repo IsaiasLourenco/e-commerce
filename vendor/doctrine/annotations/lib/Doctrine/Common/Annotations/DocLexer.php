@@ -26,7 +26,7 @@ final class DocLexer extends AbstractLexer
     public const T_FLOAT   = 4;
 
     // All tokens that are also identifiers should be >= 100
-    public const T_IDENTIFIER          = 100;
+    public const T_idENTIFIER          = 100;
     public const T_AT                  = 101;
     public const T_CLOSE_CURLY_BRACES  = 102;
     public const T_CLOSE_PARENTHESIS   = 103;
@@ -111,7 +111,7 @@ final class DocLexer extends AbstractLexer
         }
 
         if ($value[0] === '_' || $value[0] === '\\' || ctype_alpha($value[0])) {
-            return self::T_IDENTIFIER;
+            return self::T_idENTIFIER;
         }
 
         $lowerValue = strtolower($value);

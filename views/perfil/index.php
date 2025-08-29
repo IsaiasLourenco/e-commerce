@@ -13,7 +13,7 @@
 <div class="box-12">
     <form action="" method="POST">
         <div>
-            <input type="hidden" name="id" value="<?php if (isset($id) && $id <> ''): echo $perfil[0]->ID;
+            <input type="hidden" name="id" value="<?php if (isset($id) && $id <> ''): echo $perfil[0]->id;
                                                     endif; ?>">
         </div>
         <div class="box-12"><label for="">Novo Perfil</label></div>

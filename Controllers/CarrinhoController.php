@@ -19,7 +19,7 @@ class CarrinhoController
         endif;
 
         $idProduto = $_GET['id'];
-        $produto = (new ProdutoDao())->obterPorId($idProduto);
+        $produto = (new ProdutoDao())->obterPorid($idProduto);
 
         if (!$produto) {
             return;
@@ -36,7 +36,7 @@ class CarrinhoController
         if ($indiceProduto === false) :
             // Adiciona um novo produto ao carrinho
             $_SESSION["carrinho"][] = [
-                "id"        => $produto[0]->ID,
+                "id"        => $produto[0]->id,
                 "nome"      => $produto[0]->NOME,
                 "preco"     => $produto[0]->PRECO,
                 "desc"      => $produto[0]->DESCONTO,

@@ -60,7 +60,7 @@ class PagamentoMercadoPago
         ];
 
         $preference->auto_return = "approved";
-        $preference->external_reference = "PEDIDO123";
+        $preference->external_reference = "PEDidO123";
         $preference->sandbox_mode = true;
 
         try{

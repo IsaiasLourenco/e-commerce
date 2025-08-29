@@ -6,7 +6,7 @@ class Produto
 {
    private string $id;
    private string $codigo;
-   private string $datacadastro;
+   private string $data_cadastro;
    private string $nome;
    private string $descricao;
    private string $quantidade;
@@ -15,8 +15,8 @@ class Produto
    private string $desconto;
    private ?string $imagem;
    private string $categoria;
-   private string $estatus;
-   private string $precodecusto;
+   private string $status_produto;
+   private string $preco_custo;
 
    public function __construct(
       $id = '',
@@ -29,8 +29,8 @@ class Produto
       $desconto = '',
       $imagem = '',
       $categoria = '',
-      $estatus = '',
-      $precodecusto = ''
+      $status_produto = '',
+      $preco_custo = ''
    ) {
       date_default_timezone_set('America/Sao_Paulo');
       $this->id = $id;
@@ -43,15 +43,15 @@ class Produto
       $this->desconto = $desconto;
       $this->imagem = $imagem;
       $this->categoria = $categoria;
-      $this->estatus = $estatus ?: 'A';
-      $this->precodecusto = $precodecusto;
-      $this->datacadastro = date('Y-m-d H:i:s');
+      $this->status_produto = $status_produto ?: 'A';
+      $this->preco_custo = $preco_custo;
+      $this->data_cadastro = date('Y-m-d H:i:s');
    }
-   public function getId()
+   public function getid()
    {
       return $this->id;
    }
-   public function setId($id)
+   public function setid($id)
    {
       return $this->id = $id;
    }
@@ -75,9 +75,9 @@ class Produto
          "desconto" => $this->desconto,
          "imagem" => $this->imagem,
          "categoria" => $this->categoria,
-         "estatus" => $this->estatus,
-         "precodecusto" => $this->precodecusto,
-         "datacadastro" => $this->datacadastro,
+         "status_produto" => $this->status_produto,
+         "preco_custo" => $this->preco_custo,
+         "data_cadastro" => $this->data_cadastro,
       ];
    }
 

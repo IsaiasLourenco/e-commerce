@@ -41,11 +41,11 @@ class ClienteController extends Notifications
 
     if ($id) {
       // Recupera dados para edição de usuário
-      $usuario = $this->clienteDao->obterPorId($id);
+      $usuario = $this->clienteDao->obterPorid($id);
     }
 
     if ($_POST) {
-      // Determina se será uma inserção ou alteração com base no ID
+      // Determina se será uma inserção ou alteração com base no id
       if (!empty($_POST['id'])) {
         $this->alterar($_POST, $_FILES);
       } else {
@@ -133,7 +133,7 @@ class ClienteController extends Notifications
   private function gerarSessao($cliente)
   {
     $_SESSION['cliente'] = true;
-    $_SESSION['idcliente'] = $cliente[0]->ID;
+    $_SESSION['idcliente'] = $cliente[0]->id;
     $_SESSION['nome'] = $cliente[0]->NOME;
     $_SESSION['email'] = $cliente[0]->EMAIL;
     $_SESSION['imagem'] = $cliente[0]->IMAGEM;

@@ -17,18 +17,18 @@ class CategoriaController extends Notifications
         $this->categoriaDao = new CategoriaDao();
         $this->categoriaService = new CategoriaService($this->categoriaDao);
     }
-    // METODO RESPONSAVEL POR VALIDAR OS DADOS E ENVIAR PARA SEU METODO RESPONSAVEL
+    // METODO RESPONSAVEL POR VALidAR OS DADOS E ENVIAR PARA SEU METODO RESPONSAVEL
     public function index()
     {
         $id = $_GET['id'] ?? null;
 
         if ($id) {
             // Recupera dados para edição de usuário
-            $categorias = $this->categoriaDao->obterPorId($id);
+            $categorias = $this->categoriaDao->obterPorid($id);
         }
 
         if ($_POST) {
-            // Determina se será uma inserção ou alteração com base no ID
+            // Determina se será uma inserção ou alteração com base no id
             if (!empty($_POST['id'])) {
                 $this->alterar($_POST);                
             } else {

@@ -6,17 +6,17 @@ class Categoria
 {
     private string $id;
     private string $descricao;
-    private string $estatus;
+    private string $status_categoria;
 
-    public function __construct($id = '', $descricao = '', $estatus = ''){
+    public function __construct($id = '', $descricao = '', $status_categoria = ''){
       $this->id = $id;
       $this->descricao = $descricao;
-      $this->estatus = $estatus ?: 'A';
+      $this->status_categoria = $status_categoria ?: 'A';
     }
-     public function getId(){
+     public function getid(){
         return $this->id;
      }
-     public function setId($id){
+     public function setid($id){
         return $this->id = $id;
      }
      
@@ -31,7 +31,7 @@ class Categoria
         return  [
              "id" => $this->id,
              "descricao" => $this->descricao,
-             "estatus" => $this->estatus
+             "status_categoria" => $this->status_categoria
         ];
      }
      public function atributosPreenchidos()

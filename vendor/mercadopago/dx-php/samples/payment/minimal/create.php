@@ -15,7 +15,7 @@
     $payment->payer = $payer;
     $payment->save(); 
 
-    echo "Payment ID: " . $payment->id . "\n";
+    echo "Payment id: " . $payment->id . "\n";
     echo "Payment Status: " . $payment->status . "\n";
 
 ?>

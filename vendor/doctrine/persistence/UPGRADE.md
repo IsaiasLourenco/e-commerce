@@ -1,7 +1,7 @@
 Note about upgrading: Doctrine uses static and runtime mechanisms to raise
 awareness about deprecated code.
 
-- Use of `@deprecated` docblock that is detected by IDEs (like PHPStorm) or
+- Use of `@deprecated` docblock that is detected by idEs (like PHPStorm) or
   Static Analysis tools (like Psalm, phpstan)
 - Use of our low-overhead runtime deprecation API, details:
   https://github.com/doctrine/deprecations/

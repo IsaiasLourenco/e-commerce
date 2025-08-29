@@ -29,9 +29,6 @@
             <div class="divider-pontilhado mg-l-2 wd-50"></div>
         </div>
         <!-- LISTAGEM DE PRODUTOS -->
-
-
-
         <div class="box-12 flex justify-center item-centro flex-wrap">
             <?php
             if (isset($produtos) && count($produtos) > 0):
@@ -39,10 +36,10 @@
 
                     <div class="box-3 bg-branco shadow-down pd-10 mg-b-4">
                         <div class="box-12 img">
-                            <img src="lib/img/upload/produtos/<?= $produto->IMAGEM; ?>" alt="">
+                            <img src="lib/img/upload/produtos/<?= $produto->imagem; ?>" alt="">
                             <div class="box-12 flex justify-center item-centro oculta">
                                 <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover">
-                                    <a href="index.php?controller=CarrinhoController&metodo=inserirProdutoCarrinho&id=<?= $produto->ID; ?>">
+                                    <a href="index.php?controller=CarrinhoController&metodo=inserirProdutoCarrinho&id=<?= $produto->id; ?>">
                                         <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i>
                                     </a>
                                 </div>
@@ -54,9 +51,9 @@
 
                         <div class="box-12 footer pd-20">
 
-                            <p class="fonte20 fnc-secundario fnc-primario-hover txt-c poppins-black"><?= $formater->formataTextoCap($produto->NOME); ?></p>
+                            <p class="fonte20 fnc-secundario fnc-primario-hover txt-c poppins-black"><?= $formater->formataTextoCap($produto->nomeE); ?></p>
                             <div class="divider bg-cinza mg-b-1 mg-t-1"></div>
-                            <p class="fonte22 fnc-secundario fw-300 roboto-condensed fnc-primario-hover txt-c">R$ <?= $formater->converterMoeda($produto->PRECO); ?></p>
+                            <p class="fonte22 fnc-secundario fw-300 roboto-condensed fnc-primario-hover txt-c">R$ <?= $formater->converterMoeda($produto->preco); ?></p>
                         </div>
                     </div>
 

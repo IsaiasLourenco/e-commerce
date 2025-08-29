@@ -8,7 +8,7 @@ use function explode;
 use function strtolower;
 use function token_get_all;
 
-use const PHP_VERSION_ID;
+use const PHP_VERSION_id;
 use const T_AS;
 use const T_COMMENT;
 use const T_DOC_COMMENT;
@@ -108,7 +108,7 @@ class TokenParser
             } elseif ($explicitAlias && $token[0] === T_STRING) {
                 $alias = $token[1];
             } elseif (
-                PHP_VERSION_ID >= 80000 &&
+                PHP_VERSION_id >= 80000 &&
                 ($token[0] === T_NAME_QUALIFIED || $token[0] === T_NAME_FULLY_QUALIFIED)
             ) {
                 $class .= $token[1];
@@ -181,7 +181,7 @@ class TokenParser
         $name = '';
         while (
             ($token = $this->next()) && ($token[0] === T_STRING || $token[0] === T_NS_SEPARATOR || (
-            PHP_VERSION_ID >= 80000 &&
+            PHP_VERSION_id >= 80000 &&
             ($token[0] === T_NAME_QUALIFIED || $token[0] === T_NAME_FULLY_QUALIFIED)
             ))
         ) {

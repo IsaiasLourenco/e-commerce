@@ -11,9 +11,9 @@ class ProdutoDao extends Contexto
     {
         return $this->listar('PRODUTO');
     }
-    public function obterPorId($id)
+    public function obterPorid($id)
     {
-        return $this->listar('PRODUTO', "WHERE ID = ?", [$id]);
+        return $this->listar('PRODUTO', "WHERE id = ?", [$id]);
     }
 
     public function obterPorCategoria($id)
@@ -36,7 +36,7 @@ class ProdutoDao extends Contexto
     {
         $atributos = array_keys($produto->atributosPreenchidos());
         $valores = array_values($produto->atributosPreenchidos());
-        return $this->atualizar('PRODUTO', $atributos, $valores, $produto->getId());
+        return $this->atualizar('PRODUTO', $atributos, $valores, $produto->getid());
     }
     public function excluir($id)
     {

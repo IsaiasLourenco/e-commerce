@@ -20,7 +20,9 @@ if ($_GET) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casa Web - imobiliaria online</title>
+    <title>Compras online - Vetor256.</title>
+    <!-- Ícone -->
+    <link rel="icon" href="lib/img/e-commerce.ico" type="image/x-icon">
     <!-- carregando arquivos java scripts -->
     <script type="text/javascript" src="lib/js/jquery-3.7.1.min.js"></script>
     <script type="text/javascript" src="lib/js/animacoes.js"></script>
@@ -102,7 +104,7 @@ if ($_GET) {
                                foreach($categorias as $categoria):
                                 ?>
 
-                                <li class="fonte14"><a href="index.php?controller=BaseController&metodo=listarProdutoPorCategoria&id=<?= $categoria->ID; ?>" class="fnc-secundario block wd-10 pd-10"> <?= $formater->formataTextoCap($categoria->DESCRICAO); ?></a> </li>
+                                <li class="fonte14"><a href="index.php?controller=BaseController&metodo=listarProdutoPorCategoria&id=<?= $categoria->id; ?>" class="fnc-secundario block wd-10 pd-10"> <?= $formater->formataTextoCap($categoria->DESCRICAO); ?></a> </li>
 
                                 <?php endforeach; endif;?>
                             </ul>

@@ -12,7 +12,7 @@ class Contexto
     protected static function getConexao()
     {
         if (self::$conexao === null) {
-            $inf = "mysql:host=localhost;dbname=ecompras";
+            $inf = "mysql:host=localhost;dbname=e-commerce";
             try {
                 self::$conexao = new PDO($inf, "root", "", [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
                 self::$conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -60,7 +60,7 @@ class Contexto
 
     protected function listar($tabela, $condicao = "", $params = [])
     {
-        $sql = "SELECT * FROM {$tabela} {$condicao} ORDER BY ID DESC";
+        $sql = "SELECT * FROM {$tabela} {$condicao} ORDER BY id DESC";
         $stmt = $this->executarConsulta($sql, $params);
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
@@ -68,7 +68,7 @@ class Contexto
     // metodo responsavel por listar o ultimo registro no banco
     protected function listarUltimoRegistro($tabela, $campo,  $condicao = "", $parametro = [])
     {
-        $sql = "SELECT MAX($campo) AS ULTIMOVALOR FROM {$tabela} {$condicao} ORDER BY ID DESC ";
+        $sql = "SELECT MAX($campo) AS ULTIMOVALOR FROM {$tabela} {$condicao} ORDER BY id DESC ";
         $stmt = $this->executarConsulta($sql, $parametro);
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
@@ -77,7 +77,7 @@ class Contexto
     {
         $sql = "INSERT INTO {$tabela} (" . implode(",", $atributos) . ") VALUES (" . implode(",", array_fill(0, count($valores), "?")) . ")";
         $stmt = $this->executarConsulta($sql, $valores);
-        return self::getConexao()->lastInsertId();
+        return self::getConexao()->lastInsertid();
     }
 
     protected function atualizar($tabela, $atributos, $valores, $id)

@@ -1,6 +1,6 @@
 <?php return array(
     'root' => array(
-        'name' => 'ecompras/e-compras',
+        'name' => 'e-commerce/e-commerce',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
         'reference' => '7685c8e983f40974368f5eda3f8e19ca9ea8090b',
@@ -64,7 +64,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'ecompras/e-compras' => array(
+        'e-commerce/e-commerce' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
             'reference' => '7685c8e983f40974368f5eda3f8e19ca9ea8090b',

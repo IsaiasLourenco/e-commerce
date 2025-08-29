@@ -5,13 +5,13 @@
             <div class="box-4 mg-b-4">
                 <h2 class="fonte28 fnc-branco roboto-condensed fw-500 mg-b-3">Entre em contato</h2>
                 <p class="fonte16 roboto-condensed fw-300 fnc-branco mg-b-3">
-                    Não dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no
+                    Mande se contato, sua opinião, seu pedido. Nossa equipe está pronta para atende-lô da melhor maneira possível.
                 </p>
 
                 <ul class="flex flex-colum">
-                    <li class="fonte14 fnc-branco fw-300 mg-t-2"> <i class="fa-solid fa-location-dot fnc-primario fonte20 mg-r-1"></i> Rua Ciclano Alves, 23 São Paulo, SP</li>
-                    <li class="fonte14 fnc-branco fw-300 mg-t-2"><i class="fa-solid fa-envelope fnc-primario fonte20 mg-r-1"></i> contato.webstore@webstore.com</li>
-                    <li class="fonte14 fnc-branco fw-300 mg-t-2"><i class="fa-solid fa-phone-volume fnc-primario fonte20 mg-r-1"></i> +55 11 9 9999 - 9999</li>
+                    <li class="fonte14 fnc-branco fw-300 mg-t-2"> <i class="fa-solid fa-location-dot fnc-primario fonte20 mg-r-1"></i>Rua Mococa, 880 Mogi Guaçu, SP</li>
+                    <li class="fonte14 fnc-branco fw-300 mg-t-2"><i class="fa-solid fa-envelope fnc-primario fonte20 mg-r-1"></i> isaias@vetor256.com</li>
+                    <li class="fonte14 fnc-branco fw-300 mg-t-2"><i class="fa-solid fa-phone-volume fnc-primario fonte20 mg-r-1"></i> +55 19 99674 - 5466</li>
                 </ul>
 
             </div>
@@ -21,9 +21,13 @@
                 <h2 class="fonte28 fnc-branco roboto-condensed fw-500  txt-d mg-r-9">SIGA-NOS</h2>
 
                 <ul class="flex justify-end item-centro">
-                    <li class="fonte14 fnc-branco fw-300 mg-t-2 mg-r-2"><a href="" class="pd-10">  <i class="fa-brands fa-square-facebook fnc-primario fonte40 mg-r-1"></i>  </a></li>
-                    <li class="fonte14 fnc-branco fw-300 mg-t-2 mg-r-2"><a href="" class="pd-10">  <i class="fa-brands fa-square-instagram fnc-primario fonte40 mg-r-1"></i> </a></li>
-                    <li class="fonte14 fnc-branco fw-300 mg-t-2 mg-r-2"><a href="" class="pd-10">  <i class="fa-brands fa-square-whatsapp fnc-primario fonte40 mg-r-1"></i>  </a></li>
+                    <li class="fonte14 fnc-branco fw-300 mg-t-2 mg-r-2"><a href="https://www.facebook.com/joseisaiaslourenco/" target="_blank" class="pd-10"><i class="fa-brands fa-square-facebook fnc-primario fonte40 mg-r-1" title="Acesse nosso faceook"></i></a></li>
+                    <li class="fonte14 fnc-branco fw-300 mg-t-2 mg-r-2"><a href="https://www.instagram.com/isaiaslourenco3/" target="_blank" class="pd-10"> <i class="fa-brands fa-square-instagram fnc-primario fonte40 mg-r-1" title="Acesse nosso instagram"></i> </a></li>
+                    <li class="fonte14 fnc-branco fw-300 mg-t-2 mg-r-2">
+                        <a href="https://wa.me/5519996745466?text=Gostaria%20de%20saber%20mais%20sobre%20seus%20produtos." class="pd-10" target="_blank" title="Nos nande uma mensagemm via whatsapp">
+                            <i class="fa-brands fa-square-whatsapp fnc-primario fonte40 mg-r-1"></i>
+                        </a>
+                    </li>
                 </ul>
 
             </div>
@@ -33,10 +37,10 @@
             <!-- divider -->
             <div class="divider bg-light"></div>
             <!-- direitos -->
-            <p class="fnc-branco fonte14 mg-t-2 roboto-condensed espaco-letra">
+            <p class="fnc-branco fonte14 mg-t-2 roboto-condensed espaco-letra txt-c">
                 &copy; <span class="fnc-primario"> 2025 </span>
                 - Todos os direitos reservados
-                <span class="fnc-primario"> Ronaldo Leite Rodrigues </span>
+                <a href="https://vetor256.com" target="_blank"><span class="fnc-primario"> Vetor256. </span></a>
             </p>
         </div>
     </div>

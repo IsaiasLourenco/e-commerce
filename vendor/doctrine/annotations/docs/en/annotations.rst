@@ -23,7 +23,7 @@ Take a look at the following code snippet:
     class User
     {
         /**
-         * @ORM\Id @ORM\Column @ORM\GeneratedValue
+         * @ORM\id @ORM\Column @ORM\GeneratedValue
          * @dummy
          * @var int
          */

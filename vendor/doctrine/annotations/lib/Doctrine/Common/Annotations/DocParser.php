@@ -43,7 +43,7 @@ use function strtolower;
 use function substr;
 use function trim;
 
-use const PHP_VERSION_ID;
+use const PHP_VERSION_id;
 
 /**
  * A parser for docblock annotations.
@@ -59,8 +59,8 @@ final class DocParser
      *
      * @phpstan-var list<int>
      */
-    private static $classIdentifiers = [
-        DocLexer::T_IDENTIFIER,
+    private static $classidentifiers = [
+        DocLexer::T_idENTIFIER,
         DocLexer::T_TRUE,
         DocLexer::T_FALSE,
         DocLexer::T_NULL,
@@ -713,7 +713,7 @@ final class DocParser
                 ($peek === null)
                 || ($peek['type'] !== DocLexer::T_NAMESPACE_SEPARATOR && ! in_array(
                     $peek['type'],
-                    self::$classIdentifiers,
+                    self::$classidentifiers,
                     true
                 ))
                 || $peek['position'] !== $this->lexer->lookahead['position'] + 1
@@ -751,7 +751,7 @@ final class DocParser
         $this->match(DocLexer::T_AT);
 
         // check if we have an annotation
-        $name = $this->Identifier();
+        $name = $this->identifier();
 
         if (
             $this->lexer->isNextToken(DocLexer::T_MINUS)
@@ -947,7 +947,7 @@ EXCEPTION
         }
 
         if (self::$annotationMetadata[$name]['has_named_argument_constructor']) {
-            if (PHP_VERSION_ID >= 80000) {
+            if (PHP_VERSION_id >= 80000) {
                 foreach ($values as $property => $value) {
                     if (! isset(self::$annotationMetadata[$name]['constructor_args'][$property])) {
                         throw AnnotationException::creationError(sprintf(
@@ -1111,7 +1111,7 @@ EXCEPTION
      */
     private function Constant()
     {
-        $identifier = $this->Identifier();
+        $identifier = $this->identifier();
 
         if (! defined($identifier) && strpos($identifier, '::') !== false && $identifier[0] !== '\\') {
             [$className, $const] = explode('::', $identifier);
@@ -1165,11 +1165,11 @@ EXCEPTION
             $this->identifierEndsWithClassConstant($identifier) &&
             ! $this->identifierStartsWithBackslash($identifier)
         ) {
-            return substr($identifier, 0, $this->getClassConstantPositionInIdentifier($identifier));
+            return substr($identifier, 0, $this->getClassConstantPositionInidentifier($identifier));
         }
 
         if ($this->identifierEndsWithClassConstant($identifier) && $this->identifierStartsWithBackslash($identifier)) {
-            return substr($identifier, 1, $this->getClassConstantPositionInIdentifier($identifier) - 1);
+            return substr($identifier, 1, $this->getClassConstantPositionInidentifier($identifier) - 1);
         }
 
         if (! defined($identifier)) {
@@ -1186,24 +1186,24 @@ EXCEPTION
 
     private function identifierEndsWithClassConstant(string $identifier): bool
     {
-        return $this->getClassConstantPositionInIdentifier($identifier) === strlen($identifier) - strlen('::class');
+        return $this->getClassConstantPositionInidentifier($identifier) === strlen($identifier) - strlen('::class');
     }
 
     /** @return int|false */
-    private function getClassConstantPositionInIdentifier(string $identifier)
+    private function getClassConstantPositionInidentifier(string $identifier)
     {
         return stripos($identifier, '::class');
     }
 
     /**
-     * Identifier ::= string
+     * identifier ::= string
      *
      * @throws AnnotationException
      */
-    private function Identifier(): string
+    private function identifier(): string
     {
         // check if we have an annotation
-        if (! $this->lexer->isNextTokenAny(self::$classIdentifiers)) {
+        if (! $this->lexer->isNextTokenAny(self::$classidentifiers)) {
             throw $this->syntaxError('namespace separator or identifier');
         }
 
@@ -1218,7 +1218,7 @@ EXCEPTION
             $this->lexer->isNextToken(DocLexer::T_NAMESPACE_SEPARATOR)
         ) {
             $this->match(DocLexer::T_NAMESPACE_SEPARATOR);
-            $this->matchAny(self::$classIdentifiers);
+            $this->matchAny(self::$classidentifiers);
 
             $className .= '\\' . $this->lexer->token['value'];
         }
@@ -1263,7 +1263,7 @@ EXCEPTION
             return $this->Annotation();
         }
 
-        if ($this->lexer->isNextToken(DocLexer::T_IDENTIFIER)) {
+        if ($this->lexer->isNextToken(DocLexer::T_idENTIFIER)) {
             return $this->Constant();
         }
 
@@ -1312,7 +1312,7 @@ EXCEPTION
      */
     private function FieldAssignment(): stdClass
     {
-        $this->match(DocLexer::T_IDENTIFIER);
+        $this->match(DocLexer::T_idENTIFIER);
         $fieldName = $this->lexer->token['value'];
 
         $this->match(DocLexer::T_EQUALS);
@@ -1391,7 +1391,7 @@ EXCEPTION
             $peek['type'] === DocLexer::T_EQUALS
                 || $peek['type'] === DocLexer::T_COLON
         ) {
-            if ($this->lexer->isNextToken(DocLexer::T_IDENTIFIER)) {
+            if ($this->lexer->isNextToken(DocLexer::T_idENTIFIER)) {
                 $key = $this->Constant();
             } else {
                 $this->matchAny([DocLexer::T_INTEGER, DocLexer::T_STRING]);

@@ -122,7 +122,7 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreatePendingPayment
      */
-    public function testFindPaymentById(MercadoPago\Payment $payment_created_previously) {
+    public function testFindPaymentByid(MercadoPago\Payment $payment_created_previously) {
         $payment = MercadoPago\Payment::find_by_id($payment_created_previously->id); 
         $this->assertEquals($payment->id, $payment_created_previously->id);
     }
@@ -130,7 +130,7 @@ class PaymentTest extends TestCase
     /**
      * @depends testCreatePendingPayment
      */
-    public function testFindPaymentByNonExistentId(MercadoPago\Payment $payment_created_previously) {
+    public function testFindPaymentByNonExistentid(MercadoPago\Payment $payment_created_previously) {
         $payment = MercadoPago\Payment::find_by_id("123456"); 
         $this->assertEquals($payment, null);
     }

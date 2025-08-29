@@ -11,7 +11,7 @@ class Perfil
         $this->id = $id;
         $this->descricao = $descricao;
     }
-    function getId() {
+    function getid() {
         return $this->id;
     }
 
@@ -19,7 +19,7 @@ class Perfil
         return $this->descricao;
     }
 
-    function setIdperfil($id) {
+    function setidperfil($id) {
         $this->id = $id;
     }
 

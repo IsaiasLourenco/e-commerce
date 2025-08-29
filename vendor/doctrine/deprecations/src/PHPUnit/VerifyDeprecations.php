@@ -16,12 +16,12 @@ trait VerifyDeprecations
     /** @var array<string,int> */
     private $doctrineNoDeprecationsExpectations = [];
 
-    public function expectDeprecationWithIdentifier(string $identifier): void
+    public function expectDeprecationWithidentifier(string $identifier): void
     {
         $this->doctrineDeprecationsExpectations[$identifier] = Deprecation::getTriggeredDeprecations()[$identifier] ?? 0;
     }
 
-    public function expectNoDeprecationWithIdentifier(string $identifier): void
+    public function expectNoDeprecationWithidentifier(string $identifier): void
     {
         $this->doctrineNoDeprecationsExpectations[$identifier] = Deprecation::getTriggeredDeprecations()[$identifier] ?? 0;
     }

@@ -25,11 +25,11 @@ class MerchantOrder extends Entity
   protected $id;
   
   /**
-   * preferenceId
+   * preferenceid
    * @Attribute()
    * @var string
    */
-  protected $preferenceId;
+  protected $preferenceid;
   
   /**
    * dateCreated
@@ -46,11 +46,11 @@ class MerchantOrder extends Entity
   protected $lastUpdate;
   
   /**
-   * applicationId
+   * applicationid
    * @Attribute
    * @var string
    */
-  protected $applicationId;
+  protected $applicationid;
   
   /**
    * status
@@ -60,11 +60,11 @@ class MerchantOrder extends Entity
   protected $status;
   
   /**
-   * siteId
+   * siteid
    * @Attribute()
    * @var string
    */
-  protected $siteId;
+  protected $siteid;
   
   /**
    * payer
@@ -81,11 +81,11 @@ class MerchantOrder extends Entity
   protected $collector;
   
   /**
-   * sponsorId
+   * sponsorid
    * @Attribute()
    * @var int
    */
-  protected $sponsorId;
+  protected $sponsorid;
   
   /**
    * payments

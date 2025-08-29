@@ -30,10 +30,10 @@ class Config
     {
         return [
             'base_url'      => 'https://api.mercadopago.com',
-            'CLIENT_ID'     => '',
+            'CLIENT_id'     => '',
             'CLIENT_SECRET' => '',
-            'USER_ID'       => '',
-            'APP_ID'        => '',
+            'USER_id'       => '',
+            'APP_id'        => '',
             'ACCESS_TOKEN'  => '',
             'REFRESH_TOKEN' => '',
             'sandbox_mode'  => true,
@@ -109,12 +109,12 @@ class Config
         parent::set($key, $value);
 
         if ($key == "ACCESS_TOKEN") { 
-            $user = $this->getUserId($value);
-            parent::set('USER_ID', $user['id']);
-            parent::set('COUNTRY_ID', $user['country_id']);
+            $user = $this->getUserid($value);
+            parent::set('USER_id', $user['id']);
+            parent::set('COUNTRY_id', $user['country_id']);
         }
         
-        if (parent::get('CLIENT_ID') != "" && parent::get('CLIENT_SECRET') != "" && empty(parent::get('ACCESS_TOKEN'))) {
+        if (parent::get('CLIENT_id') != "" && parent::get('CLIENT_SECRET') != "" && empty(parent::get('ACCESS_TOKEN'))) {
             
             $response = $this->getToken();
 
@@ -122,10 +122,10 @@ class Config
                 parent::set('ACCESS_TOKEN', $response['access_token']);
             
 
-                $user = $this->getUserId($response['access_token']);
+                $user = $this->getUserid($response['access_token']);
 
                 if (isset($user['id'])) {
-                    parent::set('USER_ID', $user['id']);
+                    parent::set('USER_id', $user['id']);
                 }
 
             }
@@ -137,7 +137,7 @@ class Config
     /** 
      * @return mixed
      */
-    public function getUserId()
+    public function getUserid()
     {
         if (!$this->_restclient) {
             $this->_restclient = new RestClient();
@@ -158,7 +158,7 @@ class Config
             $this->_restclient = new RestClient();
         }
         $data = ['grant_type'    => 'client_credentials',
-            'client_id'     => $this->get('CLIENT_ID'),
+            'client_id'     => $this->get('CLIENT_id'),
             'client_secret' => $this->get('CLIENT_SECRET')];
         $this->_restclient->setHttpParam('address', $this->get('base_url'));
         $response = $this->_restclient->post("/oauth/token", ['json_data' => json_encode($data)]);

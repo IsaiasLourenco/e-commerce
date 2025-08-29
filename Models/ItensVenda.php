@@ -20,7 +20,7 @@ class ItensVenda
       $this->precounitario = $precoUni;
       $this->subTotal = $subTotal;
    }
-   public function getId()
+   public function getid()
    {
       $this->id;
    }
@@ -44,7 +44,7 @@ class ItensVenda
    {
       $this->subTotal;
    }
-   public function setId($id)
+   public function setid($id)
    {
       $this->id = $id;
    }

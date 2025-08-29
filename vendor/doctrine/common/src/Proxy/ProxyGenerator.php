@@ -61,7 +61,7 @@ use function trim;
 use function var_export;
 
 use const DIRECTORY_SEPARATOR;
-use const PHP_VERSION_ID;
+use const PHP_VERSION_id;
 use const PREG_SPLIT_DELIM_CAPTURE;
 
 /**
@@ -76,7 +76,7 @@ class ProxyGenerator
      * Used to match very simple id methods that don't need
      * to be decorated since the identifier is known.
      */
-    public const PATTERN_MATCH_ID_METHOD = <<<'EOT'
+    public const PATTERN_MATCH_id_METHOD = <<<'EOT'
 ((?(DEFINE)
   (?<type>\\?[a-z_\x7f-\xff][\w\x7f-\xff]*(?:\\[a-z_\x7f-\xff][\w\x7f-\xff]*)*)
   (?<intersection_type>(?&type)\s*&\s*(?&type))
@@ -370,7 +370,7 @@ class <proxyShortClassName> extends \<className> implements \<baseProxyInterface
             throw InvalidArgumentException::classMustNotBeAbstract($class->getName());
         }
 
-        if (PHP_VERSION_ID >= 80200 && $class->getReflectionClass()->isReadOnly()) {
+        if (PHP_VERSION_id >= 80200 && $class->getReflectionClass()->isReadOnly()) {
             throw InvalidArgumentException::classMustNotBeReadOnly($class->getName());
         }
     }
@@ -406,7 +406,7 @@ class <proxyShortClassName> extends \<className> implements \<baseProxyInterface
      */
     public function generateEnumUseStatements(ClassMetadata $class): string
     {
-        if (PHP_VERSION_ID < 80100) {
+        if (PHP_VERSION_id < 80100) {
             return "\n";
         }
 
@@ -939,7 +939,7 @@ EOT;
             $methods .= $this->getMethodReturnType($method);
             $methods .= "\n" . '    {' . "\n";
 
-            if ($this->isShortIdentifierGetter($method, $class)) {
+            if ($this->isShortidentifierGetter($method, $class)) {
                 $identifier = lcfirst(substr($name, 3));
                 $fieldType  = $class->getTypeOfField($identifier);
                 $cast       = in_array($fieldType, ['integer', 'smallint'], true) ? '(int) ' : '';
@@ -991,21 +991,21 @@ EOT;
      * What does this mean? For proxy objects the identifier is already known,
      * however accessing the getter for this identifier usually triggers the
      * lazy loading, leading to a query that may not be necessary if only the
-     * ID is interesting for the userland code (for example in views that
+     * id is interesting for the userland code (for example in views that
      * generate links to the entity, but do not display anything else).
      *
      * @param ReflectionMethod $method
      *
      * @return bool
      */
-    private function isShortIdentifierGetter($method, ClassMetadata $class)
+    private function isShortidentifierGetter($method, ClassMetadata $class)
     {
         $identifier = lcfirst(substr($method->getName(), 3));
         $startLine  = $method->getStartLine();
         $endLine    = $method->getEndLine();
         $cheapCheck = $method->getNumberOfParameters() === 0
             && substr($method->getName(), 0, 3) === 'get'
-            && in_array($identifier, $class->getIdentifier(), true)
+            && in_array($identifier, $class->getidentifier(), true)
             && $class->hasField($identifier)
             && ($endLine - $startLine <= 4);
 
@@ -1013,7 +1013,7 @@ EOT;
             $code = file($method->getFileName());
             $code = trim(implode(' ', array_slice($code, $startLine - 1, $endLine - $startLine + 1)));
 
-            $pattern = sprintf(self::PATTERN_MATCH_ID_METHOD, $method->getName(), $identifier);
+            $pattern = sprintf(self::PATTERN_MATCH_id_METHOD, $method->getName(), $identifier);
 
             if (preg_match($pattern, $code)) {
                 return true;
@@ -1035,7 +1035,7 @@ EOT;
         foreach ($class->getReflectionClass()->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
             $name = $property->getName();
 
-            if ((! $class->hasField($name) && ! $class->hasAssociation($name)) || $class->isIdentifier($name)) {
+            if ((! $class->hasField($name) && ! $class->hasAssociation($name)) || $class->isidentifier($name)) {
                 continue;
             }
 
@@ -1135,7 +1135,7 @@ EOT;
             return '';
         }
 
-        if (PHP_VERSION_ID < 80100 || is_scalar($parameter->getDefaultValue())) {
+        if (PHP_VERSION_id < 80100 || is_scalar($parameter->getDefaultValue())) {
             return ' = ' . var_export($parameter->getDefaultValue(), true);
         }
 

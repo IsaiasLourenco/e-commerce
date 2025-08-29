@@ -48,5 +48,5 @@ jobs:
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         USER_EMAIL: ${{ secrets.USER_EMAIL }}
-        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_id: ${{ secrets.CLIENT_id }}
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}

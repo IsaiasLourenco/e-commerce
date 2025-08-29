@@ -10,23 +10,23 @@ class ItensVendaDao extends Contexto
     {
         return $this->listar('ITENSVENDA');
     }
-    public function obterPorId($id)
+    public function obterPorid($id)
     {
-        return $this->listar('ITENSVENDA', "WHERE ID = ?", [$id]);
+        return $this->listar('ITENSVENDA', "WHERE id = ?", [$id]);
     }
 
-    public function adicionar(ItensVenda $itensvenda)
+    public function adicionar(itens_venda $itensvenda)
     {
         $atributos = array_keys($itensvenda->atributosPreenchidos());
         $valores = array_values($itensvenda->atributosPreenchidos());
         return $this->inserir('ITENSVENDA', $atributos, $valores);
     }
 
-    public function alterar(ItensVenda $itensvenda)
+    public function alterar(itens_venda $itensvenda)
     {
         $atributos = array_keys($itensvenda->atributosPreenchidos());
         $valores = array_values($itensvenda->atributosPreenchidos());
-        return $this->atualizar('ITENSVENDA', $atributos, $valores, $itensvenda->getId());
+        return $this->atualizar('ITENSVENDA', $atributos, $valores, $itensvenda->getid());
     }
     public function excluir($id)    
     {

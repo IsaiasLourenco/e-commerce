@@ -10,10 +10,10 @@ class Usuario
     private $perfil;
     private $email;
     private $imagem;
-    private $datacadastro;
+    private $data_cadastro;
     private $ativo;
 
-    public function __construct($id = null, $nome = null, $usuario = null, $senha = null, $email = null, $imagem = null, $ativo = null, $datacadastro = null)
+    public function __construct($id = null, $nome = null, $usuario = null, $senha = null, $email = null, $imagem = null, $ativo = null, $data_cadastro = null)
     {
         date_default_timezone_set('America/Sao_Paulo');
         $this->id = $id;
@@ -24,15 +24,15 @@ class Usuario
         $this->email = $email;
         $this->imagem = $imagem;
         $this->ativo = $ativo;
-        $this->datacadastro = $datacadastro ?? date('Y-m-d H:i:s');
+        $this->data_cadastro = $data_cadastro ?? date('Y-m-d');
     }
 
-    public function getId()
+    public function getid()
     {
         return $this->id;
     }
 
-    public function setId($id)
+    public function setid($id)
     {
         $this->id = $id;
     }
@@ -55,7 +55,7 @@ class Usuario
             'perfil'=> $this->perfil,
             'email' => $this->email,
             'imagem' => $this->imagem,
-            'datacadastro' => $this->datacadastro,
+            'data_cadastro' => $this->data_cadastro,
             'ativo' => $this->ativo,
         ];
     }

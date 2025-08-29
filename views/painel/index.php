@@ -10,36 +10,37 @@
 
                 <button class="menu-toggle"> <i class="fa-solid fa-bars"></i> </button>
 
-                <ul class="menu pd-20">
+                <ul class="menu pd-5">
                     <li class="item">
                         <a href="index.php?controller=PainelController&metodo=index" class="fonte12 fnc-terciario">
-                            <i class="fa-solid fa-tags mg-r-1 fonte12 fnc-terciario"></i>
-                            Painel</a>
+                            <i class="fa-solid fa-table-columns"></i>
+                            Painel
+                        </a>
                     </li>
                     <li class="item">
                         <a href="index.php?controller=CategoriaController&metodo=listar" class="fonte12 fnc-terciario">
-                            <i class="fa-solid fa-tags mg-r-1 fonte12 fnc-terciario"></i>
+                            <i class="fa-solid fa-list"></i>
                             Categoria</a>
                     </li>
                     <li class="item">
                         <a href="index.php?controller=ProdutoController&metodo=listar" class="fonte12 fnc-terciario">
-                            <i class="fa-solid fa-bag-shopping mg-r-1 fonte12 fnc-terciario"></i>
+                            <i class="fa-solid fa-bag-shopping"></i>
                             Produto</a>
                     </li>
                     <li class="item">
                         <a href="index.php?controller=PerfilController&metodo=listar" class="fonte12 fnc-terciario">
-                            <i class="fa-solid fa-users mg-r-1 fonte12 fnc-terciario"></i>
+                            <i class="fa-solid fa-users"></i>
                             Perfil</a>
                     </li>
                     <li class="item">
                         <a href="index.php?controller=UsuarioController&metodo=listar" class="fonte12 fnc-terciario">
-                            <i class="fa-solid fa-user mg-r-1 fonte12 fnc-terciario"></i>
+                            <i class="fa-solid fa-user"></i>
                             Usuario</a>
                     </li>
 
                     <li class="item">
                         <a href="index.php?controller=ClienteController&metodo=logout" class="fonte12 fnc-terciario">
-                            <i class="fa-solid fa-right-from-bracket mg-r-1 fonte12 fnc-terciario"></i>
+                            <i class="fa-solid fa-right-from-bracket"></i>
                             Logout</a>
                     </li>
                 </ul>

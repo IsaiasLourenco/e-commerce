@@ -6,6 +6,6 @@
     $customer->email = "your.payer@email.com";
     $customer->save();
 
-    echo "Customer ID: " . $customer->id;
+    echo "Customer id: " . $customer->id;
 
 ?>

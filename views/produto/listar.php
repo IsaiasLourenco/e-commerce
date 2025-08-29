@@ -22,7 +22,7 @@
                 <th class="pd-10">Preco de Custo</th>
                 <th class="pd-10">Preço</th>
                 <th class="pd-10">Desconto</th>
-                <th class="pd-10">Estatus</th>
+                <th class="pd-10">Status</th>
                 <th class="pd-10">Ação</th>
             </tr>
         </thead>
@@ -35,27 +35,27 @@
 
                     <tr>
                         <td class="pd-10 txt-c"><?= $formater->zeroEsquerda($produto->CODIGO, 6); ?></td>
-                        <td class="pd-10 txt-c"><?= $formater->formatarDataTime($produto->DATACADASTRO); ?></td>
+                        <td class="pd-10 txt-c"><?= $formater->formatarDataTime($produto->data_cadastro); ?></td>
                         <td class="pd-10 txt-c"><?= $formater->formataTextoCap($produto->NOME); ?></td>
-                        <td class="pd-10 txt-c"><?= $produto->QUANTIDADE; ?></td>
+                        <td class="pd-10 txt-c"><?= $produto->QUANTidADE; ?></td>
                         <td class="pd-10 txt-c">R$ <?= $formater->converterMoeda($produto->PRECODECUSTO); ?></td>
                         <td class="pd-10 txt-c">R$ <?= $formater->converterMoeda($produto->PRECO); ?></td>
                         <td class="pd-10 txt-c"><?= $produto->DESCONTO; ?> %</td>
                         <td class=" txt-c">
-                            <?php if ($produto->ESTATUS == 'A'): ?>
-                                <span class="ativo" data-id="<?= $produto->ID; ?>" data-status="I" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
+                            <?php if ($produto->status_categoria == 'A'): ?>
+                                <span class="ativo" data-id="<?= $produto->id; ?>" data-status="I" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
                                     <i class="fa-solid fa-lock-open fonte14 fnc-sucesso"></i>
                                 </span>
                             <?php else: ?>
-                                <span class="ativo" data-id="<?= $produto->ID; ?>" data-status="A" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
+                                <span class="ativo" data-id="<?= $produto->id; ?>" data-status="A" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
                                     <i class="fa-solid fa-lock fonte16 fnc-error"></i>
                                 </span>
 
                             <?php endif; ?>
                         </td>
                         <td class="pd-10 txt-c flex justify-center item-centro">
-                            <a href="index.php?controller=ProdutoController&metodo=deleteConfirm&id=<?= $produto->ID; ?>"><i class="fa-solid fa-trash-can mg-r-2 fnc-secundario fonte14"></i> </a>
-                            <a href="index.php?controller=ProdutoController&metodo=index&id=<?= $produto->ID; ?>"><i class="fa-solid fa-pen fnc-primario fonte14"></i> </a>
+                            <a href="index.php?controller=ProdutoController&metodo=deleteConfirm&id=<?= $produto->id; ?>"><i class="fa-solid fa-trash-can mg-r-2 fnc-secundario fonte14"></i> </a>
+                            <a href="index.php?controller=ProdutoController&metodo=index&id=<?= $produto->id; ?>"><i class="fa-solid fa-pen fnc-primario fonte14"></i> </a>
                         </td>
                     </tr>
             <?php endforeach;

@@ -19,18 +19,18 @@ class PerfilController extends Notifications
         $this->perfilDao = new PerfilDao();
         $this->perfilService = new PerfilService($this->perfilDao);
     }
-    // METODO RESPONSAVEL POR VALIDAR OS DADOS E ENVIAR PARA SEU METODO RESPONSAVEL
+    // METODO RESPONSAVEL POR VALidAR OS DADOS E ENVIAR PARA SEU METODO RESPONSAVEL
     public function index()
     {
         $id = $_GET['id'] ?? null;
 
         if ($id) {
             // Recupera dados para edição de usuário
-            $perfil = $this->perfilDao->obterPorId($id);
+            $perfil = $this->perfilDao->obterPorid($id);
         }
 
         if ($_POST) {
-            // Determina se será uma inserção ou alteração com base no ID
+            // Determina se será uma inserção ou alteração com base no id
             if (!empty($_POST['id'])) {
                 $this->alterar($_POST);
             } else {

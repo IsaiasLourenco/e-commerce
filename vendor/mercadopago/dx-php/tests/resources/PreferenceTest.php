@@ -40,7 +40,7 @@ class PreferenceTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($preference->sandbox_init_point != null);
     }
 
-    public function testFindPreferenceById(){  
+    public function testFindPreferenceByid(){  
         $preference = MercadoPago\Preference::find_by_id(self::$last_preference->id);
         $this->assertEquals($preference->id, self::$last_preference->id);
     }

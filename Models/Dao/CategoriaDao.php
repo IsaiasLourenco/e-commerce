@@ -11,9 +11,9 @@ class CategoriaDao extends Contexto
     {
         return $this->listar('CATEGORIA');
     }
-    public function obterPorId($id)
+    public function obterPorid($id)
     {
-        return $this->listar('CATEGORIA', "WHERE ID = ?", [$id]);
+        return $this->listar('CATEGORIA', "WHERE id = ?", [$id]);
     }
 
     public function adicionar(Categoria $categoria)
@@ -27,7 +27,7 @@ class CategoriaDao extends Contexto
     {
         $atributos = array_keys($categoria->atributosPreenchidos());
         $valores = array_values($categoria->atributosPreenchidos());
-        return $this->atualizar('CATEGORIA', $atributos, $valores, $categoria->getId());
+        return $this->atualizar('CATEGORIA', $atributos, $valores, $categoria->getid());
     }
     public function excluir($id)    
     {

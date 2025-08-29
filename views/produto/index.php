@@ -14,10 +14,10 @@
 <div class="box-12">
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="box-12 mg-b-2">
-            <input type="hidden" name="id" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->ID; endif;?>">
+            <input type="hidden" name="id" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->id; endif;?>">
         </div>
         <div class="box-12 mg-b-2">
-            <input type="hidden" name="estatus" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->ESTATUS; endif;?>">
+            <input type="hidden" name="status_categoria" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->status_categoria; endif;?>">
         </div>
 
 
@@ -35,7 +35,7 @@
 
         <div class="box-3 mg-b-2">
             <label for="">Quantidade</label>
-            <input type="text" name="quantidade" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->QUANTIDADE; endif;?>">
+            <input type="text" name="quantidade" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->QUANTidADE; endif;?>">
         </div>
 
         <div class="box-3 mg-b-2">
@@ -66,9 +66,9 @@
             <select name="categoria" id="">
                 <?php if (isset($categorias) && count( $categorias) > 0):
                     foreach ( $categorias as $valores):
-                        $selected  = (isset($id) && $id != '' && $produto[0]->CATEGORIA == $valores->ID) ? 'selected' : '';
+                        $selected  = (isset($id) && $id != '' && $produto[0]->CATEGORIA == $valores->id) ? 'selected' : '';
                         $descricao = $valores->DESCRICAO;
-                        echo "<option value='{$valores->ID}' {$selected} > {$descricao} </option>"
+                        echo "<option value='{$valores->id}' {$selected} > {$descricao} </option>"
                 ?>
 
                 <?php endforeach;

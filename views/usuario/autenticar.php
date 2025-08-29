@@ -12,11 +12,11 @@
                     <label for="" class="fnc-branco">Senha</label>
                     <input type="password" name="senha" class="fnc-branco">
 
-                    <h4 class=" fnc-branco fonte12 fw-800">
-                        ainda não tem cadastro? 
-                        <a href="" class=" fnc-primario poppins-medium">cadastre-se</a>
-                </h4>
-                     <input type="submit" value="Acessar" class="btn-100 bg-primario fnc-secundario mg-t-2">
+                    <h4 class="fnc-branco fonte12 fw-800">
+                        ainda não tem cadastro?
+                        <a href="" class="fnc-primario poppins-medium">cadastre-se</a>
+                    </h4>
+                    <input type="submit" value="Acessar" class="btn-100 bg-primario fnc-secundario mg-t-2">
                 </form>
 
             </div>

@@ -10,21 +10,21 @@ class ClienteDao extends Contexto
 {
     public function listarTodos()
     {
-        return $this->listar('CLIENTES');
+        return $this->listar('clientes');
     }
     public function listarClientesAtivos()
     {
-        return $this->listar('CLIENTES', "WHERE  ESTATUS = 'A' ");
+        return $this->listar('clientes', "WHERE  ativo = 'A' ");
     }
-    public function obterPorId($id)
+    public function obterPorid($id)
     {
-        return $this->listar('CLIENTES', "WHERE ID = ?", [$id]);
+        return $this->listar('clientes', "WHERE id = ?", [$id]);
     }
     public function autenticar($cliente){
-        return $this->listar("CLIENTES","WHERE EMAIL = '".$cliente."' OR CPF = '".$cliente."'"); 
+        return $this->listar("clientes","WHERE email = '".$cliente."' OR cpf = '".$cliente."'"); 
     }   
      public function validarDados($campo, $valor){
-        $sql = "SELECT COUNT(*) as total FROM CLIENTES WHERE $campo = ?";
+        $sql = "SELECT COUNT(*) as total FROM clientes WHERE $campo = ?";
         $stmt = $this->executarConsulta($sql,[$valor]);
         $retorno = $stmt->fetch(PDO::FETCH_ASSOC);
         return $retorno['total'] > 0;
@@ -34,17 +34,17 @@ class ClienteDao extends Contexto
     {
         $atributos = array_keys($cliente->atributosPreenchidos());
         $valores = array_values($cliente->atributosPreenchidos());
-        return $this->inserir('CLIENTES', $atributos, $valores);
+        return $this->inserir('clientes', $atributos, $valores);
     }
 
     public function alterar(Cliente $cliente)
     {
         $atributos = array_keys($cliente->atributosPreenchidos());
         $valores = array_values($cliente->atributosPreenchidos());
-        return $this->atualizar('CLIENTES', $atributos, $valores, $cliente->getId());
+        return $this->atualizar('clientes', $atributos, $valores, $cliente->getid());
     }
     public function excluir($id)
     {
-        return $this->deletar('CLIENTES', $id);
+        return $this->deletar('clientes', $id);
     }
 }

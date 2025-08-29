@@ -10,9 +10,9 @@ class VendaDao extends Contexto
     {
         return $this->listar('VENDA');
     }
-    public function obterPorId($id)
+    public function obterPorid($id)
     {
-        return $this->listar('VENDA', "WHERE ID = ?", [$id]);
+        return $this->listar('VENDA', "WHERE id = ?", [$id]);
     }
     public function adicionar(Venda $venda)
     {
@@ -21,7 +21,7 @@ class VendaDao extends Contexto
         return $this->inserir('VENDA', $atributos, $valores);
     }
 
-    public function adicionarItens(ItensVenda $itensVenda)
+    public function adicionarItens(itens_venda $itensVenda)
     {
         $atributos = array_keys($itensVenda->atributosPreenchidos());
         $valores = array_values($itensVenda->atributosPreenchidos());
@@ -32,7 +32,7 @@ class VendaDao extends Contexto
     {
         $atributos = array_keys($venda->atributosPreenchidos());
         $valores = array_values($venda->atributosPreenchidos());
-        return $this->atualizar('VENDA', $atributos, $valores, $venda->getId());
+        return $this->atualizar('VENDA', $atributos, $valores, $venda->getid());
     }
     public function excluir($id)    
     {

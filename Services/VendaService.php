@@ -26,7 +26,7 @@ class VendaService
       endif;
 
       $venda = new Venda();
-      $venda->setId(null);
+      $venda->setid(null);
       $venda->setValor($dados['valor']);
       $venda->setCliente($dados['cliente']);
       $venda->setStatus($dados['status']);
@@ -36,13 +36,13 @@ class VendaService
          $this->vendaDao->iniciarTransacao();
 
          $idvenda = $this->vendaDao->adicionar($venda);
-         $venda->setId($idvenda);
-         $id = $venda->getId();
+         $venda->setid($idvenda);
+         $id = $venda->getid();
    #var_dump($dados);
          if (!empty($dados['itensvenda'])):
             foreach ($dados['itensvenda'] as $item):
 
-               $itensVenda = new ItensVenda();
+               $itens_venda = new ItensVenda();
                $itensVenda->setVenda($id);
                $itensVenda->setProduto($item['produto']);
                $itensVenda->setQtde($item['quantidade']);

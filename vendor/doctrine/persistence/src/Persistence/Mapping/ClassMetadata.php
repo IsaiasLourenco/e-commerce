@@ -29,7 +29,7 @@ interface ClassMetadata
      * @return array<int, string>
      * @phpstan-return list<string>
      */
-    public function getIdentifier();
+    public function getidentifier();
 
     /**
      * Gets the ReflectionClass instance for this mapped class.
@@ -43,7 +43,7 @@ interface ClassMetadata
      *
      * @return bool
      */
-    public function isIdentifier(string $fieldName);
+    public function isidentifier(string $fieldName);
 
     /**
      * Checks if the given field is a mapped property for this class.
@@ -87,7 +87,7 @@ interface ClassMetadata
      *
      * @return array<int, string>
      */
-    public function getIdentifierFieldNames();
+    public function getidentifierFieldNames();
 
     /**
      * Returns a numerically indexed list of association names of this persistent class.
@@ -137,5 +137,5 @@ interface ClassMetadata
      *
      * @return array<string, mixed>
      */
-    public function getIdentifierValues(object $object);
+    public function getidentifierValues(object $object);
 }

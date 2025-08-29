@@ -12,7 +12,7 @@ class Venda
     private float $valor;
     private string $cliente;
     private string $status;
-    private array $itensVenda = [];
+    private array $itens_venda = [];
 
     public function __construct(
         ?string $id = '',
@@ -29,7 +29,7 @@ class Venda
     }
 
     // Getters
-    public function getId()
+    public function getid()
     {
         return $this->id;
     }
@@ -59,7 +59,7 @@ class Venda
         return $this->itensVenda;
     }
     // Setters
-    public function setId($id): void
+    public function setid($id): void
     {
         $this->id = $id;
     }

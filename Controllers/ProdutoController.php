@@ -36,11 +36,11 @@ class ProdutoController extends Notifications
 
         if ($id) {
             // Recupera dados para edição de usuário
-            $produtos = $this->produtoDao->obterPorId($id);
+            $produtos = $this->produtoDao->obterPorid($id);
         }
 
         if ($_POST) {
-            // Determina se será uma inserção ou alteração com base no ID
+            // Determina se será uma inserção ou alteração com base no id
             if (empty($_POST['id'])) {
                 $this->inserir($_POST, $_FILES);
             } else {

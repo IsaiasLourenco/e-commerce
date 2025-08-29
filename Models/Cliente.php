@@ -7,7 +7,7 @@ class Cliente
     private ?string $id;
     private ?string  $nome;
     private ?string  $cpf;
-    private ?string  $datanascimento;
+    private ?string  $data_nascimento;
     private ?string  $email;
     private ?string  $senha;
     private ?string  $cep;
@@ -17,17 +17,17 @@ class Cliente
     private ?string  $uf;
     private ?string  $cidade;
     private ?string  $imagem;
-    private ?string  $datacadastro;
+    private ?string  $data_cadastro;
     private ?string  $ativo;
     private ?string  $perfil;
 
-    public function __construct($id = '', $nome = '', $cpf = '', $datanascimento = '', $email = '',  $senha = '',   $cep = '',   $logradouro = '',    $numero = '', $bairro = '', $uf = '', $cidade = '', $imagem = '', $datacadastro = '', $ativo = '', $perfil = '')
+    public function __construct($id = '', $nome = '', $cpf = '', $data_nascimento = '', $email = '',  $senha = '',   $cep = '',   $logradouro = '',    $numero = '', $bairro = '', $uf = '', $cidade = '', $imagem = '', $data_cadastro = '', $ativo = '', $perfil = '')
     {
         date_default_timezone_set('America/Sao_Paulo');
         $this->id = $id;
         $this->nome = $nome;
         $this->cpf = $cpf;
-        $this->datanascimento = $datanascimento;
+        $this->data_nascimento = $data_nascimento;
         $this->email = $email;
         $this->senha = $senha;
         $this->cep = $cep;
@@ -37,17 +37,17 @@ class Cliente
         $this->uf = $uf;
         $this->cidade = $cidade;
         $this->imagem = $imagem;
-        $this->datacadastro = $datacadastro ?: date("Y-m-d H:i:s");
+        $this->data_cadastro = $data_cadastro ?: date("Y-m-d H:i:s");
         $this->ativo = $ativo ?: '0';
         $this->perfil = $perfil;
     }
 
-    public function getId()
+    public function getid()
     {
         return $this->id;
     }
 
-    public function setId($id)
+    public function setid($id)
     {
         $this->id = $id;
     }
@@ -64,7 +64,7 @@ class Cliente
             'id' => $this->id,
             'nome' => $this->nome,
             'cpf' => $this->cpf,
-            'datanascimento' => $this->datanascimento,
+            'data_nascimento' => $this->data_nascimento,
             'email' => $this->email,
             'senha' => $this->senha,
             'cep' => $this->cep,
@@ -74,7 +74,7 @@ class Cliente
             'uf' => $this->uf,
             'cidade' => $this->cidade,
             'imagem' => $this->imagem,
-            'datacadastro' => $this->datacadastro,
+            'data_cadastro' => $this->data_cadastro,
             'ativo' => $this->ativo,
             'perfil' => $this->perfil,
         ];

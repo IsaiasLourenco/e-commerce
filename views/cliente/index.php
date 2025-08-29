@@ -23,7 +23,7 @@
 
                 <div class="box-6">
                     <label for="">Data de Nascimento </label>
-                    <input type="date" name="datanascimento">
+                    <input type="date" name="data_nascimento">
                 </div>
 
                 <div class="box-12">

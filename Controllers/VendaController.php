@@ -28,7 +28,7 @@ class VendaController extends Notifications
                  header("location:index.php?controller=ClienteController&metodo=autenticar");
              endif;
 
-            $itensVenda = [];
+            $itens_venda = [];
             $total = 0.00;
             foreach ($_SESSION['carrinho'] as $item):
                 $subTotal = $item['preco'] * $item['qtde'];
@@ -75,7 +75,7 @@ collection_id=1333811521
 &collection_status=approved
 &payment_id=1333811521
 &status=approved
-&external_reference=PEDIDO123
+&external_reference=PEDidO123
 &payment_type=credit_card
 &merchant_order_id=29877509947
 &preference_id=97829515-7f2ab716-61e8-4ea4-9b10-d8ab70ffa9c1&site_id=MLB

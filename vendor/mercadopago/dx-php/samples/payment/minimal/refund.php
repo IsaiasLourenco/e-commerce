@@ -11,7 +11,7 @@
     $refund->metadata = "A total refund";
     $refund->save();
 
-    echo "Refund ID: " . $refund->id . "\n";
+    echo "Refund id: " . $refund->id . "\n";
     echo "Payment Refunds: \n";
     var_dump($payment->refunds);
 

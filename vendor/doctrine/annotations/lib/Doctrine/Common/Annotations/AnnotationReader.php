@@ -15,7 +15,7 @@ use function extension_loaded;
 use function filter_var;
 use function ini_get;
 
-use const FILTER_VALIDATE_BOOLEAN;
+use const FILTER_VALidATE_BOOLEAN;
 
 /**
  * A reader for docblock annotations.
@@ -113,15 +113,15 @@ class AnnotationReader implements Reader
     {
         if (
             extension_loaded('Zend Optimizer+') &&
-            (filter_var(ini_get('zend_optimizerplus.save_comments'), FILTER_VALIDATE_BOOLEAN)  === false ||
-            filter_var(ini_get('opcache.save_comments'), FILTER_VALIDATE_BOOLEAN) === false)
+            (filter_var(ini_get('zend_optimizerplus.save_comments'), FILTER_VALidATE_BOOLEAN)  === false ||
+            filter_var(ini_get('opcache.save_comments'), FILTER_VALidATE_BOOLEAN) === false)
         ) {
             throw AnnotationException::optimizerPlusSaveComments();
         }
 
         if (
             extension_loaded('Zend OPcache') &&
-            filter_var(ini_get('opcache.save_comments'), FILTER_VALIDATE_BOOLEAN) === false
+            filter_var(ini_get('opcache.save_comments'), FILTER_VALidATE_BOOLEAN) === false
         ) {
             throw AnnotationException::optimizerPlusSaveComments();
         }

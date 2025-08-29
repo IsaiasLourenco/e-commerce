@@ -13,11 +13,11 @@
 <div class="box-12">
     <form action="" method="POST">
         <div>
-            <input type="hidden" name="id" value="<?php if (isset($id) && $id <> ''): echo $categorias[0]->ID;
+            <input type="hidden" name="id" value="<?php if (isset($id) && $id <> ''): echo $categorias[0]->id;
                                                     endif; ?>">
         </div>
         <div class="box-12"><label for="">Nova Categoria</label></div>
-        <div class="box-6"> <input type="text" name="descricao" value="<?php if (isset($id) && $id <> ''): echo $categorias[0]->DESCRICAO;
+        <div class="box-6"> <input type="text" name="descricao" value="<?php if (isset($id) && $id <> ''): echo $categorias[0]->descricao;
                                                                         endif; ?>"></div>
 
         <div class="box-12">

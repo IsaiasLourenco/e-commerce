@@ -46,11 +46,11 @@ class UsuarioController extends Notifications
 
         if ($id) {
             // Recupera dados para edição de usuário
-            $cliente = $this->clienteDao->obterPorId($id);
+            $cliente = $this->clienteDao->obterPorid($id);
         }
 
         if ($_POST) {
-            // Determina se será uma inserção ou alteração com base no ID
+            // Determina se será uma inserção ou alteração com base no id
             if (empty($_POST['id'])) {
                 $this->inserir($_POST, $_FILES);
             } else {

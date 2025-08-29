@@ -1003,14 +1003,14 @@ a{
     border-collapse: collapse;
 }
 
-/* CONTAINER E BOX-GRID*/
+/* CONTAINER E BOX-GRid*/
 .container { width: 96%; margin: 0 auto; padding: 0;}
 /*1320 PX*/
 /* .container{width:100%; margin: 0 auto; padding: 0;}FULL */
 .container:after,.container:before { content: " "; display: table;}
 .container:after { clear: both;}
 
-/* CONTAINER E BOX-GRID*/
+/* CONTAINER E BOX-GRid*/
 .container-100 { width: 100%; margin: 0 auto; padding: 0;}
 /*1320 PX*/
 /* .container{width:100%; margin: 0 auto; padding: 0;}FULL */

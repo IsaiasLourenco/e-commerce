@@ -50,8 +50,8 @@ class SDK
       return self::$_config->get('ACCESS_TOKEN');
     }
 
-    public static function getCountryId(){
-        return self::$_config->get('COUNTRY_ID');
+    public static function getCountryid(){
+        return self::$_config->get('COUNTRY_id');
     }
 
     public static function cleanCredentials(){
@@ -69,17 +69,17 @@ class SDK
     }
 
     /**
-     * Set Access ClientId for SDK .
+     * Set Access Clientid for SDK .
      */
-    public static function setClientId($client_id){
+    public static function setClientid($client_id){
       if (!isset(self::$_config)){
         self::initialize();
       }
-      self::$_config->configure(['CLIENT_ID' => $client_id]); 
+      self::$_config->configure(['CLIENT_id' => $client_id]); 
     }
 
-    public static function getClientId(){
-      return self::$_config->get('CLIENT_ID');
+    public static function getClientid(){
+      return self::$_config->get('CLIENT_id');
     }
     
     /**
@@ -150,9 +150,9 @@ class SDK
     }
 
     /**
-     * Set Platform Id for SDK .
+     * Set Platform id for SDK .
      */
-    public static function setPlatformId($platform_id){
+    public static function setPlatformid($platform_id){
       if (!isset(self::$_config)){
         self::initialize();
       }
@@ -160,14 +160,14 @@ class SDK
       self::addCustomTrackingParam('x-platform-id', $platform_id);
     }
 
-    public static function getPlatformId(){
+    public static function getPlatformid(){
       return self::$_config->get('x-platform-id');
     }
 
     /**
-     * Set Corporation Id for SDK .
+     * Set Corporation id for SDK .
      */
-    public static function setCorporationId($corporation_id){
+    public static function setCorporationid($corporation_id){
       if (!isset(self::$_config)){
         self::initialize();
       }
@@ -175,14 +175,14 @@ class SDK
       self::addCustomTrackingParam('x-corporation-id', $corporation_id);
     }
 
-    public static function getCorporationId(){
+    public static function getCorporationid(){
       return self::$_config->get('x-corporation-id');
     }
 
     /**
-     * Set Integrator Id for SDK .
+     * Set Integrator id for SDK .
      */
-    public static function setIntegratorId($integrator_id){
+    public static function setIntegratorid($integrator_id){
       if (!isset(self::$_config)){
         self::initialize();
       }
@@ -190,7 +190,7 @@ class SDK
       self::addCustomTrackingParam('x-integrator-id', $integrator_id);
     }
 
-    public static function getIntegratorId(){
+    public static function getIntegratorid(){
       return self::$_config->get('x-integrator-id');
     }
 }
