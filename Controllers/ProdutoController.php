@@ -53,7 +53,7 @@ class ProdutoController extends Notifications
 
     public function listar()
     {
-        $produtos = $this->produtoDao->listarTodos();
+        $produtos = $this->produtoDao->listarComCategoria();
         require_once "Views/painel/index.php";
     }
 

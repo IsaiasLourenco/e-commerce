@@ -28,6 +28,7 @@ if ($_GET) {
     <script type="text/javascript" src="lib/js/animacoes.js"></script>
     <script type="text/javascript" src="lib/js/ajax.js"></script>
     <script type="text/javascript" src="lib/js/validacao.js"></script>
+    <script type="text/javascript" src="lib/js/buscaCep.js"></script>
 
 
     <!-- carregando fontawesome -->

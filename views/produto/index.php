@@ -1,11 +1,10 @@
 <div class="box-12 mg-t-12">
     <h2 class=" poppins-medium fw-300 fonte22">
-        <i class="fa-solid fa-bag-shopping mg-r-1 fonte22 fnc-secundario"></i> 
-        <?php  
+        <i class="fa-solid fa-bag-shopping mg-r-1 fonte22 fnc-secundario"></i>
+        <?php
         $titulo = isset($id) && $id <> '' ?  'Atualizar Produto ' : 'Cadastrar Produto';
         echo $titulo;
         ?>
-        
     </h2>
 </div>
 
@@ -14,72 +13,64 @@
 <div class="box-12">
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="box-12 mg-b-2">
-            <input type="hidden" name="id" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->id; endif;?>">
+            <input type="hidden" name="id" value="<?php if (isset($id) && $id <> ''): echo $produtos[0]->getid(); endif; ?>">
         </div>
         <div class="box-12 mg-b-2">
-            <input type="hidden" name="status_categoria" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->status_categoria; endif;?>">
+            <input type="hidden" name="status_categoria" value="<?php if (isset($id) && $id <> ''): echo $produtos[0]->status_produto; endif; ?>">
         </div>
-
 
         <div class="box-6 mg-b-2">
             <label for="">Nome</label>
-            <input type="text" name="nome" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->NOME; endif;?>">
+            <input type="text" name="nome" value="<?php if (isset($id) && $id <> ''): echo $produtos[0]->nome; endif; ?>">
         </div>
-
 
         <div class="box-6 mg-b-2">
             <label for="">Descrição</label>
-            <input type="text" name="descricao" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->DESCRICAO; endif;?>">
+            <input type="text" name="descricao" value="<?php if (isset($id) && $id <> ''): echo $produtos[0]->descricao; endif; ?>">
         </div>
-
 
         <div class="box-3 mg-b-2">
             <label for="">Quantidade</label>
-            <input type="text" name="quantidade" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->QUANTidADE; endif;?>">
+            <input type="text" name="quantidade" value="<?php if (isset($id) && $id <> ''): echo $produtos[0]->quantidade; endif; ?>">
         </div>
 
         <div class="box-3 mg-b-2">
             <label for="">Preço</label>
-            <input type="text" name="preco" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->PRECO; endif;?>">
+            <input type="text" name="preco" value="<?php if (isset($id) && $id <> ''): echo $produtos[0]->preco; endif; ?>">
         </div>
 
         <div class="box-3 mg-b-2">
             <label for="">Desconto</label>
-            <input type="text" name="desconto" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->DESCONTO; endif;?>">
+            <input type="text" name="desconto" value="<?php if (isset($id) && $id <> ''): echo $produtos[0]->desconto; endif; ?>">
         </div>
 
         <div class="box-3 mg-b-2">
             <label for="">Preço de custo</label>
-            <input type="text" name="precodecusto" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->PRECODECUSTO; endif;?>">
+            <input type="text" name="precodecusto" value="<?php if (isset($id) && $id <> ''): echo $produtos[0]->preco_custo; endif; ?>">
         </div>
-
 
         <div class="box-6 mg-b-2">
             <label for="">Cor</label>
-            <input type="text" name="cor" value="<?php if(isset($id) && $id <> ''): echo $produtos[0]->COR; endif;?>">
+            <input type="text" name="cor" value="<?php if (isset($id) && $id <> ''): echo $produtos[0]->cor; endif; ?>">
         </div>
-
-
 
         <div class="box-6 mg-b-2">
             <label for="">Categoria</label>
             <select name="categoria" id="">
-                <?php if (isset($categorias) && count( $categorias) > 0):
-                    foreach ( $categorias as $valores):
-                        $selected  = (isset($id) && $id != '' && $produto[0]->CATEGORIA == $valores->id) ? 'selected' : '';
-                        $descricao = $valores->DESCRICAO;
-                        echo "<option value='{$valores->id}' {$selected} > {$descricao} </option>"
-                ?>
-
-                <?php endforeach;
+                <option disabled selected hidden>Escolha a categoria do produto...</option>
+                <?php if (isset($categorias) && count($categorias) > 0):
+                    foreach ($categorias as $valores):
+                        $selected = (isset($id) && $id != '' && $produtos[0]->categoria == $valores->id) ? 'selected' : '';
+                        $descricao = $valores->descricao;
+                        echo "<option value='{$valores->id}' {$selected}>{$descricao}</option>";
+                    endforeach;
                 endif; ?>
             </select>
         </div>
 
-
         <div class="box-6">
             <?php
-            $imagem = isset($id) && $id != '' ?  $produtos[0]->IMAGEM : 'produto-padrao.png';
+            $imagem = isset($id) && $id != '' ?  $produtos[0]->imagem : 'produto-padrao.png';
             $dirImagem = 'lib/img/upload/produtos/' . $imagem;
             $imagemAlt = $imagem === 'produto-padrao.png' ? 'Escolha um produto' : 'Imagem do produto';
             ?>
@@ -88,8 +79,7 @@
                 <?= $imagemAlt; ?>
             </label>
             <input type="file" id="img" name="imagem" onchange="mostrar(this)" value="<?= $imagem; ?>">
-            <img class=" logo-200" id="foto" src="<?= $dirImagem ?>" alt="<?= $imagemAlt; ?>">
-
+            <img class="logo-200" id="foto" src="<?= $dirImagem ?>" alt="<?= $imagemAlt; ?>">
         </div>
 
         <div class="box-12 mg-t-2">

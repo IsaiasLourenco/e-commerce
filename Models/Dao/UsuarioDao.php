@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models\Dao;
+
 use PDOException;
 use PDO;
 use App\Models\Contexto;
@@ -12,8 +13,9 @@ class UsuarioDao extends Contexto
     {
         return $this->listar('usuario');
     }
-    public function autenticar($usuario){
-        return $this->listar("usuario","WHERE usuario = '".$usuario."'"); 
+    public function autenticar($usuario)
+    {
+        return $this->listar("usuario", "WHERE usuario = '" . $usuario . "'");
     }
 
     public function obterPorid($id)
@@ -34,8 +36,31 @@ class UsuarioDao extends Contexto
         $valores = array_values($usuario->atributosPreenchidos());
         return $this->atualizar('usuario', $atributos, $valores, $usuario->getid());
     }
-    public function excluir($id)    
+    public function excluir($id)
     {
-       return $this->deletar('usuario', $id);
+        return $this->deletar('usuario', $id);
     }
+
+    public function listarComPerfil()
+    {
+        $sql = "SELECT u.*, p.descricao AS nome_perfil
+            FROM usuario u
+            LEFT JOIN perfil p ON u.perfil = p.id";
+
+        $stmt = self::getConexao()->prepare($sql);
+        $stmt->execute();
+        $resultados = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $lista = [];
+        foreach ($resultados as $linha) {
+            $usuario = new Usuario();
+            foreach ($linha as $chave => $valor) {
+                $usuario->__set($chave, $valor);
+            }
+            $lista[] = $usuario;
+        }
+
+        return $lista;
+    }
+    
 }

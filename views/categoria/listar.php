@@ -15,10 +15,10 @@
         <table class="zebra wd-100 collapse" id="tabela">
             <thead>
                 <tr>
-                    <th class="pd-10">Código</th>
-                    <th class="pd-10">Descrição</th>
-                    <th class="pd-10">Status</th>
-                    <th class="pd-10">Ações</th>
+                    <th class="pd-10" style="text-align: center;">Código</th>
+                    <th class="pd-10" style="text-align: center;">Descrição</th>
+                    <th class="pd-10" style="text-align: center;">Status</th>
+                    <th class="pd-10" style="text-align: center;">Ações</th>
                 </tr>
             </thead>
 
@@ -27,9 +27,9 @@
                 if (isset($categorias) && count($categorias)):
                     foreach ($categorias as $categoria): ?>
                         <tr>
-                            <td class="pd-10 txt-c"><?= $formater->zeroEsquerda($categoria->id, 6); ?></td>
-                            <td class="pd-10 txt-c"><?= $categoria->descricao; ?></td>
-                            <td class=" txt-c">
+                            <td class="pd-10" style="text-align: center;"><?= $formater->zeroEsquerda($categoria->id, 6); ?></td>
+                            <td class="pd-10" style="text-align: center;"><?= $categoria->descricao; ?></td>
+                            <td  style="text-align: center;">
                                 <?php if ($categoria->status_categoria == 'A'): ?>
                                     <span class="ativo" data-id="<?= $categoria->id; ?>" data-status="I" data-url="index.php?controller=CategoriaController&metodo=alterarStatus">
                                         <i class="fa-solid fa-lock-open fonte14 fnc-sucesso" style="cursor: pointer;""></i>
@@ -41,7 +41,7 @@
 
                                 <?php endif; ?>
                             </td>
-                            <td class="pd-10 txt-c flex justify-center item-centro">
+                            <td class="pd-10 flex justify-center item-centro" style="text-align: center;">
                                 <a href="index.php?controller=CategoriaController&metodo=deleteConfirm&id=<?= $categoria->id; ?>"><i class="fa-solid fa-trash-can mg-r-2 fnc-secundario fonte14"></i> </a>
                                 <a href="index.php?controller=CategoriaController&metodo=index&id=<?= $categoria->id; ?>"><i class="fa-solid fa-pen fnc-primario fonte14"></i> </a>
 

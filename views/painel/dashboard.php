@@ -79,7 +79,7 @@
 <!-- CODIGO JAVA SCRIPT PARA RECUPERAR OS DADOS DO BANCO E CRIAR OS GRAFICOS -->
 <script>
     // grafico de barras dos produtos mais vendidos
-    new Chart(document.getElementByid('produtosMaisVendidos'), {
+    new Chart(document.getElementById('produtosMaisVendidos'), {
         type: 'bar',
         data: {
             labels: <?= json_encode($labels); ?>,
@@ -93,7 +93,7 @@
 
     // grafico de vendas por mês   
 
-    new Chart(document.getElementByid('vendasPorMes'), {
+    new Chart(document.getElementById('vendasPorMes'), {
         type: 'line',
         data: {
             labels: <?= json_encode($labelsV); ?>,
@@ -109,7 +109,7 @@
 
     // grafico de categorias mais vendidas
 
-    new Chart(document.getElementByid('categoriasMaisVendidas'), {
+    new Chart(document.getElementById('categoriasMaisVendidas'), {
         type: 'pie',
         data: {
             labels: <?= json_encode($labelsC); ?>,

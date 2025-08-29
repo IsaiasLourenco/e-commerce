@@ -17,7 +17,7 @@
                                                     endif; ?>">
         </div>
         <div class="box-12"><label for="">Novo Perfil</label></div>
-        <div class="box-6"> <input type="text" name="descricao" value="<?php if (isset($id) && $id <> ''): echo $perfil[0]->DESCRICAO;
+        <div class="box-6"> <input type="text" name="descricao" value="<?php if (isset($id) && $id <> ''): echo $perfil[0]->descricao;
                                                                         endif; ?>"></div>
 
         <div class="box-12">

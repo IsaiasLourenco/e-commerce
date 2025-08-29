@@ -1,7 +1,7 @@
 <div class="box-12 mg-t-12">
     <div class="box-8">
         <h2 class=" poppins-medium fw-300 fonte22">
-            <i class="fa-solid fa-tags mg-r-1 fonte22 fnc-secundario"></i> Lista de Produtos
+            <i class="fa-solid fa-bag-shopping"></i> Lista de Produtos
         </h2>
     </div>
     <div class="box-4 flex justify-end item-centro">
@@ -30,37 +30,52 @@
         <tbody>
             <?php if (isset($produtos) && count($produtos)):
                 foreach ($produtos as $produto):
-                    if (is_null($produto->CODIGO)): $produto->CODIGO = 0;
-                    endif; ?>
+                    if (method_exists($produto, 'getCodigo') && is_null($produto->getCodigo())):
+                        $produto->__set('codigo', '000000');
+                    endif;
 
+                    $codigoFormatado = $formater->zeroEsquerda((int) ($produto->getCodigo() ?? 0), 6);
+                    $dataCadastro = method_exists($produto, 'getDataCadastro') ? $produto->getDataCadastro() : '';
+                    $nome = method_exists($produto, 'getNome') ? $produto->getNome() : '';
+                    $quantidade = method_exists($produto, 'getQuantidade') ? $produto->getQuantidade() : '';
+                    $precoCusto = method_exists($produto, 'getPrecoCusto') ? $produto->getPrecoCusto() : '';
+                    $preco = method_exists($produto, 'getPreco') ? $produto->getPreco() : '';
+                    $desconto = method_exists($produto, 'getDesconto') ? $produto->getDesconto() : '';
+                    $status = method_exists($produto, 'getStatusProduto') ? $produto->getStatusProduto() : 'A';
+                    $id = method_exists($produto, 'getid') ? $produto->getid() : '';
+            ?>
                     <tr>
-                        <td class="pd-10 txt-c"><?= $formater->zeroEsquerda($produto->CODIGO, 6); ?></td>
-                        <td class="pd-10 txt-c"><?= $formater->formatarDataTime($produto->data_cadastro); ?></td>
-                        <td class="pd-10 txt-c"><?= $formater->formataTextoCap($produto->NOME); ?></td>
-                        <td class="pd-10 txt-c"><?= $produto->QUANTidADE; ?></td>
-                        <td class="pd-10 txt-c">R$ <?= $formater->converterMoeda($produto->PRECODECUSTO); ?></td>
-                        <td class="pd-10 txt-c">R$ <?= $formater->converterMoeda($produto->PRECO); ?></td>
-                        <td class="pd-10 txt-c"><?= $produto->DESCONTO; ?> %</td>
-                        <td class=" txt-c">
-                            <?php if ($produto->status_categoria == 'A'): ?>
-                                <span class="ativo" data-id="<?= $produto->id; ?>" data-status="I" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
+                        <td class="pd-10 txt-c"><?= $codigoFormatado; ?></td>
+                        <td class="pd-10 txt-c"><?= $formater->formatarDataTime($dataCadastro); ?></td>
+                        <td class="pd-10 txt-c"><?= $formater->formataTextoCap($nome); ?></td>
+                        <td class="pd-10 txt-c"><?= $quantidade; ?></td>
+
+                        <?php
+                        $precoCustoFloat = (float) ($produto->getPrecoCusto() ?: 0);
+                        $precoFloat = (float) ($produto->getPreco() ?: 0);
+                        ?>
+
+                        <td class="pd-10 txt-c">R$ <?= $formater->converterMoeda($precoCustoFloat); ?></td>
+                        <td class="pd-10 txt-c">R$ <?= $formater->converterMoeda($precoFloat); ?></td>
+                        <td class="pd-10 txt-c"><?= $desconto; ?> %</td>
+                        <td class="txt-c">
+                            <?php if ($status == 'A'): ?>
+                                <span class="ativo" data-id="<?= $id; ?>" data-status="I" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
                                     <i class="fa-solid fa-lock-open fonte14 fnc-sucesso"></i>
                                 </span>
                             <?php else: ?>
-                                <span class="ativo" data-id="<?= $produto->id; ?>" data-status="A" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
+                                <span class="ativo" data-id="<?= $id; ?>" data-status="A" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
                                     <i class="fa-solid fa-lock fonte16 fnc-error"></i>
                                 </span>
-
                             <?php endif; ?>
                         </td>
                         <td class="pd-10 txt-c flex justify-center item-centro">
-                            <a href="index.php?controller=ProdutoController&metodo=deleteConfirm&id=<?= $produto->id; ?>"><i class="fa-solid fa-trash-can mg-r-2 fnc-secundario fonte14"></i> </a>
-                            <a href="index.php?controller=ProdutoController&metodo=index&id=<?= $produto->id; ?>"><i class="fa-solid fa-pen fnc-primario fonte14"></i> </a>
+                            <a href="index.php?controller=ProdutoController&metodo=deleteConfirm&id=<?= $id; ?>"><i class="fa-solid fa-trash-can mg-r-2 fnc-secundario fonte14"></i></a>
+                            <a href="index.php?controller=ProdutoController&metodo=index&id=<?= $id; ?>"><i class="fa-solid fa-pen fnc-primario fonte14"></i></a>
                         </td>
                     </tr>
             <?php endforeach;
             endif; ?>
-
         </tbody>
     </table>
 </div>

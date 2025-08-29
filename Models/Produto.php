@@ -45,7 +45,7 @@ class Produto
       $this->categoria = $categoria;
       $this->status_produto = $status_produto ?: 'A';
       $this->preco_custo = $preco_custo;
-      $this->data_cadastro = date('Y-m-d H:i:s');
+      $this->data_cadastro = date('Y-m-d');
    }
    public function getid()
    {
@@ -54,6 +54,64 @@ class Produto
    public function setid($id)
    {
       return $this->id = $id;
+   }
+   public function getCodigo()
+   {
+      return $this->codigo;
+   }
+   public function getDataCadastro()
+   {
+      return $this->data_cadastro;
+   }
+
+   public function getNome()
+   {
+      return $this->nome;
+   }
+
+   public function getDescricao()
+   {
+      return $this->descricao;
+   }
+
+   public function getQuantidade()
+   {
+      return $this->quantidade;
+   }
+
+   public function getCor()
+   {
+      return $this->cor;
+   }
+
+   public function getPreco()
+   {
+      return $this->preco;
+   }
+
+   public function getDesconto()
+   {
+      return $this->desconto;
+   }
+
+   public function getImagem()
+   {
+      return $this->imagem;
+   }
+
+   public function getCategoria()
+   {
+      return $this->categoria;
+   }
+
+   public function getStatusProduto()
+   {
+      return $this->status_produto;
+   }
+
+   public function getPrecoCusto()
+   {
+      return $this->preco_custo;
    }
    public function __set($chave, $valor)
    {

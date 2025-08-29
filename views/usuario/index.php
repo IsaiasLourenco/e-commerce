@@ -13,30 +13,30 @@
 
 <div class="box-12">
     <form action="" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->id;
+        <input type="hidden" name="id" value="<?php if (isset($id) && $id <> ''): echo $usuario[0]->id;
                                                 endif; ?>">
         <div class="box-12">
             <label for="">Nome </label>
-            <input type="text" name="nome" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->nome;
+            <input type="text" name="nome" value="<?php if (isset($id) && $id <> ''): echo $usuario[0]->nome;
                                                     endif; ?>" required>
         </div>
 
         <div class="box-4">
             <label for="">Cpf </label>
-            <input type="text" name="cpf" id="cpf" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->cpf;
+            <input type="text" name="cpf" id="cpf" value="<?php if (isset($id) && $id <> ''): echo $usuario[0]->cpf;
                                                             endif; ?>" maxlength="14" onkeypress="formata_mascara(this, '###.###.###-##')">
             <span id="cpfFeedback"></span>
         </div>
 
         <div class="box-4">
             <label for="">Data de Nascimento </label>
-            <input type="date" name="data_nascimento" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->data_nascimento;
-                                                            endif; ?>">
+            <input type="date" name="data_nascimento" value="<?php if (isset($id) && $id <> ''): echo $usuario[0]->data_nascimento;
+                                                                endif; ?>">
         </div>
 
         <div class="box-4">
             <label for="">Email </label>
-            <input type="email" name="email" id="email" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->email;
+            <input type="email" name="email" id="email" value="<?php if (isset($id) && $id <> ''): echo $usuario[0]->email;
                                                                 endif; ?>" required>
             <span id="emailFeedback"></span>
         </div>
@@ -53,55 +53,50 @@
 
         <div class="box-3">
             <label for="">Cep </label>
-            <input type="text" name="cep" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->cep;
-                                                                endif; ?>" onkeypress="formata_mascara(this, '#####-###')" maxlength="9" onblur="getDadosEnderecoPorCEP(this.value)" required>
+            <input type="text" name="cep" id="cep" value="<?php if (isset($id) && $id <> ''): echo $usuario[0]->cep;
+                                                            endif; ?>" onkeypress="formata_mascara(this, '#####-###')" maxlength="9" onblur="getDadosEnderecoPorCEP(this.value)" required>
         </div>
 
         <div class="box-6">
-            <label for="">Endereço </label>
-            <input type="text" id='endereco' value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->logradouro;
-                                                                endif; ?>" name="logradouro" readonly>
+            <label for="">Rua </label>
+            <input type="text" id='rua' value="<?php if (isset($id) && $id <> ''): echo $usuario[0]->logradouro;
+                                                endif; ?>" name="logradouro" readonly>
         </div>
 
         <div class="box-6">
             <label for="">Bairro </label>
-            <input type="text" id="bairro" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->bairro;
-                                                                endif; ?>" name="bairro" readonly>
+            <input type="text" id="bairro" value="<?php if (isset($id) && $id <> ''): echo $usuario[0]->bairro;
+                                                    endif; ?>" name="bairro" readonly>
         </div>
 
         <div class="box-6">
             <label for="">Cidade </label>
-            <input type="text" id="cidade" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->cidade;
-                                                                endif; ?>" name="cidade" readonly>
+            <input type="text" id="cidade" value="<?php if (isset($id) && $id <> ''): echo $usuario[0]->cidade;
+                                                    endif; ?>" name="cidade" readonly>
         </div>
 
         <div class="box-3">
             <label for="">Numero </label>
-            <input type="text" name="numero" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->numero;
-                                                                endif; ?>">
+            <input type="text" name="numero" value="<?php if (isset($id) && $id <> ''): echo $usuario[0]->numero;
+                                                    endif; ?>">
         </div>
 
         <div class="box-3">
             <label for="">Uf </label>
-            <input type="text" id="uf" name="uf" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->uf;
-                                                                endif; ?>" readonly>
+            <input type="text" id="estado" name="uf" value="<?php if (isset($id) && $id <> ''): echo $usuario[0]->uf;
+                                                            endif; ?>" readonly>
         </div>
 
         <div class="box-4">
             <label for="" class="fnc-preto-azulado">Perfil</label>
-            <select name="perfil" id="">
+            <select name="perfil" required>
+                <option value="" disabled selected hidden>Selecione um perfil...</option>
                 <?php if (isset($perfis) && count($perfis) > 0):
                     foreach ($perfis as $perfil):
-                        $selected  = (isset($id) && $id != '' && $cliente[0]->PERFIL == $perfil->id) ? 'selected' : '';
-                        $descricao = $perfil->DESCRICAO;
-                        echo "<option value='{$perfil->id}' {$selected} > {$descricao} </option>"
-                ?>
-
-
-                <?php endforeach;
+                        $selected = (isset($id) && $id != '' && $usuario[0]->perfil == $perfil->id) ? 'selected' : '';
+                        echo "<option value='{$perfil->id}' {$selected}>{$perfil->descricao}</option>";
+                    endforeach;
                 endif; ?>
-
-
             </select>
         </div>
 

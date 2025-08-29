@@ -9,37 +9,60 @@ class ProdutoDao extends Contexto
 {
     public function listarTodos()
     {
-        return $this->listar('PRODUTO');
+        return $this->listar('produto');
     }
     public function obterPorid($id)
     {
-        return $this->listar('PRODUTO', "WHERE id = ?", [$id]);
+        return $this->listar('produto', "WHERE id = ?", [$id]);
     }
 
     public function obterPorCategoria($id)
     {
-        return $this->listar('PRODUTO', "WHERE CATEGORIA = ?", [$id]);
+        return $this->listar('produto', "WHERE categoria = ?", [$id]);
     }
     public function ObterUltimoRegistro($campo)
     {
-        return $this->listarUltimoRegistro('PRODUTO', $campo);
+        return $this->listarUltimoRegistro('produto', $campo);
     }
 
     public function adicionar(Produto $produto)
     {
         $atributos = array_keys($produto->atributosPreenchidos());
         $valores = array_values($produto->atributosPreenchidos());
-        return $this->inserir('PRODUTO', $atributos, $valores);
+        return $this->inserir('produto', $atributos, $valores);
     }
 
     public function alterar(Produto $produto)
     {
         $atributos = array_keys($produto->atributosPreenchidos());
         $valores = array_values($produto->atributosPreenchidos());
-        return $this->atualizar('PRODUTO', $atributos, $valores, $produto->getid());
+        return $this->atualizar('produto', $atributos, $valores, $produto->getid());
     }
     public function excluir($id)
     {
-        return $this->deletar('PRODUTO', $id);
+        return $this->deletar('produto', $id);
+    }
+
+    public function listarComCategoria()
+    {
+        $sql = "SELECT p.*, c.descricao AS categoria_nome
+            FROM produto p
+            LEFT JOIN categoria c ON p.categoria = c.id";
+
+        $stmt = self::getConexao()->prepare($sql);
+        $stmt->execute();
+
+        $resultados = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $lista = [];
+
+        foreach ($resultados as $linha) {
+            $produto = new Produto();
+            $produto->atributosPreenchidos($linha);
+            $produto->categoria_nome = $linha['categoria_nome'];
+            $lista[] = $produto;
+        }
+
+        return $lista;
     }
 }
