@@ -122,10 +122,10 @@ class ProdutoController extends Notifications
         $ativo = $_GET['ativo'] ?? null;
 
         if ($id):
-            $produto = new Produto($id, "", "", "", "", "", "", "", "", "", "", "", $ativo, "");
+            $produto = new Produto();
+            $produto->__set('id', $id);
+            $produto->__set('status_produto', $ativo);
             $this->produtoDao->alterar($produto);
-        #$this->success("Imovel", "Atualizado", "listar");
         endif;
     }
-
 }

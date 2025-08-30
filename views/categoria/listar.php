@@ -32,11 +32,11 @@
                             <td  style="text-align: center;">
                                 <?php if ($categoria->status_categoria == 'A'): ?>
                                     <span class="ativo" data-id="<?= $categoria->id; ?>" data-status="I" data-url="index.php?controller=CategoriaController&metodo=alterarStatus">
-                                        <i class="fa-solid fa-lock-open fonte14 fnc-sucesso" style="cursor: pointer;""></i>
+                                        <i class="fa-solid fa-lock-open fonte14 fnc-sucesso" style="cursor: pointer;"></i>
                                     </span>
                                 <?php else: ?>
                                     <span class="ativo" data-id="<?= $categoria->id; ?>" data-status="A" data-url="index.php?controller=CategoriaController&metodo=alterarStatus">
-                                        <i class="fa-solid fa-lock fonte16 fnc-error"></i>
+                                        <i class="fa-solid fa-lock fonte16 fnc-error" style="cursor: pointer;"></i>
                                     </span>
 
                                 <?php endif; ?>

@@ -54,7 +54,7 @@
                                     </span>
                                 <?php else: ?>
                                     <span class="ativo" data-id="<?= $produto->id; ?>" data-status="A" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
-                                        <i class="fa-solid fa-lock fonte16 fnc-error"></i>
+                                        <i class="fa-solid fa-lock fonte16 fnc-error" style="cursor: pointer;"></i>
                                 </span>
 
                             <?php endif; ?>
