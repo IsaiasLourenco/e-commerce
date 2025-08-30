@@ -12,23 +12,33 @@ class ClienteDao extends Contexto
     {
         return $this->listar('clientes');
     }
+
     public function listarClientesAtivos()
     {
-        return $this->listar('clientes', "WHERE  ativo = 'A' ");
+        return $this->listar('clientes', "WHERE  ativo = '1' ");
     }
+
     public function obterPorid($id)
     {
         return $this->listar('clientes', "WHERE id = ?", [$id]);
     }
-    public function autenticar($cliente){
-        return $this->listar("clientes","WHERE email = '".$cliente."' OR cpf = '".$cliente."'"); 
-    }   
-     public function validarDados($campo, $valor){
+
+    public function autenticar($cliente)
+    {
+        return $this->listar("clientes", "WHERE email = '" . $cliente . "' OR cpf = '" . $cliente . "'");
+    }
+
+    public function obterUltimoRegistro($campo) {
+        return $this->listarUltimoRegistro('Cliente', $campo);
+    }
+
+    public function validarDados($campo, $valor)
+    {
         $sql = "SELECT COUNT(*) as total FROM clientes WHERE $campo = ?";
-        $stmt = $this->executarConsulta($sql,[$valor]);
+        $stmt = $this->executarConsulta($sql, [$valor]);
         $retorno = $stmt->fetch(PDO::FETCH_ASSOC);
         return $retorno['total'] > 0;
-     }
+    }
 
     public function adicionar(Cliente $cliente)
     {

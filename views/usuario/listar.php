@@ -1,7 +1,7 @@
 <div class="box-12 mg-t-12">
     <div class="box-8">
         <h2 class=" poppins-medium fw-300 fonte22">
-            <i class="fa-solid fa-keyboard"></i></i> Lista de Usuario
+            <i class="fa-solid fa-keyboard"></i> Lista de Usuario
         </h2>
     </div>
     <div class="box-4 flex justify-end item-centro">

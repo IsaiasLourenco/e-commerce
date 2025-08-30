@@ -26,7 +26,7 @@ class ClienteController extends Notifications
     $this->clienteService = new ClienteService($this->clienteDao);
   }
 
-  // Função responsável por listar todos os usuários
+
   public function listar()
   {
     // Separação da responsabilidade de buscar os dados e exibir a view
@@ -34,14 +34,12 @@ class ClienteController extends Notifications
     require_once "Views/painel/index.php";
   }
 
-  // Função principal de gerenciamento de usuários (inserção, alteração e listagem)
   public function index()
   {
     $id = $_GET['id'] ?? null;
 
     if ($id) {
-      // Recupera dados para edição de usuário
-      $usuario = $this->clienteDao->obterPorid($id);
+      $cliente = $this->clienteDao->obterPorid($id);
     }
 
     if ($_POST) {
@@ -55,33 +53,28 @@ class ClienteController extends Notifications
     require_once "views/cliente/index.php";
   }
 
-  // Função responsável por inserir um usuário
   public function inserir($dados, $files)
   {
     // Utiliza o serviço de upload para lidar com a imagem
     $imagem = $this->fileUploadService->upload($files['imagem']);
 
-    // Valida e cria o usuário via serviço dedicado
     $retorno = $this->clienteService->adicionarCliente($dados, $imagem);
 
     // Exibe mensagem de sucesso
     echo $this->Success("Cliente", "Cadastrado", "index");
   }
 
-  // Função responsável por alterar os dados de um usuário
   public function alterar($dados, $files)
   {
     // Utiliza o serviço de upload para lidar com a imagem
     $imagem = $this->fileUploadService->upload($files['imagem']);
 
-    // Atualiza o usuário via serviço dedicado
     $retorno = $this->clienteService->alterarCliente($dados, $imagem);
 
     // Exibe mensagem de sucesso
     echo $this->Success("Cliente", "Alterado", "Listar");
   }
 
-  // Confirmação de exclusão de usuário
   public function deleteConfirm()
   {
     $id = $_GET['id'] ?? null;
@@ -91,7 +84,6 @@ class ClienteController extends Notifications
     require_once "views/shared/header.php";
   }
 
-  // Função responsável por excluir um usuário
   public function delete()
   {
     $id = $_GET['id'] ?? null;
@@ -181,5 +173,18 @@ class ClienteController extends Notifications
 
     echo json_encode(["existe" => $existe ? true : false]);
     exit;
+  }
+
+  public function alterarStatus()
+  {
+    $id = $_GET['id'] ?? null;
+    $ativo = $_GET['ativo'] ?? null;
+
+    if ($id):
+      $cliente = new Cliente();
+      $cliente->__set('id', $id);
+      $cliente->__set('ativo', $ativo);
+      $this->clienteDao->alterar($cliente);
+    endif;
   }
 }

@@ -1,4 +1,15 @@
 <?php require_once "Views/shared/header.php"; ?>
+<div class="box-12 mg-t-12">
+    <h2 class=" poppins-medium fw-300 fonte22">
+        <i class="fa-solid fa-bag-shopping mg-r-1 fonte22 fnc-secundario"></i>
+        <?php
+        $titulo = isset($id) && $id <> '' ?  'Atualizar Cliente ' : 'Cadastrar Cliente';
+        echo $titulo;
+        ?>
+
+    </h2>
+</div>
+
 <section class="cad mg-t-4">
     <div class="container">
         <div class="box-6">
@@ -10,26 +21,32 @@
             <form id="formCadastro" action="" method="POST" enctype="multipart/form-data" class="box-12 shadow-down  pd-10">
                 <h3 class="fonte24 mg-b-1">Cadastre-se</h3>
                 <div class="divider mg-b-4"></div>
+                <input type="hidden" name="id" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->id;
+                                                        endif; ?>">
                 <div class="box-12">
                     <label for="">Nome </label>
-                    <input type="text" name="nome" required>
+                    <input type="text" name="nome" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->nome;
+                                                            endif; ?>" required>
                 </div>
 
                 <div class="box-6">
                     <label for="">Cpf </label>
-                    <input type="text" name="cpf"  id="cpf" maxlength="14" onkeypress="formata_mascara(this, '###.###.###-##')" required>
+                    <input type="text" name="cpf" id="cpf" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->cpf;
+                                                            endif; ?>" maxlength="14" onkeypress="formata_mascara(this, '###.###.###-##')" required>
                     <span id="cpfFeedback"></span>
                 </div>
 
                 <div class="box-6">
                     <label for="">Data de Nascimento </label>
-                    <input type="date" name="data_nascimento">
+                    <input type="date" name="data_nascimento" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->data_nascimento;
+                                                            endif; ?>">
                 </div>
 
                 <div class="box-12">
                     <label for="">Email </label>
-                    <input type="email" name="email" id="email" required>  
-                    <span id="emailFeedback"></span>                  
+                    <input type="email" name="email" id="email" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->email;
+                                                            endif; ?>" required>
+                    <span id="emailFeedback"></span>
                 </div>
 
                 <div class="box-6">
@@ -39,32 +56,38 @@
 
                 <div class="box-6">
                     <label for="">Cep </label>
-                    <input type="text" name="cep" onkeypress="formata_mascara(this, '#####-###')" maxlength="9" onblur="getDadosEnderecoPorCEP(this.value)" required>
+                    <input type="text" name="cep" id="cep" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->cep;
+                                                            endif; ?>" onkeypress="formata_mascara(this, '#####-###')" maxlength="9" onblur="getDadosEnderecoPorCEP(this.value)" required>
                 </div>
 
                 <div class="box-12">
                     <label for="">Endereço </label>
-                    <input type="text" id='endereco' name="logradouro" readonly>
+                    <input type="text" id="rua" name="logradouro" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->logradouro;
+                                                            endif; ?>" readonly>
                 </div>
 
                 <div class="box-12">
                     <label for="">Bairro </label>
-                    <input type="text" id="bairro" name="bairro" readonly>
+                    <input type="text" id="bairro" name="bairro" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->bairro;
+                                                            endif; ?>" readonly>
                 </div>
 
                 <div class="box-12">
                     <label for="">Cidade </label>
-                    <input type="text" id="cidade" name="cidade" readonly>
+                    <input type="text" id="cidade" name="cidade" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->cidade;
+                                                            endif; ?>" readonly>
                 </div>
 
                 <div class="box-6">
                     <label for="">Numero </label>
-                    <input type="text" name="numero" required>
+                    <input type="text" name="numero" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->numero;
+                                                            endif; ?>" required>
                 </div>
 
                 <div class="box-6">
                     <label for="">Uf </label>
-                    <input type="text" id="uf" name="uf" readonly>
+                    <input type="text" id="estado" name="uf" value="<?php if (isset($id) && $id <> ''): echo $cliente[0]->uf;
+                                                            endif; ?>" readonly>
                 </div>
 
                 <div class="box-12">

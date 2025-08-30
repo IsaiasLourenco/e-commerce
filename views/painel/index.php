@@ -38,7 +38,7 @@
                             Usuario</a>
                     </li>
                     <li class="item">
-                        <a href="index.php?controller=UsuarioController&metodo=listar" class="fonte12 fnc-terciario">
+                        <a href="index.php?controller=ClienteController&metodo=listar" class="fonte12 fnc-terciario">
                             <i class="fa-solid fa-person"></i>
                             Cliente</a>
                     </li>
