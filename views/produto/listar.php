@@ -15,67 +15,83 @@
     <table class="zebra wd-100 collapse" id="tabela">
         <thead>
             <tr>
-                <th class="pd-10">Código</th>
-                <th class="pd-10">Data Cadastro</th>
-                <th class="pd-10">Nome </th>
-                <th class="pd-10">Quantidade</th>
-                <th class="pd-10">Preco de Custo</th>
-                <th class="pd-10">Preço</th>
-                <th class="pd-10">Desconto</th>
-                <th class="pd-10">Status</th>
-                <th class="pd-10">Ação</th>
+                <th class="fonte12 espaco-letra fw-bold" style="text-align: center;">Data Cadastro</th>
+                <th class="fonte12 espaco-letra fw-bold" style="text-align: center;">Nome</th>
+                <th class="fonte12 espaco-letra fw-bold" style="text-align: center;">Descrição</th>
+                <th class="fonte12 espaco-letra fw-bold" style="text-align: center;">Quantidade</th>
+                <th class="fonte12 espaco-letra fw-bold" style="text-align: center;">Preço</th>
+                <th class="fonte12 espaco-letra fw-bold" style="text-align: center;">Desconto</th>
+                <th class="fonte12 espaco-letra fw-bold" style="text-align: center;">Preço Custo</th>
+                <th class="fonte12 espaco-letra fw-bold" style="text-align: center;">Status</th>
+                <th class="fonte12 espaco-letra fw-bold" style="text-align: center;">Açoes</th>
             </tr>
         </thead>
-
         <tbody>
-            <?php if (isset($produtos) && count($produtos)):
+
+            <?php if (isset($produtos) && count($produtos) > 0):
                 foreach ($produtos as $produto):
-                    if (method_exists($produto, 'getCodigo') && is_null($produto->getCodigo())):
-                        $produto->__set('codigo', '000000');
-                    endif;
-
-                    $codigoFormatado = $formater->zeroEsquerda((int) ($produto->getCodigo() ?? 0), 6);
-                    $dataCadastro = method_exists($produto, 'getDataCadastro') ? $produto->getDataCadastro() : '';
-                    $nome = method_exists($produto, 'getNome') ? $produto->getNome() : '';
-                    $quantidade = method_exists($produto, 'getQuantidade') ? $produto->getQuantidade() : '';
-                    $precoCusto = method_exists($produto, 'getPrecoCusto') ? $produto->getPrecoCusto() : '';
-                    $preco = method_exists($produto, 'getPreco') ? $produto->getPreco() : '';
-                    $desconto = method_exists($produto, 'getDesconto') ? $produto->getDesconto() : '';
-                    $status = method_exists($produto, 'getStatusProduto') ? $produto->getStatusProduto() : 'A';
-                    $id = method_exists($produto, 'getid') ? $produto->getid() : '';
+                    $data_cadastro = $produto->data_cadastro ?: date('0000-00-00');
             ?>
-                    <tr>
-                        <td class="pd-10 txt-c"><?= $codigoFormatado; ?></td>
-                        <td class="pd-10 txt-c"><?= $formater->formatarDataTime($dataCadastro); ?></td>
-                        <td class="pd-10 txt-c"><?= $formater->formataTextoCap($nome); ?></td>
-                        <td class="pd-10 txt-c"><?= $quantidade; ?></td>
+                    <tr class="zebra">
+                        <td class="espaco-letra fw-300" style="text-align: center;"><?= date('d/m/Y', strtotime($produto->getDataCadastro())); ?></td>
+                        <td class="espaco-letra fw-300" style="text-align: center;"><?= $produto->nome; ?></td>
+                        <td class="espaco-letra fw-300" style="text-align: center;"><?= $produto->descricao; ?></td>
+                        <td class="espaco-letra fw-300" style="text-align: center;"><?= $produto->quantidade; ?></td>
+                        <td class="espaco-letra fw-300" style="text-align: center;">
+                            R$ <?= number_format((float) $produto->preco, 2, ',', '.'); ?>
+                        </td>
+                        <td class="espaco-letra fw-300" style="text-align: center;">
+                            <?= number_format((float) $produto->desconto, 2, ',', '.'); ?> %
+                        </td>
+                        <td class="espaco-letra fw-300" style="text-align: center;">
+                            R$ <?= number_format((float) $produto->preco_custo, 2, ',', '.'); ?>
+                        </td>
 
-                        <?php
-                        $precoCustoFloat = (float) ($produto->getPrecoCusto() ?: 0);
-                        $precoFloat = (float) ($produto->getPreco() ?: 0);
-                        ?>
+                        <td style="text-align: center;">
+                            <?php if ($produto->status_produto == 'A'): ?>
+                                <span class="ativo" data-id="<?= $produto->id; ?>" data-status="I" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
+                                    <i class="fa-solid fa-lock-open fonte14 fnc-sucesso" style="cursor: pointer;"></i>
+                                    </span>
+                                <?php else: ?>
+                                    <span class="ativo" data-id="<?= $produto->id; ?>" data-status="A" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
+                                        <i class="fa-solid fa-lock fonte16 fnc-error"></i>
+                                </span>
 
-                        <td class="pd-10 txt-c">R$ <?= $formater->converterMoeda($precoCustoFloat); ?></td>
-                        <td class="pd-10 txt-c">R$ <?= $formater->converterMoeda($precoFloat); ?></td>
-                        <td class="pd-10 txt-c"><?= $desconto; ?> %</td>
-                        <td class="txt-c">
-                            <?php if ($status == 'A'): ?>
-                                <span class="ativo" data-id="<?= $id; ?>" data-status="I" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
-                                    <i class="fa-solid fa-lock-open fonte14 fnc-sucesso"></i>
-                                </span>
-                            <?php else: ?>
-                                <span class="ativo" data-id="<?= $id; ?>" data-status="A" data-url="index.php?controller=ProdutoController&metodo=alterarStatus">
-                                    <i class="fa-solid fa-lock fonte16 fnc-error"></i>
-                                </span>
                             <?php endif; ?>
                         </td>
-                        <td class="pd-10 txt-c flex justify-center item-centro">
-                            <a href="index.php?controller=ProdutoController&metodo=deleteConfirm&id=<?= $id; ?>"><i class="fa-solid fa-trash-can mg-r-2 fnc-secundario fonte14"></i></a>
-                            <a href="index.php?controller=ProdutoController&metodo=index&id=<?= $id; ?>"><i class="fa-solid fa-pen fnc-primario fonte14"></i></a>
+                        <td class="flex justify-center item-centro">
+                            <a href="index.php?controller=ProdutoController&metodo=deleteConfirm&id=<?= $produto->id; ?>">
+                                <i class="fa-solid fa-trash-can fonte12 mg-r-2 fnc-cinza" title="Apagar Registro"></i>
+                            </a>
+                            <a href="index.php?controller=ProdutoController&metodo=index&id=<?= $produto->id; ?>">
+                                <i class="fa-solid fa-pen fonte12 fnc-vermelho-claro" title="Editar Registro"></i>
+                            </a>
                         </td>
                     </tr>
-            <?php endforeach;
-            endif; ?>
+                <?php endforeach;
+            else: ?>
+                <tr>
+                    <td colspan="6" class="pd-t-2">
+                        <h1 class="txt-c fonte16 poppins-medium"> Nenhum registro na base de dados </h1>
+                    </td>
+                </tr>
+            <?php endif; ?>
+
         </tbody>
+        <tfoot>
+
+        </tfoot>
     </table>
 </div>
+
+<script>
+    let tabela = new DataTable('#tabela', {
+        language: {
+            emptyTable: "Nenhum registro na base de dados"
+        },
+        columnDefs: [{
+            targets: '_all',
+            defaultContent: ""
+        }]
+    });
+</script>

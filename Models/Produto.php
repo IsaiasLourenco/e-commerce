@@ -120,6 +120,13 @@ class Produto
       endif;
    }
 
+   public function __get($chave)
+   {
+      if (property_exists($this, $chave)) {
+         return $this->$chave;
+      }
+   }
+
    public function toArray()
    {
       return  [

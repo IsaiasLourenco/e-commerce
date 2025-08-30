@@ -11,6 +11,7 @@ class ProdutoDao extends Contexto
     {
         return $this->listar('produto');
     }
+    
     public function obterPorid($id)
     {
         return $this->listar('produto', "WHERE id = ?", [$id]);
@@ -38,6 +39,7 @@ class ProdutoDao extends Contexto
         $valores = array_values($produto->atributosPreenchidos());
         return $this->atualizar('produto', $atributos, $valores, $produto->getid());
     }
+    
     public function excluir($id)
     {
         return $this->deletar('produto', $id);
@@ -58,7 +60,9 @@ class ProdutoDao extends Contexto
 
         foreach ($resultados as $linha) {
             $produto = new Produto();
-            $produto->atributosPreenchidos($linha);
+            foreach ($linha as $chave => $valor) {
+                $produto->__set($chave, $valor);
+            }
             $produto->categoria_nome = $linha['categoria_nome'];
             $lista[] = $produto;
         }

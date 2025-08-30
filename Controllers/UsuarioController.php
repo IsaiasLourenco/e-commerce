@@ -111,6 +111,7 @@ class UsuarioController extends Notifications
 
         require_once "views/shared/header.php";
     }
+    
     public function alterarStatus()
     {
         $id = $_GET['id'] ?? null;

@@ -100,9 +100,18 @@
             </select>
         </div>
 
-        <div class="box-6 pd-l-2 fnc-branco radius pd-t-1 bg-light mg-t-2">
-            <label for="img">Escolher uma Imagem </label>
-            <input type="file" name="imagem" id="img">
+        <div class="box-6">
+            <?php
+            $imagem = isset($id) && $id != '' ? $usuario[0]->imagem : 'sem-foto.jpg';
+            $dirImagem = 'lib/img/users/' . $imagem;
+            $imagemAlt = $imagem === 'sem-foto.jpg' ? 'Escolha uma imagem...' : 'Imagem do Usuário';
+            ?>
+            <label for="img" class="fonte16 fnc-preto-azulado mg-t-3 mg-b-3">
+                <i class="fa-solid fa-file-image fonte20 fnc-cinza"></i>
+                <?php echo $imagemAlt; ?>
+            </label>
+            <input type="file" id="img" name="imagem" onchange="mostrar(this)" value="<?php echo $imagem; ?>">
+            <img class="logo-150" id="foto" src="<?php echo $dirImagem; ?>" alt="<?php echo $imagemAlt; ?>">
         </div>
 
         <div class="box-12">
