@@ -33,14 +33,6 @@ class ClienteDao extends Contexto
         return $this->listarUltimoRegistro('Cliente', $campo);
     }
 
-    // public function validarDados($campo, $valor)
-    // {
-    //     $sql = "SELECT COUNT(*) as total FROM clientes WHERE $campo = ?";
-    //     $stmt = $this->executarConsulta($sql, [$valor]);
-    //     $retorno = $stmt->fetch(PDO::FETCH_ASSOC);
-    //     return $retorno['total'] > 0;
-    // }
-
     public function validarDados($campo, $valor, $id = null)
     {
         $sql = "SELECT COUNT(*) AS total FROM clientes WHERE $campo = ?";

@@ -22,7 +22,7 @@ class ClienteController extends Notifications
   public function __construct()
   {
     $this->clienteDao = new ClienteDao();
-    $this->fileUploadService = new FileUploadService("lib/img/clientes");
+    $this->fileUploadService = new FileUploadService("lib/img/users");
     $this->clienteService = new ClienteService($this->clienteDao);
   }
 
@@ -77,12 +77,27 @@ class ClienteController extends Notifications
 
   public function alterar($dados, $files)
   {
-    // Utiliza o serviço de upload para lidar com a imagem
+    // Validação e hash da nova senha — ANTES de enviar para o service
+    if (!empty($dados['senha_atual']) && !empty($dados['nova_senha'])) {
+      $cliente = $this->clienteDao->obterPorid($dados['id']);
+      if (!password_verify($dados['senha_atual'], $cliente[0]->senha)) {
+        echo $this->Error("Cliente", "Senha atual incorreta", "index");
+        return;
+      }
+
+      $dados['senha'] = password_hash($dados['nova_senha'], PASSWORD_DEFAULT);
+    }
+
+    // Preserva o valor atual de 'ativo'
+    $clienteAtual = $this->clienteDao->obterPorid($dados['id']);
+    $dados['ativo'] = $clienteAtual[0]->ativo;
+
+    // Upload da imagem
     $imagem = $this->fileUploadService->upload($files['imagem']);
 
+    // Envia os dados completos
     $retorno = $this->clienteService->alterarCliente($dados, $imagem);
 
-    // Exibe mensagem de sucesso
     echo $this->Success("Cliente", "Alterado", "Listar");
   }
 
@@ -201,30 +216,6 @@ class ClienteController extends Notifications
       $cliente->__set('ativo', $ativo);
       $this->clienteDao->alterar($cliente);
     endif;
-  }
-
-  public function alterarSenha()
-  {
-    $id = $_POST['id'] ?? null;
-    $senhaAtual = $_POST['senha_atual'] ?? '';
-    $novaSenha = $_POST['nova_senha'] ?? '';
-
-    if ($id && !empty($novaSenha)) {
-      $cliente = $this->clienteDao->obterPorid($id);
-      
-      exit;
-      if (!password_verify($senhaAtual, $cliente[0]->senha)) {
-        return $this->Error("Cliente", "Senha atual incorreta", "index");
-      }
-      
-      $clienteObj = new Cliente();
-      $clienteObj->__set('id', $id);
-      $clienteObj->__set('senha', password_hash($novaSenha, PASSWORD_DEFAULT));
-      $dados = ['id' => $id, 'senha' => password_hash($novaSenha, PASSWORD_DEFAULT)];
-
-      $this->clienteDao->alterar($clienteObj);
-      return $this->Success("Senha", "Atualizada", "index");
-    }
   }
 
   public function validarSenhaAtual()

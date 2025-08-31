@@ -54,7 +54,7 @@
                     <div class="box-6">
                         <label for="senha">Senha</label>
                         <div style="position: relative;">
-                            <input type="password" name="senha" id="senha" style="padding-right: 40px;" required tabindex="5">
+                            <input type="password" name="senha" id="senha" style="padding-right: 40px;" tabindex="5">
                             <span id="toggleSenha" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                     <div class="box-6">
                         <label for="senha_atual">Senha atual</label>
                         <div style="position: relative;">
-                            <input type="password" name="senha_atual" id="senha_atual" style="padding-right: 40px;" required tabindex="6">
+                            <input type="password" name="senha_atual" id="senha_atual" style="padding-right: 40px;" tabindex="6">
                             <span id="toggleSenhaAtual" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                     <div class="box-6" id="novaSenhaBloco" style="display: none;">
                         <label for="nova_senha">Nova senha</label>
                         <div style="position: relative;">
-                            <input type="password" name="nova_senha" id="nova_senha" style="padding-right: 40px;" required tabindex="7">
+                            <input type="password" name="nova_senha" id="nova_senha" style="padding-right: 40px;" tabindex="7">
                             <span id="toggleNovaSenha" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
                         </div>
                     </div>
@@ -113,13 +113,27 @@
                                                                     endif; ?>" readonly>
                 </div>
 
-                <div class="box-12">
+                <!-- <div class="box-12">
                     <label for="img">Cadastrar Imagem </label>
                     <input type="file" name="imagem" id="img">
+                </div> -->
+
+                <div class="box-12">
+                    <?php
+                    $imagem = isset($id) && $id != '' ? $cliente[0]->imagem : 'sem-foto.jpg';
+                    $dirImagem = 'lib/img/users/' . $imagem;
+                    $imagemAlt = $imagem === 'sem-foto.jpg' ? 'Escolha uma imagem...' : 'Imagem do Usuário';
+                    ?>
+                    <label for="img" class="fonte16 fnc-preto-azulado mg-t-3 mg-b-3">
+                        <i class="fa-solid fa-file-image fonte20 fnc-cinza"></i>
+                        <?php echo $imagemAlt; ?>
+                    </label>
+                    <input type="file" id="img" name="imagem" onchange="mostrar(this)" value="<?php echo $imagem; ?>">
+                    <img class="logo-150 mg-b-2" id="foto" src="<?php echo $dirImagem; ?>" alt="<?php echo $imagemAlt; ?>">
                 </div>
 
                 <div class="box-12">
-                    <input type="submit" value="<?= isset($id) && $id !== '' ? 'Atualizar' : 'Cadastrar' ?>" class="btn-100 bg-primario mg-t-4">
+                    <input type="submit" value="<?= isset($id) && $id !== '' ? 'Atualizar' : 'Cadastrar' ?>" class="btn-100 bg-primario mg-t-4" onclick="document.getElementById('novaSenhaBloco').style.display = 'block';">
                 </div>
 
             </form>
