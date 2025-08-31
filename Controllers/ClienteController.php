@@ -43,8 +43,19 @@ class ClienteController extends Notifications
     }
 
     if ($_POST) {
-      // Determina se será uma inserção ou alteração com base no id
-      if (!empty($_POST['id'])) {
+      $id = isset($_POST['id']) && $_POST['id'] !== '' ? intval($_POST['id']) : null;
+
+      // Validação condicional: ignora o próprio ID se estiver editando
+      if (
+        $this->clienteDao->validarDados('email', $_POST['email'], $id) ||
+        $this->clienteDao->validarDados('cpf', $_POST['cpf'], $id)
+      ) {
+        echo $this->Error("Cliente", "CPF ou e-mail já existem — VALIDAÇÃO", "index");
+        return;
+      }
+
+      // Fluxo de cadastro ou edição
+      if (!empty($id)) {
         $this->alterar($_POST, $_FILES);
       } else {
         $this->inserir($_POST, $_FILES);
@@ -77,14 +88,18 @@ class ClienteController extends Notifications
 
   public function deleteConfirm()
   {
+    require_once "views/shared/header.php";
+
     $id = $_GET['id'] ?? null;
+
     if ($id) {
       echo $this->Confirm("Excluir", "Cliente", "", $id);
+    } else {
+      echo $this->Error("Cliente", "ID não informado", "listar");
     }
-    require_once "views/shared/header.php";
   }
 
-  public function delete()
+  public function excluir()
   {
     $id = $_GET['id'] ?? null;
 
@@ -95,9 +110,9 @@ class ClienteController extends Notifications
 
     require_once "views/shared/header.php";
   }
+
   public function autenticar()
   {
-
     require_once "Views/cliente/autenticar.php";
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST'):
@@ -107,9 +122,9 @@ class ClienteController extends Notifications
 
       $dadosCliente = $this->clienteDao->autenticar($cliente);
 
-      if (!empty($dadosCliente) && password_verify($senha, $dadosCliente[0]->SENHA)):
+      if (!empty($dadosCliente) && password_verify($senha, $dadosCliente[0]->senha)):
         $this->gerarSessao($dadosCliente);
-        if ($dadosCliente[0]->PERFIL === '1'):
+        if ($dadosCliente[0]->perfil === '1'):
           header("location:index.php?controller=PainelController&metodo=index");
         else:
           header("location:index.php");
@@ -157,21 +172,21 @@ class ClienteController extends Notifications
 
   public function validarDadosCliente()
   {
-
     header("Content-Type: application/json; charset=UTF-8");
     $dados = json_decode(file_get_contents("php://input"), true);
 
-    if (!isset($dados['campo']) || !isset($dados["valor"])):
-      echo (json_encode(["erro" => "Dados Invalidos"]));
+    if (!isset($dados['campo']) || !isset($dados["valor"])) {
+      echo json_encode(["erro" => "Dados inválidos"]);
       exit;
-    endif;
+    }
 
     $campo = trim($dados['campo']);
     $valor = trim($dados['valor']);
+    $id = isset($dados['id']) && $dados['id'] !== '' ? intval($dados['id']) : null;
 
-    $existe = $this->clienteDao->validarDados($campo, $valor);
+    $existe = $this->clienteDao->validarDados($campo, $valor, $id);
 
-    echo json_encode(["existe" => $existe ? true : false]);
+    echo json_encode(["existe" => $existe]);
     exit;
   }
 
@@ -186,5 +201,48 @@ class ClienteController extends Notifications
       $cliente->__set('ativo', $ativo);
       $this->clienteDao->alterar($cliente);
     endif;
+  }
+
+  public function alterarSenha()
+  {
+    $id = $_POST['id'] ?? null;
+    $senhaAtual = $_POST['senha_atual'] ?? '';
+    $novaSenha = $_POST['nova_senha'] ?? '';
+
+    if ($id && !empty($novaSenha)) {
+      $cliente = $this->clienteDao->obterPorid($id);
+      
+      exit;
+      if (!password_verify($senhaAtual, $cliente[0]->senha)) {
+        return $this->Error("Cliente", "Senha atual incorreta", "index");
+      }
+      
+      $clienteObj = new Cliente();
+      $clienteObj->__set('id', $id);
+      $clienteObj->__set('senha', password_hash($novaSenha, PASSWORD_DEFAULT));
+      $dados = ['id' => $id, 'senha' => password_hash($novaSenha, PASSWORD_DEFAULT)];
+
+      $this->clienteDao->alterar($clienteObj);
+      return $this->Success("Senha", "Atualizada", "index");
+    }
+  }
+
+  public function validarSenhaAtual()
+  {
+    header("Content-Type: application/json; charset=UTF-8");
+
+    $dados = json_decode(file_get_contents("php://input"), true);
+    $id = $dados['id'] ?? null;
+    $senha = $dados['senha'] ?? '';
+
+    if (!$id || !$senha) {
+      echo json_encode(["valida" => false]);
+      return;
+    }
+
+    $cliente = $this->clienteDao->obterPorid($id);
+    $valida = password_verify($senha, $cliente[0]->senha);
+
+    echo json_encode(["valida" => $valida]);
   }
 }

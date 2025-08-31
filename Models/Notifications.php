@@ -99,7 +99,7 @@ abstract class Notifications
     }
 
     // Retorna uma mensagem padrão
-    protected function defaultMessage($mensagem,$submensagem, $controller, $metodo)
+    protected function defaultMessage($mensagem, $submensagem, $controller, $metodo)
     {
         $css = $this->getCssLink();
         $mensagem = sprintf(
@@ -115,6 +115,27 @@ abstract class Notifications
             htmlspecialchars($mensagem),
             htmlspecialchars($submensagem),
             htmlspecialchars($controller),
+            htmlspecialchars($metodo)
+        );
+        return $mensagem;
+    }
+
+    protected function Error($obj, $mensagem, $metodo)
+    {
+        $css = $this->getCssLink();
+        $mensagem = sprintf(
+            "%s<div class='aviso'>
+            <div class='msg bg-branco'>
+                <h2 class='fonte12 poppins-black fnc-error'>
+                    Erro ao %s: %s
+                </h2>
+                <a href='index.php?controller=%sController&metodo=%s' class='btn-msg fnc-error'> Fechar Sair </a>
+            </div>
+        </div>",
+            $css,
+            htmlspecialchars($obj),
+            htmlspecialchars($mensagem),
+            htmlspecialchars($obj),
             htmlspecialchars($metodo)
         );
         return $mensagem;

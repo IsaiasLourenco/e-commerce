@@ -28,16 +28,33 @@ class ClienteDao extends Contexto
         return $this->listar("clientes", "WHERE email = '" . $cliente . "' OR cpf = '" . $cliente . "'");
     }
 
-    public function obterUltimoRegistro($campo) {
+    public function obterUltimoRegistro($campo)
+    {
         return $this->listarUltimoRegistro('Cliente', $campo);
     }
 
-    public function validarDados($campo, $valor)
+    // public function validarDados($campo, $valor)
+    // {
+    //     $sql = "SELECT COUNT(*) as total FROM clientes WHERE $campo = ?";
+    //     $stmt = $this->executarConsulta($sql, [$valor]);
+    //     $retorno = $stmt->fetch(PDO::FETCH_ASSOC);
+    //     return $retorno['total'] > 0;
+    // }
+
+    public function validarDados($campo, $valor, $id = null)
     {
-        $sql = "SELECT COUNT(*) as total FROM clientes WHERE $campo = ?";
-        $stmt = $this->executarConsulta($sql, [$valor]);
-        $retorno = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $retorno['total'] > 0;
+        $sql = "SELECT COUNT(*) AS total FROM clientes WHERE $campo = ?";
+        $params = [$valor];
+
+        if ($id) {
+            $sql .= " AND id <> ?";
+            $params[] = $id;
+        }
+
+        $stmt = $this->executarConsulta($sql, $params);
+        $dados = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $dados['total'] > 0;
     }
 
     public function adicionar(Cliente $cliente)
@@ -51,8 +68,10 @@ class ClienteDao extends Contexto
     {
         $atributos = array_keys($cliente->atributosPreenchidos());
         $valores = array_values($cliente->atributosPreenchidos());
+
         return $this->atualizar('clientes', $atributos, $valores, $cliente->getid());
     }
+
     public function excluir($id)
     {
         return $this->deletar('clientes', $id);
