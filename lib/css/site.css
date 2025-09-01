@@ -222,3 +222,33 @@ input[type='file']
 .btn-paginacao:hover {
     background: #ddd;
 }
+
+.card-home-produto {
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.card-home-produto .img {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card-home-produto .img img {
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.card-home-produto p.poppins-black {
+    display: -webkit-box;
+    /* -webkit-line-clamp: 2; */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 48px;
+}

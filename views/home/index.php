@@ -35,7 +35,7 @@
         <div class="box-12 flex justify-center item-centro flex-wrap">
             <?php if (isset($produtos) && count($produtos) > 0): ?>
                 <?php foreach ($produtos as $produto): ?>
-                    <div class="box-3 bg-branco shadow-down pd-10 mg-b-4">
+                    <div class="box-3 card-home-produto bg-branco shadow-down pd-10 mg-b-4">
                         <div class="box-12 img">
                             <img src="lib/img/upload/<?= $produto->imagem; ?>" alt="">
                             <div class="box-12 flex justify-center item-centro oculta">
