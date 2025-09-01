@@ -21,40 +21,40 @@
         <div class="box-4">
             <label for="">Nome</label>
             <input type="text" name="nome" value="<?php if (isset($id) && $id <> ''): echo $produto[0]->nome;
-                                                        endif; ?>" autofocus required>
+                                                        endif; ?>" autofocus required tabindex="1">
         </div>
 
         <div class="box-4">
             <label for="">Descrição</label>
             <input type="text" name="descricao" value="<?php if (isset($id) && $id <> ''): echo $produto[0]->descricao;
-                                                        endif; ?>" required>
+                                                        endif; ?>" required tabindex="2">
         </div>
 
         <div class="box-4">
             <label for="">Quantidade</label>
             <input type="text" name="quantidade" value="<?php if (isset($id) && $id <> ''): echo $produto[0]->quantidade;
-                                                        endif; ?>">
+                                                        endif; ?>" tabindex="3">
         </div>
 
         <div class="box-3">
             <label for="">Cor</label>
             <input type="text" name="cor" value="<?php if (isset($id) && $id <> ''): echo $produto[0]->cor;
-                                                        endif; ?>">
+                                                        endif; ?>" required tabindex="4">
         </div>
 
         <div class="box-3">
             <label for="">Preço</label>
-            <input type="text" name="preco" value="R$ <?= isset($produto[0]) ? number_format((float) $produto[0]->preco, 2, ',', '.') : ''; ?>">
+            <input type="text" name="preco" value="R$ <?= isset($produto[0]) ? number_format((float) $produto[0]->preco, 2, ',', '.') : ''; ?>" required tabindex="5">
         </div>
 
         <div class="box-3">
             <label for="">Desconto</label>
-            <input type="text" name="desconto" value="<?= isset($produto[0]) ? number_format((float) $produto[0]->desconto, 2, ',', '.') : ''; ?> %">
+            <input type="text" name="desconto" value="<?= isset($produto[0]) ? number_format((float) $produto[0]->desconto, 2, ',', '.') : ''; ?> %" tabindex="6">
         </div>
 
         <div class="box-3">
             <label for="">Preço de Custo</label>
-            <input type="text" name="preco_custo" value="R$ <?= isset($produto[0]) ? number_format((float) $produto[0]->preco_custo, 2, ',', '.') : ''; ?>">
+            <input type="text" name="preco_custo" value="R$ <?= isset($produto[0]) ? number_format((float) $produto[0]->preco_custo, 2, ',', '.') : ''; ?>" required tabindex="7">
         </div>
 
         <div class="box-4">

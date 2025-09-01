@@ -70,26 +70,20 @@ class ProdutoController extends Notifications
     // Função responsável por inserir um usuário
     public function inserir($dados, $files)
     {
-        // Utiliza o serviço de upload para lidar com a imagem
+        $dados['preco'] = str_replace(['R$', ',', ' '], ['', '.', ''], $_POST['preco']);
+        $dados['preco_custo'] = str_replace(['R$', ',', ' '], ['', '.', ''], $_POST['preco_custo']);
         $imagem = $this->fileUploadService->upload($files['imagem']);
-
-        // Valida e cria o usuário via serviço dedicado
         $retorno = $this->produtoService->adicionarProduto($dados, $imagem);
-
-        // Exibe mensagem de sucesso
         echo $this->Success("Produto", "Cadastrado", "Listar");
     }
 
     // Função responsável por alterar os dados de um usuário
     public function alterar($dados, $files)
     {
-        // Utiliza o serviço de upload para lidar com a imagem
+        $dados['preco'] = str_replace(['R$', ',', ' '], ['', '.', ''], $_POST['preco']);
+        $dados['preco_custo'] = str_replace(['R$', ',', ' '], ['', '.', ''], $_POST['preco_custo']);
         $imagem = $this->fileUploadService->upload($files['imagem']);
-
-        // Atualiza o usuário via serviço dedicado
         $retorno = $this->produtoService->alterarProduto($dados, $imagem);
-
-        // Exibe mensagem de sucesso
         echo $this->Success("Produto", "Alterado", "Listar");
     }
 

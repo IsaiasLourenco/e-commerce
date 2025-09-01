@@ -21,6 +21,7 @@ class ProdutoDao extends Contexto
     {
         return $this->listar('produto', "WHERE categoria = ?", [$id]);
     }
+    
     public function ObterUltimoRegistro($campo)
     {
         return $this->listarUltimoRegistro('produto', $campo);

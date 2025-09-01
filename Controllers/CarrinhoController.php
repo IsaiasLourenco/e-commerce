@@ -37,10 +37,10 @@ class CarrinhoController
             // Adiciona um novo produto ao carrinho
             $_SESSION["carrinho"][] = [
                 "id"        => $produto[0]->id,
-                "nome"      => $produto[0]->NOME,
-                "preco"     => $produto[0]->PRECO,
-                "desc"      => $produto[0]->DESCONTO,
-                "imagem"    => $produto[0]->IMAGEM,
+                "nome"      => $produto[0]->nome,
+                "preco"     => $produto[0]->preco,
+                "desc"      => $produto[0]->desconto,
+                "imagem"    => $produto[0]->imagem,
                 "qtde"      => 1
             ];
         endif;

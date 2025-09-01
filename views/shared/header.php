@@ -31,6 +31,8 @@ if ($_GET) {
     <script type="text/javascript" src="lib/js/buscaCep.js"></script>
     <script type="text/javascript" src="lib/js/verSenha.js"></script>
     <script type="text/javascript" src="lib/js/trocarSenha.js"></script>
+    <script type="text/javascript" src="lib/js/passaComEnter.js"></script>
+    <script type="text/javascript" src="lib/js/selecionar.js"></script>
 
     <!-- carregando fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -43,6 +45,7 @@ if ($_GET) {
     <link rel="stylesheet" href="lib/css/aurora.css">
     <link rel="stylesheet" href="lib/css/site.css">
     <link rel="stylesheet" href="lib/css/menu.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
 
 </head>
 
@@ -61,11 +64,16 @@ if ($_GET) {
                 <div class="box-6 flex justify-end item-centro">
                     <?php if (isset($_SESSION['cliente'])): ?>
                         <div class="img-cli mg-r-1 bg-primario flex justify-center item-centro pd-5">
-                            <i class="fa-regular fa-circle-user fonte20 fnc-branco"></i>
+                            <?php if (!empty($_SESSION['imagem']) && file_exists('lib/img/users/' . $_SESSION['imagem'])): ?>
+                                <img src="lib/img/users/<?= $_SESSION['imagem'] ?>" alt="Foto do Cliente">
+                            <?php else: ?>
+                                <i class="fa-regular fa-circle-user fonte20 fnc-branco"></i>
+                            <?php endif; ?>
                         </div>
-                        <p>Olá, <?= $_SESSION['nome'] ?></p>
-                        <a href="index.php?controller=ClienteController&metodo=logout">Sair</a>
-
+                        <div class="flex flex-colum">
+                            <p>Olá, <?= $_SESSION['nome'] ?></p>
+                            <a href="index.php?controller=ClienteController&metodo=logout">Sair</a>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -93,7 +101,7 @@ if ($_GET) {
                 </div>
             </div>
         </div>
-        <!-- BARRA DE PESQUUISA  -->
+        <!-- BARRA DE PESQUISA  -->
         <div class="limpar"></div>
         <div class="wd-100 bg-secundario hg-60">
             <div class="container">
@@ -102,13 +110,14 @@ if ($_GET) {
                     <ul class="mg-l-2">
                         <li class="fonte20 dropdown-container">Categoria <i class="fa-solid fa-chevron-right fonte16 fnc-primario mg-l-2"></i>
                             <ul class="dropdown">
-                               <?php if(isset($categorias) && count($categorias) > 0 ):
-                               foreach($categorias as $categoria):
+                                <?php if (isset($categorias) && count($categorias) > 0):
+                                    foreach ($categorias as $categoria):
                                 ?>
 
-                                <li class="fonte14"><a href="index.php?controller=BaseController&metodo=listarProdutoPorCategoria&id=<?= $categoria->id; ?>" class="fnc-secundario block wd-10 pd-10"> <?= $formater->formataTextoCap($categoria->DESCRICAO); ?></a> </li>
+                                        <li class="fonte14"><a href="index.php?controller=BaseController&metodo=listarProdutoPorCategoria&id=<?= $categoria->id; ?>" class="fnc-secundario block wd-10 pd-10"> <?= $formater->formataTextoCap($categoria->descricao); ?></a> </li>
 
-                                <?php endforeach; endif;?>
+                                <?php endforeach;
+                                endif; ?>
                             </ul>
 
                         </li>

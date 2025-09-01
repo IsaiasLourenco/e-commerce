@@ -36,7 +36,7 @@
 
                     <div class="box-3 bg-branco shadow-down pd-10 mg-b-4">
                         <div class="box-12 img">
-                            <img src="lib/img/upload/produtos/<?= $produto->imagem; ?>" alt="">
+                            <img src="lib/img/upload/<?= $produto->imagem; ?>" alt="">
                             <div class="box-12 flex justify-center item-centro oculta">
                                 <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover">
                                     <a href="index.php?controller=CarrinhoController&metodo=inserirProdutoCarrinho&id=<?= $produto->id; ?>">
@@ -51,7 +51,7 @@
 
                         <div class="box-12 footer pd-20">
 
-                            <p class="fonte20 fnc-secundario fnc-primario-hover txt-c poppins-black"><?= $formater->formataTextoCap($produto->nomeE); ?></p>
+                            <p class="fonte20 fnc-secundario fnc-primario-hover txt-c poppins-black"><?= $formater->formataTextoCap($produto->nome); ?></p>
                             <div class="divider bg-cinza mg-b-1 mg-t-1"></div>
                             <p class="fonte22 fnc-secundario fw-300 roboto-condensed fnc-primario-hover txt-c">R$ <?= $formater->converterMoeda($produto->preco); ?></p>
                         </div>

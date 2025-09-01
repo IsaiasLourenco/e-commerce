@@ -156,9 +156,9 @@ class ClienteController extends Notifications
   {
     $_SESSION['cliente'] = true;
     $_SESSION['idcliente'] = $cliente[0]->id;
-    $_SESSION['nome'] = $cliente[0]->NOME;
-    $_SESSION['email'] = $cliente[0]->EMAIL;
-    $_SESSION['imagem'] = $cliente[0]->IMAGEM;
+    $_SESSION['nome'] = $cliente[0]->nome;
+    $_SESSION['email'] = $cliente[0]->email;
+    $_SESSION['imagem'] = $cliente[0]->imagem;
     $_SESSION['ultimo_acesso'] = time();
   }
 
