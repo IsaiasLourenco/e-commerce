@@ -7,22 +7,31 @@ use App\Models\Dao\ProdutoDao;
 
 class BaseController
 {
-    function index()
+    public function index()
     {
-        $produtos = (new ProdutoDao())->listarTodos();
+        $produtoDao = new ProdutoDao();
+        $categoriaDao = new CategoriaDao();
 
-        $categorias = (new CategoriaDao())->listarTodos();
+        $paginaAtual = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit = 12;
+        $offset = ($paginaAtual - 1) * $limit;
 
+        $produtos = $produtoDao->listarPaginadoNaHome($limit, $offset);
+        $total = $produtoDao->contarTodosNaHome();
+        $categorias = $categoriaDao->listarTodos();
 
         require_once 'Views/home/index.php';
     }
 
     public function listarProdutoPorCategoria()
     {
-        $categorias = (new CategoriaDao())->listarTodos();
+        $categoriaDao = new CategoriaDao();
+        $produtoDao = new ProdutoDao();
 
         $id = $_GET['id'] ?? null;
-        $produtos = (new ProdutoDao())->obterPorCategoria($id);
+        $produtos = $produtoDao->obterPorCategoria($id);
+        $categorias = $categoriaDao->listarTodos();
+
         require_once 'Views/home/index.php';
     }
 }

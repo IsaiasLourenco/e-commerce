@@ -1,4 +1,5 @@
 <?php require_once 'Views/shared/header.php'; ?>
+
 <section class="info mg-t-6">
     <div class="container flex justify-center">
         <div class="box-2 bg-branco flex justify-center item-centro pd-10">
@@ -19,21 +20,21 @@
         </div>
     </div>
 </section>
+
 <div class="limpar"></div>
+
 <!-- sessão de carregamento de produtos -->
 <section class="destaque mg-t-6">
     <div class="container">
-
         <div class="box-12 flex justify-start item-centro mg-b-4 mg-t-6">
-            <h1 class=" fnc-secundario fonte24">PRODUTOS EM DESTAQUE </h1>
+            <h1 class="fnc-secundario fonte24">PRODUTOS EM DESTAQUE</h1>
             <div class="divider-pontilhado mg-l-2 wd-50"></div>
         </div>
+
         <!-- LISTAGEM DE PRODUTOS -->
         <div class="box-12 flex justify-center item-centro flex-wrap">
-            <?php
-            if (isset($produtos) && count($produtos) > 0):
-                foreach ($produtos as $produto): ?>
-
+            <?php if (isset($produtos) && count($produtos) > 0): ?>
+                <?php foreach ($produtos as $produto): ?>
                     <div class="box-3 bg-branco shadow-down pd-10 mg-b-4">
                         <div class="box-12 img">
                             <img src="lib/img/upload/<?= $produto->imagem; ?>" alt="">
@@ -50,27 +51,65 @@
                         </div>
 
                         <div class="box-12 footer pd-20">
-
-                            <p class="fonte20 fnc-secundario fnc-primario-hover txt-c poppins-black"><?= $formater->formataTextoCap($produto->nome); ?></p>
+                            <p class="fonte20 fnc-secundario fnc-primario-hover txt-c poppins-black">
+                                <?= $formater->formataTextoCap($produto->nome); ?>
+                            </p>
                             <div class="divider bg-cinza mg-b-1 mg-t-1"></div>
-                            <p class="fonte22 fnc-secundario fw-300 roboto-condensed fnc-primario-hover txt-c">R$ <?= $formater->converterMoeda($produto->preco); ?></p>
+                            <p class="fonte22 fnc-secundario fw-300 roboto-condensed fnc-primario-hover txt-c">
+                                R$ <?= $formater->converterMoeda($produto->preco); ?>
+                            </p>
                         </div>
                     </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
 
-            <?php endforeach;
+        <!-- PAGINAÇÃO -->
+        <div class="box-12 flex justify-center item-centro mg-t-4">
+            <?php
+            if (isset($total) && isset($limit)):
+                $totalPaginas = ceil($total / $limit);
+                $paginaAtual = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+                echo '<div class="box-12 flex justify-center item-centro mg-t-4">';
+
+                // Sempre mostra a página 1
+                echo '<a href="index.php?controller=BaseController&metodo=index&page=1" class="btn-paginacao ' . ($paginaAtual == 1 ? 'ativo' : '') . '">1</a>';
+
+                // Se estiver além da página 6, mostra "..."
+                if ($paginaAtual > 6) {
+                    echo '<span class="btn-paginacao">...</span>';
+                }
+
+                // Mostra páginas entre 2 e total-1, com intervalo de 5 em torno da atual
+                for ($i = max(2, $paginaAtual - 2); $i <= min($totalPaginas - 1, $paginaAtual + 2); $i++) {
+                    echo '<a href="index.php?controller=BaseController&metodo=index&page=' . $i . '" class="btn-paginacao ' . ($i == $paginaAtual ? 'ativo' : '') . '">' . $i . '</a>';
+                }
+
+                // Se ainda houver páginas depois do intervalo, mostra "..."
+                if ($paginaAtual + 2 < $totalPaginas - 1) {
+                    echo '<span class="btn-paginacao">...</span>';
+                }
+
+                // Sempre mostra a última página (se for maior que 1)
+                if ($totalPaginas > 1) {
+                    echo '<a href="index.php?controller=BaseController&metodo=index&page=' . $totalPaginas . '" class="btn-paginacao ' . ($paginaAtual == $totalPaginas ? 'ativo' : '') . '">' . $totalPaginas . '</a>';
+                }
+
+                echo '</div>';
             endif;
-
             ?>
-
         </div>
     </div>
 </section>
+
 <div class="limpar"></div>
+
 <!-- sessão de ofertas -->
 <section class="ofertas mg-t-4">
     <div class="container">
         <div class="box-12 flex justify-start item-centro mg-b-4 mg-t-6">
-            <h1 class=" fnc-secundario fonte24">OFERTAS ESPECIAIS </h1>
+            <h1 class="fnc-secundario fonte24">OFERTAS ESPECIAIS</h1>
             <div class="divider-pontilhado mg-l-2 wd-50"></div>
         </div>
     </div>
@@ -78,31 +117,27 @@
         <div class="box-5 overflow-hidden">
             <div class="img">
                 <img src="lib/img/sapatos.jpg" alt="">
-
                 <div class="oculta pd-t-6">
-                    <p class="fnc-branco txt-c block mg-b-1 fonte24 roboto-condensed fw-900">Sapatos com <br> 20% de descontos</p>
+                    <p class="fnc-branco txt-c block mg-b-1 fonte24 roboto-condensed fw-900">
+                        Sapatos com <br> 20% de descontos
+                    </p>
                     <a href="" class="btn bg-primario fnc-secundario mg-auto">Comprar</a>
                 </div>
-
             </div>
         </div>
 
         <div class="box-5 overflow-hidden">
             <div class="img">
                 <img src="lib/img/ternos.jpg" alt="">
-
                 <div class="oculta pd-t-6">
-                    <p class="fnc-branco txt-c block mg-b-1 fonte24 roboto-condensed fw-900">Ternos com <br>20% de descontos</p>
+                    <p class="fnc-branco txt-c block mg-b-1 fonte24 roboto-condensed fw-900">
+                        Ternos com <br> 20% de descontos
+                    </p>
                     <a href="" class="btn bg-primario fnc-secundario mg-auto">Comprar</a>
                 </div>
-
             </div>
         </div>
-
     </div>
 </section>
 
-
-<?php
-require_once 'Views/shared/footer.php';
-?>
+<?php require_once 'Views/shared/footer.php'; ?>

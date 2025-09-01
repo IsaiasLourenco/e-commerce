@@ -11,7 +11,7 @@ class ProdutoDao extends Contexto
     {
         return $this->listar('produto');
     }
-    
+
     public function obterPorid($id)
     {
         return $this->listar('produto', "WHERE id = ?", [$id]);
@@ -21,7 +21,7 @@ class ProdutoDao extends Contexto
     {
         return $this->listar('produto', "WHERE categoria = ?", [$id]);
     }
-    
+
     public function ObterUltimoRegistro($campo)
     {
         return $this->listarUltimoRegistro('produto', $campo);
@@ -40,7 +40,7 @@ class ProdutoDao extends Contexto
         $valores = array_values($produto->atributosPreenchidos());
         return $this->atualizar('produto', $atributos, $valores, $produto->getid());
     }
-    
+
     public function excluir($id)
     {
         return $this->deletar('produto', $id);
@@ -69,5 +69,21 @@ class ProdutoDao extends Contexto
         }
 
         return $lista;
+    }
+
+    public function listarPaginadoNaHome($limit, $offset)
+    {
+        $sql = "SELECT * FROM produto LIMIT ? OFFSET ?";
+        $stmt = self::getConexao()->prepare($sql);
+        $stmt->bindValue(1, $limit, \PDO::PARAM_INT);
+        $stmt->bindValue(2, $offset, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function contarTodosNaHome()
+    {
+        $sql = "SELECT COUNT(*) as total FROM produto";
+        return self::getConexao()->query($sql)->fetch(\PDO::FETCH_OBJ)->total;
     }
 }
