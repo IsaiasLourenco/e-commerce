@@ -3,77 +3,64 @@
 namespace App\Models;
 
 use Exception;
-use MercadoPago\SDK;
-use MercadoPago\Preference;
-use MercadoPago\Item;
-use stdClass;
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Preference\PreferenceClient;
+use MercadoPago\Exceptions\MPApiException;
 
 class PagamentoMercadoPago
 {
-    private string $accessToken;
-    private string $publicKey;
+    private $accessToken;
 
-    public function __construct(string $publicKey, string $accessToken)
+    public function __construct($publicKey, $accessToken)
     {
         $this->accessToken = $accessToken;
-        $this->publicKey = $publicKey;
-        // Certifique-se de que o SDK está configurado corretamente
-        SDK::setAccessToken($this->accessToken);
-        SDK::setPublicKey($this->publicKey);
+        MercadoPagoConfig::setAccessToken($this->accessToken);
     }
 
     public function criarPagamento(array $carrinho, string $emailCliente)
     {
-        $preference = new Preference();
+        $client = new PreferenceClient();
 
-        $itens = [];
-        $total = 0;
-
+        $items = [];
         foreach ($carrinho as $item) {
-            $itemMP = new Item();
-            $itemMP->title = $item['nome'];
-            $itemMP->quantity = (int) $item['qtde'];
-            $itemMP->unit_price = (float) $item['preco'];
-            $itemMP->currency_id = "BRL";
-            $itens[] = $itemMP;
-
-            $total += $item['preco'] * $item['qtde'];
+            $items[] = [
+                "title" => $item['nome'],
+                "quantity" => (int) $item['qtde'],
+                "unit_price" => (float) $item['preco'],
+                "currency_id" => "BRL"
+            ];
         }
 
-        $preference->items = $itens;   
-
-        $preference->payment_method = [
-            "excluded_payment_methods" => [
-                ["id" => "bolbradesco"]
+        $preferenceData = [
+            "items" => $items,
+            "payer" => [
+                "email" => $emailCliente
             ],
-            "excluded_payment_types" => [],
-            "installments" => 12
+            "back_urls" => [
+                "success" => "http://localhost/e-commerce/index.php?controller=VendaController&metodo=sucesso",
+                "failure" => "http://localhost/e-commerce/index.php?controller=VendaController&metodo=error",
+                "pending" => "http://localhost/e-commerce/index.php?controller=VendaController&metodo=pendente"
+            ],
+            "auto_return" => "approved",
+            "external_reference" => "PEDidO123",
+            "payment_methods" => [
+                "excluded_payment_methods" => [
+                    ["id" => "bolbradesco"]
+                ],
+                "installments" => 12
+            ]
         ];
-        
-        $payer = new stdClass();
-        $payer->email = $emailCliente;
-        $preference->payer =$payer;
 
-        $preference->back_urls = [
-            "success" => "localhost/git/e-compras/src/index.php?controller=VendaController&metodo=sucesso",
-            "failure" => "localhost/git/e-compras/src/index.php?controller=VendaController&metodo=error"
-        ];
+        try {
+            $preference = $client->create($preferenceData);
+            return $preference->sandbox_init_point;
+        } catch (MPApiException $e) {
+            $apiResponse = $e->getApiResponse();
+            $body = $apiResponse ? $apiResponse->getContent() : 'sem conteúdo';
 
-        $preference->auto_return = "approved";
-        $preference->external_reference = "PEDidO123";
-        $preference->sandbox_mode = true;
-
-        try{
-            $preference->save();
-            return $preference->init_point;
-
-        }catch(Exception $e){
-            echo "Erro ao finalizar pagamento ". $e->getMessage();
+            echo "Erro ao finalizar pagamento:<br>";
+            echo "<pre>" . print_r($body, true) . "</pre>";
             exit;
         }
-
-
-        
-       
     }
 }

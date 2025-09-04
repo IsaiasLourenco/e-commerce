@@ -1,9 +1,12 @@
 <?php
 ob_start();
 
-if (!isset($_SESSION)):
+if (!isset($_SESSION)) {
     session_start();
-endif;
+    if (isset($_SESSION['carrinho'])) {
+        $_SESSION['quantidade_carrinho'] = array_sum(array_column($_SESSION['carrinho'], 'qtde'));
+    }
+}
 
 use App\Configurations\Formater;
 
@@ -124,7 +127,7 @@ if ($_GET) {
                     </ul>
                 </div>
                 <div class="box-9 flex justify-end item-centro pd-t-2">
-                    <a href="index.php?controller=CarrinhoController&metodo=inserirProdutoCarrinho=id=0">
+                    <a href="#">
                         <i class="fa-solid fa-heart fonte18 fnc-primario"></i>
                     </a>
 

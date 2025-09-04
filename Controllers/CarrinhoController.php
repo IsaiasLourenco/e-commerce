@@ -123,7 +123,7 @@ class CarrinhoController
             $total += $subTotal;
         endforeach;
 
-       $pagamento = new PagamentoMercadoPago("TEST-eaf65f0e-21ff-4a44-8140-a87013777f32","TEST-2850965892227914-032301-bce4718671a828a5cff6a829d3bf3584-97829515");
+       $pagamento = new PagamentoMercadoPago("APP_USR-f502da59-0fc6-4e0a-86c8-0714a4f9774f","APP_USR-2926068152857647-090409-c76185bd738db1211de8dbedafce0ba3-2666037429");
        $linkPagamento = $pagamento->criarPagamento($_SESSION['carrinho'], $email);
 
        header("location: $linkPagamento");

@@ -8,14 +8,14 @@
                 <table class="wd-100 zebra collapse">
                     <thead class="bg-primario">
                         <tr>
-                            <th class="pd-10 fnc-branco">Imagem</th>
-                            <th class="pd-10 fnc-branco">Código</th>
-                            <th class="pd-10 fnc-branco">Produto</th>
-                            <th class="pd-10 fnc-branco">Qtde</th>
-                            <th class="pd-10 fnc-branco">Preço</th>
-                            <th class="pd-10 fnc-branco">Desconto</th>
-                            <th class="pd-10 fnc-branco">Subtotal</th>
-                            <th class="pd-10 fnc-branco">Ação</th>
+                            <th class="pd-10 fnc-branco txt-c">Imagem</th>
+                            <th class="pd-10 fnc-branco txt-c">Código</th>
+                            <th class="pd-10 fnc-branco txt-c">Produto</th>
+                            <th class="pd-10 fnc-branco txt-c">Qtde</th>
+                            <th class="pd-10 fnc-branco txt-c">Preço</th>
+                            <th class="pd-10 fnc-branco txt-c">Desconto</th>
+                            <th class="pd-10 fnc-branco txt-c">Subtotal</th>
+                            <th class="pd-10 fnc-branco txt-c">Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,8 +64,8 @@
                                     R$ <?= number_format($subtotal, 2, ',', '.'); ?>
                                 </td>
 
-                                <td>
-                                    <a href="index.php?controller=CarrinhoController&metodo=atualizarCarrinho&linha=<?= $key; ?>" class="btn-action">
+                                <td class="txt-c">
+                                    <a href="index.php?controller=CarrinhoController&metodo=atualizarCarrinho&linha=<?= $key; ?>" class="btn-action" title="Excluir produto">
                                         <i class="fa-regular fa-trash-can"></i>
                                     </a>
                                 </td>
