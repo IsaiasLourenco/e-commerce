@@ -39,7 +39,7 @@
                     ?>
                             <tr>
 
-                                <td class="txt-c"><img class="logo-60 mg-auto" src="lib/img/upload/produtos/<?= htmlspecialchars($item['imagem']); ?>" alt="Imagem do Produto"></td>
+                                <td class="txt-c"><img class="logo-60 mg-auto" src="lib/img/upload/<?= htmlspecialchars($item['imagem']); ?>" alt="Imagem do Produto"></td>
 
                                 <td class="txt-c">
                                     <?= $formater->zeroEsquerda(htmlspecialchars($item['id']), 6, '0'); ?>

@@ -38,7 +38,7 @@
                     <div class="box-3 card-home-produto bg-branco shadow-down pd-10 mg-b-4">
                         <div class="box-12 img">
                             <img src="lib/img/upload/<?= $produto->imagem; ?>" alt="">
-                            <div class="box-12 flex justify-center item-centro oculta">
+                            <div class="box-12 flex justify-center item-centro">
                                 <div class="box-2 flex justify-center item-centro borda-1 bg-secundario-hover fnc-primario-hover">
                                     <a href="index.php?controller=CarrinhoController&metodo=inserirProdutoCarrinho&id=<?= $produto->id; ?>">
                                         <i class="fa-solid fa-cart-shopping fnc-primario-hover fonte18 fnc-secundario"></i>

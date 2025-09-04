@@ -64,10 +64,11 @@ class VendaController extends Notifications
         endif;
     }
 
-    public function error()
+    public function Error($obj, $mensagem, $metodo)
     {
         echo $this->defaultMessage("Erro ao realizar pagamento!", "Tente novamente", "Base", "index");
     }
+    
 }
 
 /*

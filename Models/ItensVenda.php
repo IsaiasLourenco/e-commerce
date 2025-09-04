@@ -11,8 +11,14 @@ class ItensVenda
    private ?string $precounitario;
    private ?string $subTotal;
 
-   public function __construct($id = '', $venda = '', $produto = '', $qtde = '', $precoUni = '', $subTotal = '')
-   {
+   public function __construct(
+      $id = '',
+      $venda = '',
+      $produto = '',
+      $qtde = '',
+      $precoUni = '',
+      $subTotal = ''
+   ) {
       $this->id = $id;
       $this->venda = $venda;
       $this->produto = $produto;
@@ -22,7 +28,7 @@ class ItensVenda
    }
    public function getid()
    {
-      $this->id;
+      return $this->id;
    }
    public function getVenda()
    {
@@ -85,7 +91,8 @@ class ItensVenda
          "venda" => $this->venda,
          "produto" => $this->produto,
          "quantidade" => $this->quantidade,
-         "precounitario" => $this->precounitario
+         "precounitario" => $this->precounitario,
+         "subTotal" => $this->subTotal
       ];
    }
    public function atributosPreenchidos()

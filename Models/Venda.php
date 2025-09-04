@@ -7,26 +7,25 @@ use App\Models\ItensVenda;
 
 class Venda
 {
-    private ?string $id;
-    private string $datavenda;
-    private float $valor;
-    private string $cliente;
-    private string $status;
-    private array $itens_venda = [];
+    private $id;
+    private $data_venda;
+    private $valor;
+    private $cliente;
+    private $status_venda;
+    private $itens_venda = [];
 
-    public function __construct(
-        ?string $id = '',
-        float $valor = 0.00,
-        string $cliente = '',
-        string $status = 'Pendente'
-    ) {
-        date_default_timezone_set('America/Sao_Paulo');
-        $this->id = $id;
-        $this->datavenda =  date('Y-m-d H:i:s');
-        $this->valor = $valor;
-        $this->cliente = $cliente;
-        $this->status = $status;
-    }
+public function __construct($id = '', 
+                            $data_venda = '', 
+                            $valor = 0.00, 
+                            $cliente = '', 
+                            $status_venda = 'Pendente')
+{
+    $this->id = $id;
+    $this->data_venda = $data_venda ?: date('Y-m-d H:i:s');
+    $this->valor = $valor;
+    $this->cliente = $cliente;
+    $this->status_venda = $status_venda;
+}
 
     // Getters
     public function getid()
@@ -36,7 +35,7 @@ class Venda
 
     public function getDatavenda()
     {
-        return $this->datavenda;
+        return $this->data_venda;
     }
 
     public function getValor()
@@ -49,45 +48,45 @@ class Venda
         return $this->cliente;
     }
 
-    public function getStatus(): string
+    public function getStatus()
     {
-        return $this->status;
+        return $this->status_venda;
     }
 
-    public function getItens(): array
+    public function getItens()
     {
-        return $this->itensVenda;
+        return $this->itens_venda;
     }
     // Setters
-    public function setid($id): void
+    public function setid($id)
     {
         $this->id = $id;
     }
 
-    public function setDatavenda($datavenda): void
+    public function setDatavenda($data_venda)
     {
-        $this->datavenda = $datavenda;
+        $this->data_venda = $data_venda;
     }
 
-    public function setValor(float $valor): void
+    public function setValor($valor)
     {
         $this->valor = $valor;
     }
 
-    public function setCliente($cliente): void
+    public function setCliente($cliente)
     {
         $this->cliente = $cliente;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus($status_venda)
     {
-        $this->status = $status;
+        $this->status_venda = $status_venda;
     }
 
     // Adicionar itens à venda
-    public function adicionarItem($itemVenda): void
+    public function adicionarItem($itemVenda)
     {
-        $this->itensVenda[] = $itemVenda;
+        $this->itens_venda[] = $itemVenda;
     }
 
     // Converter para array
@@ -95,11 +94,11 @@ class Venda
     {
         return [
             "id" => $this->id,
-            "datavenda" => $this->datavenda,
+            "data_venda" => $this->data_venda,
             "valor" => $this->valor,
             "cliente" => $this->cliente,
-            "status" => $this->status,
-            "itensVenda" => array_map(fn($item) => $item->toArray(), $this->itensVenda)
+            "status_venda" => $this->status_venda,
+            "itensVenda" => array_map(fn($item) => $item->toArray(), $this->itens_venda)
         ];
     }
 

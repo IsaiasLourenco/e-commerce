@@ -136,14 +136,14 @@ class MyTest extends TestCase
 
     public function testSomethingDeprecation()
     {
-        $this->expectDeprecationWithidentifier('https://github.com/doctrine/orm/issue/1234');
+        $this->expectDeprecationWithIdentifier('https://github.com/doctrine/orm/issue/1234');
 
         triggerTheCodeWithDeprecation();
     }
 
     public function testSomethingDeprecationFixed()
     {
-        $this->expectNoDeprecationWithidentifier('https://github.com/doctrine/orm/issue/1234');
+        $this->expectNoDeprecationWithIdentifier('https://github.com/doctrine/orm/issue/1234');
 
         triggerTheCodeWithoutDeprecation();
     }
