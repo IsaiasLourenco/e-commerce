@@ -1,0 +1,12 @@
+# Arquivo de configuração local
+.env
+
+# Dependências do Composer
+/vendor
+
+# Cache do Composer
+composer.lock
+
+# Arquivos temporários
+/node_modules
+*.log

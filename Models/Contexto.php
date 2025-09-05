@@ -1,94 +1,107 @@
 <?php
-# Classe Contexto: Refatorada para melhor clareza e reutilização
+declare(strict_types=1);
+
 namespace App\Models;
 
 use PDO;
 use PDOException;
+use PDOStatement;
+use Dotenv\Dotenv;
 
 class Contexto
 {
-    private static $conexao;
+    private static ?PDO $conexao = null;
 
-    protected static function getConexao()
+    private function __construct() {}
+
+    protected static function getConexao(): PDO
     {
         if (self::$conexao === null) {
-            $inf = "mysql:host=localhost;dbname=e-commerce";
+            // Carrega o .env
+            $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+            $dotenv->safeLoad(); // safeLoad para não quebrar se .env estiver ausente
+
+            $host = $_ENV['DB_HOST'] ?? 'localhost';
+            $db   = $_ENV['DB_DATABASE'] ?? 'e-commerce';
+            $user = $_ENV['DB_USERNAME'] ?? 'root';
+            $pass = $_ENV['DB_PASSWORD'] ?? '';
+
+            $dsn = "mysql:host={$host};dbname={$db};charset=utf8";
+
             try {
-                self::$conexao = new PDO($inf, "root", "", [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
-                self::$conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$conexao = new PDO($dsn, $user, $pass, [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
+                ]);
             } catch (PDOException $e) {
                 die("Erro ao conectar ao banco: " . $e->getMessage());
             }
         }
+
         return self::$conexao;
     }
-    public function iniciarTransacao()
+
+    public function iniciarTransacao(): void
     {
         self::getConexao()->beginTransaction();
     }
 
-    public function confirmarTransacao()
+    public function confirmarTransacao(): void
     {
         self::getConexao()->commit();
     }
 
-    public function reverterTransacao()
+    public function reverterTransacao(): void
     {
         self::getConexao()->rollBack();
     }
 
-    protected static function closeConexao()
+    protected static function closeConexao(): void
     {
         self::$conexao = null;
     }
 
-    protected function executarConsulta($sql, $params = [])
+    protected function executarConsulta(string $sql, array $params = []): PDOStatement
     {
-        try {
-            $stmt = self::getConexao()->prepare($sql);
-
-            foreach ($params as $key => $value) {
-                $stmt->bindValue($key + 1, $value);
-            }
-
-            $stmt->execute();
-            return $stmt;
-        } catch (PDOException $e) {
-            die("Erro na execução da consulta: " . $e->getMessage());
+        $stmt = self::getConexao()->prepare($sql);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key + 1, $value);
         }
+        $stmt->execute();
+        return $stmt;
     }
 
-    protected function listar($tabela, $condicao = "", $params = [])
+    protected function listar(string $tabela, string $condicao = "", array $params = []): array
     {
         $sql = "SELECT * FROM {$tabela} {$condicao} ORDER BY id DESC";
         $stmt = $this->executarConsulta($sql, $params);
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $stmt->fetchAll();
     }
 
-    // metodo responsavel por listar o ultimo registro no banco
-    protected function listarUltimoRegistro($tabela, $campo,  $condicao = "", $parametro = [])
+    protected function listarUltimoRegistro(string $tabela, string $campo, string $condicao = "", array $params = []): array
     {
-        $sql = "SELECT MAX($campo) AS ULTIMOVALOR FROM {$tabela} {$condicao} ORDER BY id DESC ";
-        $stmt = $this->executarConsulta($sql, $parametro);
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        $sql = "SELECT MAX({$campo}) AS ULTIMOVALOR FROM {$tabela} {$condicao} ORDER BY id DESC";
+        $stmt = $this->executarConsulta($sql, $params);
+        return $stmt->fetchAll();
     }
 
-    protected function inserir($tabela, $atributos, $valores)
+    protected function inserir(string $tabela, array $atributos, array $valores): int
     {
-        $sql = "INSERT INTO {$tabela} (" . implode(",", $atributos) . ") VALUES (" . implode(",", array_fill(0, count($valores), "?")) . ")";
-        $stmt = $this->executarConsulta($sql, $valores);
-        return self::getConexao()->lastInsertid();
+        $placeholders = implode(',', array_fill(0, count($valores), '?'));
+        $sql = "INSERT INTO {$tabela} (" . implode(',', $atributos) . ") VALUES ({$placeholders})";
+        $this->executarConsulta($sql, $valores);
+        return (int)self::getConexao()->lastInsertId();
     }
 
-    protected function atualizar($tabela, $atributos, $valores, $id)
+    protected function atualizar(string $tabela, array $atributos, array $valores, int $id): int
     {
-        $set = implode(",", array_map(fn($attr) => "$attr = ?", $atributos));
+        $set = implode(',', array_map(fn($attr) => "{$attr} = ?", $atributos));
         $sql = "UPDATE {$tabela} SET {$set} WHERE id = ?";
         $stmt = $this->executarConsulta($sql, array_merge($valores, [$id]));
         return $stmt->rowCount();
     }
 
-    protected function deletar($tabela, $id)
+    protected function deletar(string $tabela, int $id): int
     {
         $sql = "DELETE FROM {$tabela} WHERE id = ? LIMIT 1";
         $stmt = $this->executarConsulta($sql, [$id]);

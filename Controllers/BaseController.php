@@ -20,7 +20,7 @@ class BaseController
         $total = $produtoDao->contarTodosNaHome();
         $categorias = $categoriaDao->listarTodos();
 
-        require_once 'Views/home/index.php';
+        require_once __DIR__ . '/../Views/home/index.php';
     }
 
     public function listarProdutoPorCategoria()
@@ -32,6 +32,6 @@ class BaseController
         $produtos = $produtoDao->obterPorCategoria($id);
         $categorias = $categoriaDao->listarTodos();
 
-        require_once 'Views/home/index.php';
+        require_once __DIR__ . '/../Views/home/index.php';
     }
 }

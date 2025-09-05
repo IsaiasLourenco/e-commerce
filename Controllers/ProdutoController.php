@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-session_start();
-
 use App\Models\Produto;
 use App\Models\Dao\CategoriaDao;
 use App\Models\Dao\ProdutoDao;
@@ -13,48 +11,37 @@ use App\Services\ProdutoService;
 
 class ProdutoController extends Notifications
 {
-    private $produtoDao;
-    private $categoriaDao;
-    private $fileUploadService;
-    private $produtoService;
+    private ProdutoDao $produtoDao;
+    private CategoriaDao $categoriaDao;
+    private FileUploadService $fileUploadService;
+    private ProdutoService $produtoService;
 
-    // Injeção de dependências para melhor testabilidade e organização
     public function __construct()
     {
         $this->produtoDao = new ProdutoDao();
         $this->categoriaDao = new CategoriaDao();
         $this->fileUploadService = new FileUploadService("lib/img/upload");
         $this->produtoService = new ProdutoService($this->produtoDao);
+        if (!isset($_SESSION)) session_start();
     }
 
-    // Função responsável por listar todos os usuários
-    public function listar()
+    public function listar(): void
     {
-        // Separação da responsabilidade de buscar os dados e exibir a view
-        // $produtos = (new ProdutoDao())->listarComCategoria();
-        // require_once "views/painel/index.php";
         $produtos = $this->produtoDao->listarComCategoria();
         $controller = "produto";
         $metodo = "listar";
-        require_once "views/painel/index.php";
+        require_once __DIR__ . '/../views/painel/index.php';
     }
 
-    // Função principal de gerenciamento de usuários (inserção, alteração e listagem)
-    public function index()
+    public function index(): void
     {
-        /*
-        Este operador de coelescencias verifica se a parte à esquerda está definida e não é null.
-        Se $_GET['id'] estiver definida e não for null, o valor de $_GET['id'] será atribuído a $id.
-         */
         $id = $_GET['id'] ?? null;
 
         if ($id) {
-            // Recupera dados para edição de usuário
             $produto = $this->produtoDao->obterPorid($id);
         }
 
         if ($_POST) {
-            // Determina se será uma inserção ou alteração com base no id
             if (empty($_POST['id'])) {
                 $this->inserir($_POST, $_FILES);
             } else {
@@ -64,62 +51,56 @@ class ProdutoController extends Notifications
 
         $produtos = $this->produtoDao->listarComCategoria();
         $categorias = $this->categoriaDao->listarTodos();
-        require_once "views/painel/index.php";
+        require_once __DIR__ . '/../views/painel/index.php';
     }
 
-    // Função responsável por inserir um usuário
-    public function inserir($dados, $files)
+    public function inserir(array $dados, array $files): void
     {
-        $dados['preco'] = str_replace(['R$', ',', ' '], ['', '.', ''], $_POST['preco']);
-        $dados['preco_custo'] = str_replace(['R$', ',', ' '], ['', '.', ''], $_POST['preco_custo']);
+        $dados['preco'] = str_replace(['R$', ',', ' '], ['', '.', ''], $dados['preco']);
+        $dados['preco_custo'] = str_replace(['R$', ',', ' '], ['', '.', ''], $dados['preco_custo']);
         $imagem = $this->fileUploadService->upload($files['imagem']);
-        $retorno = $this->produtoService->adicionarProduto($dados, $imagem);
+        $this->produtoService->adicionarProduto($dados, $imagem);
         echo $this->Success("Produto", "Cadastrado", "Listar");
     }
 
-    // Função responsável por alterar os dados de um usuário
-    public function alterar($dados, $files)
+    public function alterar(array $dados, array $files): void
     {
-        $dados['preco'] = str_replace(['R$', ',', ' '], ['', '.', ''], $_POST['preco']);
-        $dados['preco_custo'] = str_replace(['R$', ',', ' '], ['', '.', ''], $_POST['preco_custo']);
+        $dados['preco'] = str_replace(['R$', ',', ' '], ['', '.', ''], $dados['preco']);
+        $dados['preco_custo'] = str_replace(['R$', ',', ' '], ['', '.', ''], $dados['preco_custo']);
         $imagem = $this->fileUploadService->upload($files['imagem']);
-        $retorno = $this->produtoService->alterarProduto($dados, $imagem);
+        $this->produtoService->alterarProduto($dados, $imagem);
         echo $this->Success("Produto", "Alterado", "Listar");
     }
 
-    // Confirmação de exclusão de usuário
-    public function deleteConfirm()
+    public function deleteConfirm(): void
     {
         $id = $_GET['id'] ?? null;
         if ($id) {
             echo $this->Confirm("Excluir", "Produto", "", $id);
         }
-        require_once "views/shared/header.php";
+        require_once __DIR__ . '/../views/shared/header.php';
     }
 
-    // Função responsável por excluir um usuário
-    public function excluir()
+    public function excluir(): void
     {
         $id = $_GET['id'] ?? null;
-
         if ($id) {
             $this->produtoDao->excluir($id);
             echo $this->Success("Produto", "Excluido", "Listar");
         }
-
-        require_once "views/shared/header.php";
+        require_once __DIR__ . '/../views/shared/header.php';
     }
 
-    public function alterarStatus()
+    public function alterarStatus(): void
     {
         $id = $_GET['id'] ?? null;
         $ativo = $_GET['ativo'] ?? null;
 
-        if ($id):
+        if ($id) {
             $produto = new Produto();
             $produto->__set('id', $id);
             $produto->__set('status_produto', $ativo);
             $this->produtoDao->alterar($produto);
-        endif;
+        }
     }
 }

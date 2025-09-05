@@ -1,4 +1,4 @@
-<?php require_once 'Views/shared/header.php'; ?>
+<?php require_once __DIR__ . '/../shared/header.php'; ?>
 
 <section class="info mg-t-6">
     <div class="container flex justify-center">
@@ -140,4 +140,4 @@
     </div>
 </section>
 
-<?php require_once 'Views/shared/footer.php'; ?>
+<?php require_once __DIR__ . '/../shared/footer.php'; ?>

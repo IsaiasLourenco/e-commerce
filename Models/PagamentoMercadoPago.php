@@ -6,18 +6,31 @@ use Exception;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\Exceptions\MPApiException;
+use Dotenv\Dotenv;
 
 class PagamentoMercadoPago
 {
-    private $accessToken;
+    private string $accessToken;
+    private string $publicKey;
 
-    public function __construct($publicKey, $accessToken)
+    public function __construct()
     {
-        $this->accessToken = $accessToken;
+        // Carrega .env
+        $dotenv = Dotenv::createImmutable(__DIR__ . "/../../");
+        $dotenv->safeLoad();
+
+        $this->accessToken = $_ENV['MERCADOPAGO_ACCESS_TOKEN'] ?? '';
+        $this->publicKey   = $_ENV['MERCADOPAGO_PUBLIC_KEY'] ?? '';
+
+        if (empty($this->accessToken)) {
+            throw new Exception("Access Token do Mercado Pago não configurado no .env");
+        }
+
+        // Configura SDK
         MercadoPagoConfig::setAccessToken($this->accessToken);
     }
 
-    public function criarPagamento(array $carrinho, string $emailCliente)
+    public function criarPagamento(array $carrinho, string $emailCliente): string
     {
         $client = new PreferenceClient();
 
@@ -37,9 +50,9 @@ class PagamentoMercadoPago
                 "email" => $emailCliente
             ],
             "back_urls" => [
-                "success" => "http://localhost/e-commerce/index.php?controller=VendaController&metodo=sucesso",
-                "failure" => "http://localhost/e-commerce/index.php?controller=VendaController&metodo=error",
-                "pending" => "http://localhost/e-commerce/index.php?controller=VendaController&metodo=pendente"
+                "success" => $_ENV['MERCADOPAGO_SUCCESS_URL'],
+                "failure" => $_ENV['MERCADOPAGO_FAILURE_URL'],
+                "pending" => $_ENV['MERCADOPAGO_PENDING_URL']
             ],
             "auto_return" => "approved",
             "external_reference" => "PEDidO123",
@@ -54,13 +67,12 @@ class PagamentoMercadoPago
         try {
             $preference = $client->create($preferenceData);
             return $preference->sandbox_init_point;
+            // Em produção você pode trocar por $preference->init_point
         } catch (MPApiException $e) {
             $apiResponse = $e->getApiResponse();
             $body = $apiResponse ? $apiResponse->getContent() : 'sem conteúdo';
 
-            echo "Erro ao finalizar pagamento:<br>";
-            echo "<pre>" . print_r($body, true) . "</pre>";
-            exit;
+            throw new Exception("Erro ao finalizar pagamento: " . print_r($body, true));
         }
     }
 }

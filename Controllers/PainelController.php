@@ -2,16 +2,18 @@
 namespace App\Controllers;
 
 use App\Models\Dao\DashBoardDao;
+
 class PainelController
 {   
-    public function index()
+    public function index(): void
     {
-        $indicadores = (new DashBoardDao())->indicadores();
-        $produtosMaisVendidos = (new DashBoardDao())->produtosMaisVendidos();
-        $vendaPorMes = (new DashBoardDao())->vendasPorMes();
-        $categoriaMaisVendida = (new DashBoardDao())->categoriasMaisVendidas();
+        $dashDao = new DashBoardDao();
+
+        $indicadores = $dashDao->indicadores();
+        $produtosMaisVendidos = $dashDao->produtosMaisVendidos();
+        $vendaPorMes = $dashDao->vendasPorMes();
+        $categoriaMaisVendida = $dashDao->categoriasMaisVendidas();
         
-        require_once "views/painel/index.php";
+        require_once __DIR__ . '/../views/painel/index.php';
     }
-    
 }
